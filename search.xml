@@ -2534,7 +2534,8 @@ def size(self) -&gt; int:
   <entry>
     <title>从JNDI注入到log4j注入</title>
     <url>/2024/10/11/JNDI%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<h1 id="本文章首发于先知社区从JNDI注入到log4j漏洞"><a href="#本文章首发于先知社区从JNDI注入到log4j漏洞" class="headerlink" title="本文章首发于先知社区从JNDI注入到log4j漏洞"></a>本文章首发于先知社区<a href="https://xz.aliyun.com/t/15880?time__1311=GqjxnDgQiQi%3DdGNDQ0PBKGQAPxVQd7Fa4D">从JNDI注入到log4j漏洞</a></h1><h1 id="今天闲的慌，不知道学些什么，于是去NSS上找一下java的题目想着刷点题，于是刷到了一题log4j的题目，一直都能听说这个log4j的核弹级漏洞的威名想着学一下，于是就有了这篇文章"><a href="#今天闲的慌，不知道学些什么，于是去NSS上找一下java的题目想着刷点题，于是刷到了一题log4j的题目，一直都能听说这个log4j的核弹级漏洞的威名想着学一下，于是就有了这篇文章" class="headerlink" title="今天闲的慌，不知道学些什么，于是去NSS上找一下java的题目想着刷点题，于是刷到了一题log4j的题目，一直都能听说这个log4j的核弹级漏洞的威名想着学一下，于是就有了这篇文章"></a>今天闲的慌，不知道学些什么，于是去NSS上找一下java的题目想着刷点题，于是刷到了一题log4j的题目，一直都能听说这个log4j的核弹级漏洞的威名想着学一下，于是就有了这篇文章</h1><h1 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h1><p>首先我们要先了解一下什么是JNDI<br>JNDI全名(Java Naming and Directory Interface即Java命名和目录接口)<br><img src="/2024/10/11/JNDI%E6%B3%A8%E5%85%A5/1.png" class="" title="alt text"></p>
+    <content><![CDATA[<h1 id="本文章首发于先知社区从JNDI注入到log4j漏洞"><a href="#本文章首发于先知社区从JNDI注入到log4j漏洞" class="headerlink" title="本文章首发于先知社区从JNDI注入到log4j漏洞"></a>本文章首发于先知社区<a href="https://xz.aliyun.com/t/15880?time__1311=GqjxnDgQiQi%3DdGNDQ0PBKGQAPxVQd7Fa4D">从JNDI注入到log4j漏洞</a></h1><p>今天闲的慌，不知道学些什么，于是去NSS上找一下java的题目想着刷点题，于是刷到了一题log4j的题目，一直都能听说这个log4j的核弹级漏洞的威名想着学一下，于是就有了这篇文章</p>
+<h1 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h1><p>首先我们要先了解一下什么是JNDI<br>JNDI全名(Java Naming and Directory Interface即Java命名和目录接口)<br><img src="/2024/10/11/JNDI%E6%B3%A8%E5%85%A5/1.png" class="" title="alt text"></p>
 <h2 id="命名服务"><a href="#命名服务" class="headerlink" title="命名服务"></a>命名服务</h2><p>命名服务的主要功能是将人们的友好名称映射到对象，例如地址、标识符或计算机程序通常使用的对象。</p>
 <p>例如，Internet 域名系统 （DNS） 将计算机名称映射到 IP 地址：</p>
 <p>www.example.com ==&gt; 192.0.2.5<br>文件系统将文件名映射到程序可用于访问文件内容的文件引用。</p>
