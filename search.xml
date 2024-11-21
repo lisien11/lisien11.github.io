@@ -3071,8 +3071,7 @@ def size(self) -&gt; int:
   <entry>
     <title>极客大挑战</title>
     <url>/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/</url>
-    <content><![CDATA[<h1 id="清泉流响总榜第6名"><a href="#清泉流响总榜第6名" class="headerlink" title="清泉流响总榜第6名"></a>清泉流响总榜第6名</h1>  
-<h1 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h1><h2 id="雪"><a href="#雪" class="headerlink" title="雪"></a>雪</h2><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241115-143524680.png" class="">  
+    <content><![CDATA[<h1 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h1><h2 id="雪"><a href="#雪" class="headerlink" title="雪"></a>雪</h2><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241115-143524680.png" class="">  
 <p>压缩包尾部有隐写，可以得到解压密码。<br>打开后有一张图片和一堆空白字体猜测为snow隐写<br>图片存在盲水印<br><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241115-143652853.png" class=""><br>得到snow隐写的key<br><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241115-143712469.png" class=""><br>得到flag</p>
 <h2 id="doSomeMath"><a href="#doSomeMath" class="headerlink" title="doSomeMath"></a>doSomeMath</h2><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241104-162058378.png" class="">  
 <p>我们可以看到在元组中存在<code>__ge__</code>魔术方法，其逻辑是大于等于，那么我们只要<code>().__ge__(())</code>就可以得到True True+True=2。构造出数字和其实就是一步步算上去了<br><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241031-234942312.png" class=""><br><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241031-234909658.png" class="">  </p>
