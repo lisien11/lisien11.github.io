@@ -3195,7 +3195,7 @@ def size(self) -&gt; int:
       </tags>
   </entry>
   <entry>
-    <title>极客大挑战</title>
+    <title>极客大挑战2024</title>
     <url>/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/</url>
     <content><![CDATA[<h1 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h1><h2 id="雪"><a href="#雪" class="headerlink" title="雪"></a>雪</h2><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241115-143524680.png" class="">  
 <p>压缩包尾部有隐写，可以得到解压密码。<br>打开后有一张图片和一堆空白字体猜测为snow隐写<br>图片存在盲水印<br><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241115-143652853.png" class=""><br>得到snow隐写的key<br><img src="/2024/10/31/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/IMG_20241115-143712469.png" class=""><br>得到flag</p>
