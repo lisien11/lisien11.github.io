@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>初探java内存马</title>
+      <link href="/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/"/>
+      <url>/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/</url>
+      
+        <content type="html"><![CDATA[<h1 id="其实很早就想学习java内存马的知识了。虽然现在对java安全的了解还很浅显，但是因为我个人对各种马比较有兴趣，所以这篇文章想浅显的认识一下内存马"><a href="#其实很早就想学习java内存马的知识了。虽然现在对java安全的了解还很浅显，但是因为我个人对各种马比较有兴趣，所以这篇文章想浅显的认识一下内存马" class="headerlink" title="其实很早就想学习java内存马的知识了。虽然现在对java安全的了解还很浅显，但是因为我个人对各种马比较有兴趣，所以这篇文章想浅显的认识一下内存马"></a>其实很早就想学习java内存马的知识了。虽然现在对java安全的了解还很浅显，但是因为我个人对各种马比较有兴趣，所以这篇文章想浅显的认识一下内存马</h1><h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>学内存马之前我们需要先了解的概念挺多的<br>1.啥是servlet<br>2.啥是tomcat，tomcat的结构逻辑又是啥。</p><h2 id="我们先来谈一下servlet"><a href="#我们先来谈一下servlet" class="headerlink" title="我们先来谈一下servlet"></a>我们先来谈一下servlet</h2><p>servlet是javaweb中一个非常重要的组件，其可以获取客户端的请求与发生响应到客户端。</p><h3 id="servlet的生命周期"><a href="#servlet的生命周期" class="headerlink" title="servlet的生命周期"></a>servlet的生命周期</h3><p>Servlet 初始化后调用 init () 方法。<br>Servlet 调用 service() 方法来处理客户端的请求。<br>Servlet 销毁前调用 destroy() 方法。<br>最后，Servlet 是由 JVM 的垃圾回收器进行垃圾回收的。<br><a href="https://www.runoob.com/servlet/servlet-life-cycle.html">https://www.runoob.com/servlet/servlet-life-cycle.html</a></p><h3 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h3><p>先来简单写几个servlet的demo吧<br>首先我们先来看一下jakarta EE自己生成的javaweb代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.lse.java_shell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet(name = &quot;helloServlet&quot;, value = &quot;/hello-servlet&quot;)</span> <span class="comment">//使用webServlet来将类添加到路由/hello-servlet</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        message = <span class="string">&quot;Hello LSE!&quot;</span>; <span class="comment">//init初始化</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        response.setContentType(<span class="string">&quot;text/html&quot;</span>); <span class="comment">//设置响应模式</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Hello</span></span><br><span class="line">        <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> response.getWriter(); <span class="comment">//通过getWriter来得到一个PrintWirter对象</span></span><br><span class="line">        out.println(<span class="string">&quot;&lt;html&gt;&lt;body&gt;&quot;</span>); <span class="comment">//通过println输出响应</span></span><br><span class="line">        out.println(<span class="string">&quot;&lt;h1&gt;&quot;</span> + message + <span class="string">&quot;&lt;/h1&gt;&quot;</span>);</span><br><span class="line">        out.println(<span class="string">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;<span class="comment">//关闭数据库连接关闭后台进程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>我们可以看到上面的代码是使用的<code>@WebServlet</code>来进行路由的映射，我们还可以使用tomcat项目结构下的web.xml来对路由进行映射<br><img src="/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/IMG_20241123-161631343.png" class=""><br>我们可以看到其使用的是doGet来获取请求进行响应，其实我们直接使用service也是可以的</p><p>我们在菜鸟教程里看一下基础的知识我们可以知道。service回根据请求的不同而做出不同的动作，即其可以得到GET请求的内容也可以得到POST的乃至PUT的，而doGet和doPost看名字也知道其是获取专门请求的</p><p>这时候我的好奇心一下就起来了,当service和doGET,doPost同时存在时其会如何处理?</p><p>于是我写入如下demo<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.lse.java_shell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletConfig;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.xml.ws.Service;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.Writer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloLSE</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String LLL;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">        LLL=<span class="string">&quot;LSE&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="comment">//super.service(req, resp);</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> req.getParameter(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        resp.setContentType(<span class="string">&quot;text/html&quot;</span>);</span><br><span class="line">        <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> resp.getWriter();</span><br><span class="line">        out.println(<span class="string">&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;&quot;</span>);</span><br><span class="line">        out.println(<span class="string">&quot;Hello, &quot;</span> + name + <span class="string">&quot;!&quot;</span>);</span><br><span class="line">        out.println(<span class="string">&quot;&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> resp.getWriter();</span><br><span class="line">        out.println(<span class="string">&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;&quot;</span>);</span><br><span class="line">        out.println(<span class="string">&quot;doGET!!!!&quot;</span>);</span><br><span class="line">        out.println(<span class="string">&quot;&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> resp.getWriter();</span><br><span class="line">        out.println(<span class="string">&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;&quot;</span>);</span><br><span class="line">        out.println(<span class="string">&quot;doPOST!!!!&quot;</span>);</span><br><span class="line">        out.println(<span class="string">&quot;&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><br>我先是没有调用super.service(req, resp);来尝试其他这个web<br><img src="/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/IMG_20241123-164043087.png" class=""><br>经过尝试发现不论我用什么方法都之后触发service，这是因为service的等级要高于doGet和doPost，其先一步拦截的请求并响应。<br>我们再产生一下调用super.service(req, resp);会发生什么<br><img src="/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/IMG_20241123-164339979.png" class=""><br>其会根据方法的不同来调用我们重新的doGet和doPost，且其自身的响应漏洞不发生改变。\</p><p>这时候我脑子里又有了个问题，如果我没重新doGet或者doPost会发生什么?<br><img src="/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/IMG_20241123-164557393.png" class=""><br>这是我发现其直接返回405错误说我们的请求方法有问题，连自身的响应逻辑也不会运行了</p><p>原本我想简单调试一下其逻辑但是发现竟然调不动，后面发现时我maven的里没有安装omcat-catalina<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-catalina<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>9.0.97<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><br>但就算安装了后也不知道为什么不能看到全部的逻辑调下来非常的怪<br>所有我就不在此深入了。</p><h2 id="啥是tomcat"><a href="#啥是tomcat" class="headerlink" title="啥是tomcat"></a>啥是tomcat</h2><p>来介绍一下tomcat吧，我们前面编写servlet的demo时都用到了tomcat，tomcat简单来说就是一个web的容器，其将我们的servlet进行了多层包装</p><p>而tomcat总共有4种容器分别为Engine、Host、Context和 Wrapper。而这四种容器的关系不是平行的而是父与子的关系</p><p>放一张经典老图<br><img src="/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/IMG_20241123-175354648.png" class="">  </p><p>上面的图标识了tomcat容器的嵌套关系一个Engine内套多个Host，一个Host内套多个Context，一个Context下套多个wrapper</p><p>Wrapper其实就算对Servlet进行简单的包装，可以简单把它理解成一个servlet实例<br>而Context就算一个web的一级路由<br>而Host就算一个web站点。<br>Engine就是引擎，其作用是协调多个站点其通常与Service来配合进行工作<strong>注意:这个service和我们之前将的servlet下的service的方法是没有关系的。servic的作用主要是管理和开启引擎和连接器的</strong><br><img src="/2024/11/22/%E5%88%9D%E6%8E%A2java%E5%86%85%E5%AD%98%E9%A9%AC/IMG_20241123-183725289.png" class="">  </p><p>从上面的图我们就可以很清晰的看出来每个容器的关系</p><h1 id=""><a href="#" class="headerlink" title=" "></a> </h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>春秋云镜Initial</title>
       <link href="/2024/11/21/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CInitial/"/>
       <url>/2024/11/21/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CInitial/</url>
@@ -21,7 +40,7 @@
       <link href="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/"/>
       <url>/2024/11/21/%E7%8E%84%E6%9C%BAtop10/</url>
       
-        <content type="html"><![CDATA[<h1 id="第一章-应急响应-webshell查杀"><a href="#第一章-应急响应-webshell查杀" class="headerlink" title="第一章 应急响应-webshell查杀"></a>第一章 应急响应-webshell查杀</h1><h2 id="1-黑客webshell里面的flag-flag-xxxxx-xxxx-xxxx-xxxx-xxxx"><a href="#1-黑客webshell里面的flag-flag-xxxxx-xxxx-xxxx-xxxx-xxxx" class="headerlink" title="1.黑客webshell里面的flag flag{xxxxx-xxxx-xxxx-xxxx-xxxx}"></a>1.黑客webshell里面的flag flag{xxxxx-xxxx-xxxx-xxxx-xxxx}</h2><p>用d盾扫可以扫出三个webshell<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091404035.png" class=""><br>从上到下分别是一句话木马，哥斯拉马和混淆一句话<br>打开哥斯拉马可以找到flag<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091450601.png" class="">  </p><h2 id="2-黑客使用的什么工具的shell-github地址的md5-flag-md5"><a href="#2-黑客使用的什么工具的shell-github地址的md5-flag-md5" class="headerlink" title="2.黑客使用的什么工具的shell github地址的md5 flag{md5}"></a>2.黑客使用的什么工具的shell github地址的md5 flag{md5}</h2><p>哥斯拉马<br><a href="https://github.com/Tas9er/ByPassBehinder">https://github.com/Tas9er/ByPassBehinder</a></p><h2 id="3-黑客隐藏shell的完整路径的md5-flag-md5-注-xxx-xxx-xxx-xxx-xxx-xxx"><a href="#3-黑客隐藏shell的完整路径的md5-flag-md5-注-xxx-xxx-xxx-xxx-xxx-xxx" class="headerlink" title="3.黑客隐藏shell的完整路径的md5 flag{md5} 注 : /xxx/xxx/xxx/xxx/xxx.xxx"></a>3.黑客隐藏shell的完整路径的md5 flag{md5} 注 : /xxx/xxx/xxx/xxx/xxx.xxx</h2><p>我们可以用如下命令来读取web命令下的所有隐藏文件<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /<span class="keyword">var</span>/www/html/ -type f -name <span class="string">&quot;.*&quot;</span></span><br></pre></td></tr></table></figure><br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091648832.png" class=""><br>可以发现一个php文件<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091712366.png" class=""><br>读取后发现其为木马<br>/var/www/html/include/Db/.Mysqli.php</p><h2 id="4-黑客免杀马完整路径-md5-flag-md5"><a href="#4-黑客免杀马完整路径-md5-flag-md5" class="headerlink" title="4.黑客免杀马完整路径 md5 flag{md5}"></a>4.黑客免杀马完整路径 md5 flag{md5}</h2><p>题目问的是免杀马，正常的免杀马是无法通过工具扫描得到的，一般得通过日志来查看<br>这道题目是apache的环境日志文件为/var/log/access.log<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-092032157.png" class=""><br>其实这个所谓的免杀马就是经过混淆的木马，而那种程度的混淆d盾完全可以扫描出来<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-092135422.png" class="">  </p><h1 id="第一章-应急响应-Linux日志分析"><a href="#第一章-应急响应-Linux日志分析" class="headerlink" title="第一章 应急响应-Linux日志分析"></a>第一章 应急响应-Linux日志分析</h1>]]></content>
+        <content type="html"><![CDATA[<h1 id="参考-学习文章-文章"><a href="#参考-学习文章-文章" class="headerlink" title="参考(学习文章)文章"></a>参考(学习文章)文章</h1><p><a href="https://github.com/Bypass007/Emergency-Response-Notes">https://github.com/Bypass007/Emergency-Response-Notes</a></p><h1 id="第一章-应急响应-webshell查杀"><a href="#第一章-应急响应-webshell查杀" class="headerlink" title="第一章 应急响应-webshell查杀"></a>第一章 应急响应-webshell查杀</h1><h2 id="1-黑客webshell里面的flag-flag-xxxxx-xxxx-xxxx-xxxx-xxxx"><a href="#1-黑客webshell里面的flag-flag-xxxxx-xxxx-xxxx-xxxx-xxxx" class="headerlink" title="1.黑客webshell里面的flag flag{xxxxx-xxxx-xxxx-xxxx-xxxx}"></a>1.黑客webshell里面的flag flag{xxxxx-xxxx-xxxx-xxxx-xxxx}</h2><p>用d盾扫可以扫出三个webshell<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091404035.png" class=""><br>从上到下分别是一句话木马，哥斯拉马和混淆一句话<br>打开哥斯拉马可以找到flag<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091450601.png" class="">  </p><h2 id="2-黑客使用的什么工具的shell-github地址的md5-flag-md5"><a href="#2-黑客使用的什么工具的shell-github地址的md5-flag-md5" class="headerlink" title="2.黑客使用的什么工具的shell github地址的md5 flag{md5}"></a>2.黑客使用的什么工具的shell github地址的md5 flag{md5}</h2><p>哥斯拉马<br><a href="https://github.com/Tas9er/ByPassBehinder">https://github.com/Tas9er/ByPassBehinder</a></p><h2 id="3-黑客隐藏shell的完整路径的md5-flag-md5-注-xxx-xxx-xxx-xxx-xxx-xxx"><a href="#3-黑客隐藏shell的完整路径的md5-flag-md5-注-xxx-xxx-xxx-xxx-xxx-xxx" class="headerlink" title="3.黑客隐藏shell的完整路径的md5 flag{md5} 注 : /xxx/xxx/xxx/xxx/xxx.xxx"></a>3.黑客隐藏shell的完整路径的md5 flag{md5} 注 : /xxx/xxx/xxx/xxx/xxx.xxx</h2><p>我们可以用如下命令来读取web命令下的所有隐藏文件<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /<span class="keyword">var</span>/www/html/ -type f -name <span class="string">&quot;.*&quot;</span></span><br></pre></td></tr></table></figure><br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091648832.png" class=""><br>可以发现一个php文件<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-091712366.png" class=""><br>读取后发现其为木马<br>/var/www/html/include/Db/.Mysqli.php</p><h2 id="4-黑客免杀马完整路径-md5-flag-md5"><a href="#4-黑客免杀马完整路径-md5-flag-md5" class="headerlink" title="4.黑客免杀马完整路径 md5 flag{md5}"></a>4.黑客免杀马完整路径 md5 flag{md5}</h2><p>题目问的是免杀马，正常的免杀马是无法通过工具扫描得到的，一般得通过日志来查看<br>这道题目是apache的环境日志文件为/var/log/access.log<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-092032157.png" class=""><br>其实这个所谓的免杀马就是经过混淆的木马，而那种程度的混淆d盾完全可以扫描出来<br><img src="/2024/11/21/%E7%8E%84%E6%9C%BAtop10/IMG_20241121-092135422.png" class="">  </p><h1 id="第一章-应急响应-Linux日志分析"><a href="#第一章-应急响应-Linux日志分析" class="headerlink" title="第一章 应急响应-Linux日志分析"></a>第一章 应急响应-Linux日志分析</h1><div class="table-container"><table><thead><tr><th>日志文件</th><th>说明</th></tr></thead><tbody><tr><td>/var/log/cron</td><td>记录了系统定时任务相关的日志</td></tr><tr><td>/var/log/cups</td><td>记录打印信息的日志</td></tr><tr><td>/var/log/dmesg</td><td>记录了系统在开机时内核自检的信息，也可以使用dmesg命令直接查看内核自检信息</td></tr><tr><td>/var/log/mailog</td><td>记录邮件信息</td></tr><tr><td>/var/log/message</td><td>记录系统重要信息的日志。这个日志文件中会记录Linux系统的绝大多数重要信息，如果系统出现问题时，首先要检查的就应该是这个日志文件</td></tr><tr><td>/var/log/btmp</td><td>记录错误登录日志，这个文件是二进制文件，不能直接vi查看，而要使用lastb命令查看</td></tr><tr><td>/var/log/lastlog</td><td>记录系统中所有用户最后一次登录时间的日志，这个文件是二进制文件，不能直接vi，而要使用lastlog命令查看</td></tr><tr><td>/var/log/wtmp</td><td>永久记录所有用户的登录、注销信息，同时记录系统的启动、重启、关机事件。同样这个文件也是一个二进制文件，不能直接vi，而需要使用last命令来查看</td></tr><tr><td>/var/log/utmp</td><td>记录当前已经登录的用户信息，这个文件会随着用户的登录和注销不断变化，只记录当前登录用户的信息。同样这个文件不能直接vi，而要使用w,who,users等命令来查询</td></tr><tr><td>/var/log/secure</td><td>记录验证和授权方面的信息，只要涉及账号和密码的程序都会记录，比如SSH登录，su切换用户，sudo授权，甚至添加用户和修改用户密码都会记录在这个日志文件中</td></tr></tbody></table></div><p>我们要写的这到题目主要是登陆日志的审查即<br>登陆失败日志/var/log/btmp     使用lastb查看<br>最后一次登陆日志 /var/log/lastlog    使用lastlog<br>登陆成功的用户日志/var/log/wtmp    使用last<br>目前登陆用户 /var/log/utmp    //w、who、users</p>]]></content>
       
       
       
@@ -2304,11 +2323,11 @@
     
     
     <entry>
-      <title>这就是（一个平平无奇的大学生的）分类</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title></title>
+      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
+      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
       
     </entry>
     
@@ -2327,10 +2346,10 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
-      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
       
-        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -2340,6 +2359,28 @@
       <title>友情链接</title>
       <link href="/link/index.html"/>
       <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>这就是（一个平平无奇的大学生的）分类</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2360,30 +2401,8 @@
     
     <entry>
       <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
       <link href="/css/LSE.css"/>
       <url>/css/LSE.css</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
