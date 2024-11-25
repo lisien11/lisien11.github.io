@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>mysql:udf提权</title>
+      <link href="/2024/11/25/mysql-udf%E6%8F%90%E6%9D%83/"/>
+      <url>/2024/11/25/mysql-udf%E6%8F%90%E6%9D%83/</url>
+      
+        <content type="html"><![CDATA[<h1 id="打玄机的时候遇到了mysql的日志审查，而我本人对于提权操作其实并不是特别了解。本文将记录mysql的udf提权的学习"><a href="#打玄机的时候遇到了mysql的日志审查，而我本人对于提权操作其实并不是特别了解。本文将记录mysql的udf提权的学习" class="headerlink" title="打玄机的时候遇到了mysql的日志审查，而我本人对于提权操作其实并不是特别了解。本文将记录mysql的udf提权的学习"></a>打玄机的时候遇到了mysql的日志审查，而我本人对于提权操作其实并不是特别了解。本文将记录mysql的udf提权的学习</h1><p>#</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> top10 </category>
+          
+          <category> sql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> sql </tag>
+            
+            <tag> 提权 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>玄机靶场第二章日志分析</title>
       <link href="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
       <url>/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</url>
@@ -2418,9 +2447,9 @@
     
     
     <entry>
-      <title></title>
-      <link href="/css/LSE.css"/>
-      <url>/css/LSE.css</url>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tag/index.html"/>
+      <url>/tag/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2440,9 +2469,9 @@
     
     
     <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tag/index.html"/>
-      <url>/tag/index.html</url>
+      <title></title>
+      <link href="/css/LSE.css"/>
+      <url>/css/LSE.css</url>
       
         <content type="html"><![CDATA[]]></content>
       
