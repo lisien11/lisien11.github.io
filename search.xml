@@ -2403,17 +2403,6 @@
     
     
     <entry>
-      <title>这就是（一个平平无奇的大学生的）分类</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title></title>
       <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
       <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
@@ -2436,11 +2425,11 @@
     
     
     <entry>
-      <title></title>
-      <link href="/css/transpancy.css"/>
-      <url>/css/transpancy.css</url>
+      <title>这就是（一个平平无奇的大学生的）分类</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[/* 文章页背景 */.layout_post>#post {    /* 以下代表透明度为0.7 可以自行修改*/    background: rgba(255,255,255,.8);} /* 所有页面背景 */#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    /* 以下代表透明度为0.7 */    background: rgba(255,255,255,.8);}/*侧边卡片的透明度 */:root {  --card-bg: rgba(255, 255, 255, .8);}/* 页脚透明 */#footer {/* 以下代表透明度为0.7 */background: rgba(255,255,255, .0);}]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -2458,17 +2447,6 @@
     
     
     <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>友情链接</title>
       <link href="/link/index.html"/>
       <url>/link/index.html</url>
@@ -2480,11 +2458,11 @@
     
     
     <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tag/index.html"/>
-      <url>/tag/index.html</url>
+      <title></title>
+      <link href="/css/transpancy.css"/>
+      <url>/css/transpancy.css</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[/* 文章页背景 */.layout_post>#post {    /* 以下代表透明度为0.7 可以自行修改*/    background: rgba(255,255,255,.8);} /* 所有页面背景 */#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    /* 以下代表透明度为0.7 */    background: rgba(255,255,255,.8);}/*侧边卡片的透明度 */:root {  --card-bg: rgba(255, 255, 255, .8);}/* 页脚透明 */#footer {/* 以下代表透明度为0.7 */background: rgba(255,255,255, .0);}]]></content>
       
     </entry>
     
@@ -2502,9 +2480,31 @@
     
     
     <entry>
+      <title></title>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一个普通大学生的标签页</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tag/index.html"/>
+      <url>/tag/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
