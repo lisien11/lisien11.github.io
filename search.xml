@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>玄机靶场第二章日志分析</title>
+      <link href="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+      <url>/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第二章日志分析-apache日志分析"><a href="#第二章日志分析-apache日志分析" class="headerlink" title="第二章日志分析-apache日志分析"></a>第二章日志分析-apache日志分析</h1><h2 id="1、提交当天访问次数最多的IP，即黑客IP："><a href="#1、提交当天访问次数最多的IP，即黑客IP：" class="headerlink" title="1、提交当天访问次数最多的IP，即黑客IP："></a>1、提交当天访问次数最多的IP，即黑客IP：</h2><p>apache的日志ip是在第一个我们直接分组输出第一个组就是ip让后在统计次数即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat access.log.1|awk &#x27;&#123;print$1&#125;&#x27;|sort -n|uniq -c</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><img src="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/IMG_20241125-121228733.png" class="">  </p><p>flag{192.168.200.2}</p><h2 id="2、黑客使用的浏览器指纹是什么，提交指纹的md5："><a href="#2、黑客使用的浏览器指纹是什么，提交指纹的md5：" class="headerlink" title="2、黑客使用的浏览器指纹是什么，提交指纹的md5："></a>2、黑客使用的浏览器指纹是什么，提交指纹的md5：</h2><p>直接过滤出黑客ip然后将ua头进行md5加密即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat access.log.1|grep &quot;192.168.200.2&quot;</span><br></pre></td></tr></table></figure><br><img src="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/IMG_20241125-112920614.png" class="">  </p><img src="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/IMG_20241125-120129568.png" class="">  <h2 id="3、查看index-php页面被访问的次数，提交次数："><a href="#3、查看index-php页面被访问的次数，提交次数：" class="headerlink" title="3、查看index.php页面被访问的次数，提交次数："></a>3、查看index.php页面被访问的次数，提交次数：</h2><p>过滤/index.php<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat access.log.1|grep &quot;/index.php&quot;|awk &#x27;&#123;print$1&#125;&#x27;|sort -n|uniq -c</span><br></pre></td></tr></table></figure><br><img src="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/IMG_20241125-120854275.png" class="">  </p><h2 id="4、查看黑客IP访问了多少次，提交次数：l"><a href="#4、查看黑客IP访问了多少次，提交次数：l" class="headerlink" title="4、查看黑客IP访问了多少次，提交次数：l"></a>4、查看黑客IP访问了多少次，提交次数：l</h2><p>第一题就出了<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat access.log.1|awk &#x27;&#123;print$1&#125;&#x27;|sort -n|uniq -c</span><br></pre></td></tr></table></figure><br>也可以在加一个过滤<br><img src="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/IMG_20241125-120558519.png" class="">  </p><p>flag{6555}</p><h2 id="5、查看2023年8月03日8时这一个小时内有多少IP访问，提交次数"><a href="#5、查看2023年8月03日8时这一个小时内有多少IP访问，提交次数" class="headerlink" title="5、查看2023年8月03日8时这一个小时内有多少IP访问，提交次数:"></a>5、查看2023年8月03日8时这一个小时内有多少IP访问，提交次数:</h2><p>过滤时间到小时<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat access.log.1|grep -a &#x27;03/Aug/2023:08&#x27;|awk &#x27;&#123;print$1&#125;&#x27;|sort -n |uniq -c</span><br></pre></td></tr></table></figure></p><img src="/2024/11/25/%E7%8E%84%E6%9C%BA%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/IMG_20241125-120625692.png" class="">  <p>flag{5}</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>NSS上的一些java题</title>
       <link href="/2024/11/24/NSS%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9Bjava%E9%A2%98/"/>
       <url>/2024/11/24/NSS%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9Bjava%E9%A2%98/</url>
@@ -2351,6 +2364,17 @@
     
     <entry>
       <title></title>
+      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
+      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
+      
+        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
       <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
       <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
       
@@ -2384,19 +2408,19 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
-      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
       
-        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tag/index.html"/>
-      <url>/tag/index.html</url>
+      <title></title>
+      <link href="/css/LSE.css"/>
+      <url>/css/LSE.css</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2416,20 +2440,9 @@
     
     
     <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/css/LSE.css"/>
-      <url>/css/LSE.css</url>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tag/index.html"/>
+      <url>/tag/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
