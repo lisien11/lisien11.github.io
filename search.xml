@@ -2436,17 +2436,6 @@
     
     
     <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>友情链接</title>
       <link href="/link/index.html"/>
       <url>/link/index.html</url>
@@ -2459,8 +2448,19 @@
     
     <entry>
       <title>一个普通大学生的标签页</title>
-      <link href="/tag/index.html"/>
-      <url>/tag/index.html</url>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2470,8 +2470,8 @@
     
     <entry>
       <title>一个普通大学生的标签页</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <link href="/tag/index.html"/>
+      <url>/tag/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
