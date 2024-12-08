@@ -8,7 +8,7 @@
       <link href="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/"/>
       <url>/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/</url>
       
-        <content type="html"><![CDATA[<h1 id="这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西"><a href="#这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西" class="headerlink" title="这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西"></a>这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西</h1><h2 id="Ez-Gallery"><a href="#Ez-Gallery" class="headerlink" title="Ez_Gallery"></a>Ez_Gallery</h2><p>首先是爆破验证码<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-153657253.png" class=""><br>我这里直接用captcha-killer+codereg.py<br><a href="https://github.com/f0ng/captcha-killer-modified/tree/main">https://github.com/f0ng/captcha-killer-modified/tree/main</a></p><p>可以爆破出密码为123456。然后进入后可以发现一个文件读取<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-154105134.png" class=""><br>看源码<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-154240092.png" class=""><br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-154336445.png" class="">  </p><p>我们可以发现是一个无回显且flag没有读取权限的ssti，那这就很明显了其想让我们将执行命令的内容带出来或者盲注。<br>但因为其将数字和点都给过滤了，那么我们弹shell和dns外带的难度就很大了。</p><p>而且因为这道题目并比赛flask框架的而是pyramid加wsgiref的我们不好使用内存马。</p><p>而我在之前有看过一个师傅的flask宽假的响应头回显思路并自己进行了一次调试<br><a href="https://lisien11.xyz/2024/11/19/python-flask-%E6%96%B0%E5%9E%8B%E5%9B%9E%E6%98%BE%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%9A%84%E6%B7%B1%E5%85%A5/">python flask 新型回显的学习和进一步的深入</a></p><p>其原理像server头等固定的响应头其实都是硬编码在代码里的，我们可以通过将这些值污染为我们命令执行的结果从而进行回显</p><p>我先在本地简单调了一下这个宽假，我前面说了这些请求头是硬编码的，所有大概率是在程序刚开始运行时就写入的。<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155103524.png" class=""><br>我直接将断点下到了sever启动的地方</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155130064.png" class="">  <p>可以发现其就是硬编码的<br>我们继续往下调，将这些赋值的过程调过去。<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155507709.png" class=""><br>跳过后我们查看下面控制台的变量，会发现很多和响应有关的类和属性<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155637591.png" class=""><br>像这个<code>&lt;class &#39;wsgiref.simple_server.ServerHandler&#39;&gt;</code>下的http_version啊，server_software啊。<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155831207.png" class=""><br>还有<code>&lt;class &#39;http.server.BaseHTTPRequestHandler&#39;&gt;</code>下的responses啊，这个responses和之前我调flask的很像，我在flask上成功污染了500页面硬编码的内容。这个应该也可以做到。</p><p>。我们可以先自己在本地搞一个有回显的ssti。来先调一调<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161038936.png" class=""><br>稍微修改一下shell路由<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161312500.png" class=""><br>和之前调flask一样一步步的往下找我们要的wsgiref.simple_server.ServerHandler<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161652674.png" class=""><br>就这样一步步的走就可以知道如何跳过sys获取http_version这个属性</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161912246.png" class="">  <p>其值也就是回显标头里的http版本<br>然后我们可以通过setattr来更改其值</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-162206265.png" class="">  <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;lipsum[<span class="string">&#x27;__globals__&#x27;</span>][<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;setattr&#x27;</span>](lipsum.__spec__.__init__.__globals__.sys.modules.wsgiref.simple_server.ServerHandler,<span class="string">&#x27;http_version&#x27;</span>,<span class="string">&quot;aaaa&quot;</span>)&#125;&#125;</span><br></pre></td></tr></table></figure><p>我们可以看见其回显的http标头已经杯篡改了。我们将后面窜改的值改为我们的命令执行的payload<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-162401828.png" class=""><br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;lipsum[<span class="string">&#x27;__globals__&#x27;</span>][<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;setattr&#x27;</span>](lipsum.__spec__.__init__.__globals__.sys.modules.wsgiref.simple_server.ServerHandler,<span class="string">&#x27;http_version&#x27;</span>,lipsum.__globals__.__builtins__[<span class="string">&#x27;__import__&#x27;</span>](<span class="string">&#x27;os&#x27;</span>).popen(<span class="string">&#x27;whoami&#x27;</span>).read())&#125;&#125;</span><br></pre></td></tr></table></figure></p><p>那么接下来距离解决这到题目也只剩下了如何绕waf了<br>题目过滤了点好，我们知道当过滤了点好ssti我们是可以使用[]或者|attr()来绕过的，但是单纯的将其改为[]和|attr()我们是无法成功污染的(会报错)。我之前在调试flask是就有想尝试不使用点好来进行污染但是却失败了也就没有继续探讨下去了。</p><p>在前面获取setatter和进行命令执行的部分没有什么问题都可以通过中括号来绕过过滤，但是中间通过sys来获取http<em>version的过程却不行<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-163550043.png" class=""><br>我们一个一个的进行替换看问题出在哪里，我们就要看到当我们将`.<em>_init</em></em>`改为</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西"><a href="#这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西" class="headerlink" title="这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西"></a>这个国城杯的题目难度有那么亿点高，复现一下应该能学到不少东西</h1><h2 id="Ez-Gallery"><a href="#Ez-Gallery" class="headerlink" title="Ez_Gallery"></a>Ez_Gallery</h2><p>首先是爆破验证码<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-153657253.png" class=""><br>我这里直接用captcha-killer+codereg.py<br><a href="https://github.com/f0ng/captcha-killer-modified/tree/main">https://github.com/f0ng/captcha-killer-modified/tree/main</a></p><p>可以爆破出密码为123456。然后进入后可以发现一个文件读取<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-154105134.png" class=""><br>看源码<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-154240092.png" class=""><br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-154336445.png" class="">  </p><p>我们可以发现是一个无回显且flag没有读取权限的ssti，那这就很明显了其想让我们将执行命令的内容带出来或者盲注。<br>但因为其将数字和点都给过滤了，那么我们弹shell和dns外带的难度就很大了。</p><p>而且因为这道题目并比赛flask框架的而是pyramid加wsgiref的我们不好使用内存马。</p><p>而我在之前有看过一个师傅的flask宽假的响应头回显思路并自己进行了一次调试<br><a href="https://lisien11.xyz/2024/11/19/python-flask-%E6%96%B0%E5%9E%8B%E5%9B%9E%E6%98%BE%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%9A%84%E6%B7%B1%E5%85%A5/">python flask 新型回显的学习和进一步的深入</a></p><p>其原理像server头等固定的响应头其实都是硬编码在代码里的，我们可以通过将这些值污染为我们命令执行的结果从而进行回显</p><p>我先在本地简单调了一下这个宽假，我前面说了这些请求头是硬编码的，所有大概率是在程序刚开始运行时就写入的。<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155103524.png" class=""><br>我直接将断点下到了sever启动的地方</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155130064.png" class="">  <p>可以发现其就是硬编码的<br>我们继续往下调，将这些赋值的过程调过去。<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155507709.png" class=""><br>跳过后我们查看下面控制台的变量，会发现很多和响应有关的类和属性<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155637591.png" class=""><br>像这个<code>&lt;class &#39;wsgiref.simple_server.ServerHandler&#39;&gt;</code>下的http_version啊，server_software啊。<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-155831207.png" class=""><br>还有<code>&lt;class &#39;http.server.BaseHTTPRequestHandler&#39;&gt;</code>下的responses啊，这个responses和之前我调flask的很像，我在flask上成功污染了500页面硬编码的内容。这个应该也可以做到。</p><p>。我们可以先自己在本地搞一个有回显的ssti。来先调一调<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161038936.png" class=""><br>稍微修改一下shell路由<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161312500.png" class=""><br>和之前调flask一样一步步的往下找我们要的wsgiref.simple_server.ServerHandler<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161652674.png" class=""><br>就这样一步步的走就可以知道如何跳过sys获取http_version这个属性</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-161912246.png" class="">  <p>其值也就是回显标头里的http版本<br>然后我们可以通过setattr来更改其值</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-162206265.png" class="">  <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;lipsum[<span class="string">&#x27;__globals__&#x27;</span>][<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;setattr&#x27;</span>](lipsum.__spec__.__init__.__globals__.sys.modules.wsgiref.simple_server.ServerHandler,<span class="string">&#x27;http_version&#x27;</span>,<span class="string">&quot;aaaa&quot;</span>)&#125;&#125;</span><br></pre></td></tr></table></figure><p>我们可以看见其回显的http标头已经杯篡改了。我们将后面窜改的值改为我们的命令执行的payload<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-162401828.png" class=""><br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;lipsum[<span class="string">&#x27;__globals__&#x27;</span>][<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;setattr&#x27;</span>](lipsum.__spec__.__init__.__globals__.sys.modules.wsgiref.simple_server.ServerHandler,<span class="string">&#x27;http_version&#x27;</span>,lipsum.__globals__.__builtins__[<span class="string">&#x27;__import__&#x27;</span>](<span class="string">&#x27;os&#x27;</span>).popen(<span class="string">&#x27;whoami&#x27;</span>).read())&#125;&#125;</span><br></pre></td></tr></table></figure></p><p>那么接下来距离解决这到题目也只剩下了如何绕waf了<br>题目过滤了点好，我们知道当过滤了点好ssti我们是可以使用[]或者|attr()来绕过的，但是单纯的将其改为[]和|attr()我们是无法成功污染的(会报错)。我之前在调试flask是就有想尝试不使用点好来进行污染但是却失败了也就没有继续探讨下去了。</p><p>在前面获取setatter和进行命令执行的部分没有什么问题都可以通过中括号来绕过过滤，但是中间通过sys来获取http<em>version的过程却不行<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-163550043.png" class=""><br>我们一个一个的进行替换看问题出在哪里，我们就要看到当我们将<code>.__init__</code>改为<code>[&#39;__init__&#39;]</code>就发现其发生了报错。这是因为我们将<code>lipsum[&#39;__spec__&#39;]</code>当成字典了。<code>lipsum[&#39;__spec__&#39;]</code>他返回的是一个对象，我们其并没有实现`<em>_getitem</em></em><code>所以我们并不能直接使用</code>[]`来对其进行获取。这时我们就要像到|attr()这个过滤器了，这个过滤器可以获取对象（模块，类）的属性，</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-171709111.png" class="">  <p>我们使用|attr()可以发现器成功得到了一个method类。因为是class所以我们继续用|attr(),可以发现获取到<code>__globals__</code>时就是一个字典看，我们用中括号<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-171904219.png" class=""><br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-172003348.png" class=""><br>但我们发现直接实验[]还是不行,这是因为<code>lipsum[&#39;__spec__&#39;]|attr(&#39;__init__&#39;)|attr(&#39;__globals__&#39;)</code>这个整体才是一个字典，所以我们需要实验括号将其括起来<br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-172411962.png" class=""><br>剩下的其实就不断重复上面的不在，遇到字典就加括号实验[]遇到类就使用|attr(‘’)</p><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-172836158.png" class="">  <p>就这样，最终的payload我们就能构造出来了如下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;&#123;lipsum[&#x27;__globals__&#x27;][&#x27;__builtins__&#x27;][&#x27;setattr&#x27;](((lipsum[&#x27;__spec__&#x27;]|attr(&#x27;__init__&#x27;)|attr(&#x27;__globals__&#x27;))[&#x27;sys&#x27;]|attr(&#x27;modules&#x27;))[&#x27;wsgiref&#x27;]|attr(&#x27;simple_server&#x27;)|attr(&#x27;ServerHandler&#x27;),&#x27;http_version&#x27;,lipsum[&#x27;__globals__&#x27;][&#x27;__builtins__&#x27;][&#x27;__import__&#x27;](&#x27;os&#x27;)[&#x27;popen&#x27;](&#x27;whoami&#x27;)[&#x27;read&#x27;]())&#125;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-173042460.png" class=""><br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-174359447.png" class=""><br><img src="/2024/12/08/%E5%9B%BD%E5%9F%8E%E6%9D%AF/IMG_20241208-174410253.png" class="">  </p>]]></content>
       
       
       
@@ -2500,10 +2500,10 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
-      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
+      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
+      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
       
-        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
+        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
       
     </entry>
     
@@ -2511,10 +2511,10 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
-      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
+      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
+      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
       
-        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
+        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
       
     </entry>
     
@@ -2532,6 +2532,17 @@
     
     
     <entry>
+      <title>这就是（一个平平无奇的大学生的）分类</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="/css/LSE.css"/>
       <url>/css/LSE.css</url>
@@ -2543,9 +2554,9 @@
     
     
     <entry>
-      <title>这就是（一个平平无奇的大学生的）分类</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>友情链接</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2566,6 +2577,17 @@
     
     <entry>
       <title></title>
+      <link href="/scripts/modify.js"/>
+      <url>/scripts/modify.js</url>
+      
+        <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
       <link href="/css/modify.css"/>
       <url>/css/modify.css</url>
       
@@ -2577,30 +2599,8 @@
     
     <entry>
       <title></title>
-      <link href="/scripts/modify.js"/>
-      <url>/scripts/modify.js</url>
-      
-        <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>友情链接</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2620,9 +2620,9 @@
     
     
     <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
