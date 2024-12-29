@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>从DAS的strange_php开始探究PDO在反序列化中的利用</title>
+      <link href="/2024/12/28/%E4%BB%8EDAS%E7%9A%84strange-php%E5%BC%80%E5%A7%8B%E6%8E%A2%E7%A9%B6PDO%E5%9C%A8%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E7%9A%84%E5%88%A9%E7%94%A8/"/>
+      <url>/2024/12/28/%E4%BB%8EDAS%E7%9A%84strange-php%E5%BC%80%E5%A7%8B%E6%8E%A2%E7%A9%B6PDO%E5%9C%A8%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E7%9A%84%E5%88%A9%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="平常上课都没听，最近都忙着速通期末都没时间来更博客了。"><a href="#平常上课都没听，最近都忙着速通期末都没时间来更博客了。" class="headerlink" title="平常上课都没听，最近都忙着速通期末都没时间来更博客了。"></a>平常上课都没听，最近都忙着速通期末都没时间来更博客了。</h1><p>#</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DASCTF 2024最后一战｜寒夜破晓，冬至终章个人wp</title>
       <link href="/2024/12/21/DASCTF-2024%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%EF%BD%9C%E5%AF%92%E5%A4%9C%E7%A0%B4%E6%99%93%EF%BC%8C%E5%86%AC%E8%87%B3%E7%BB%88%E7%AB%A0%E4%B8%AA%E4%BA%BAwp/"/>
       <url>/2024/12/21/DASCTF-2024%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%EF%BD%9C%E5%AF%92%E5%A4%9C%E7%A0%B4%E6%99%93%EF%BC%8C%E5%86%AC%E8%87%B3%E7%BB%88%E7%AB%A0%E4%B8%AA%E4%BA%BAwp/</url>
@@ -2563,33 +2576,22 @@
     
     
     <entry>
-      <title></title>
-      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
-      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
-      
-        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/css/modify.css"/>
-      <url>/css/modify.css</url>
-      
-        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>这就是（一个平平无奇的大学生的）分类</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
+      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
+      
+        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
       
     </entry>
     
@@ -2608,10 +2610,10 @@
     
     <entry>
       <title></title>
-      <link href="/css/LSE.css"/>
-      <url>/css/LSE.css</url>
+      <link href="/css/modify.css"/>
+      <url>/css/modify.css</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
       
     </entry>
     
@@ -2629,9 +2631,9 @@
     
     
     <entry>
-      <title>友情链接</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title></title>
+      <link href="/css/LSE.css"/>
+      <url>/css/LSE.css</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2643,6 +2645,17 @@
       <title></title>
       <link href="/js/LSE.js"/>
       <url>/js/LSE.js</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>友情链接</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
