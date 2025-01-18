@@ -8,7 +8,7 @@
       <link href="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/"/>
       <url>/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/</url>
       
-        <content type="html"><![CDATA[<h1 id="Rank-l"><a href="#Rank-l" class="headerlink" title="Rank-l"></a>Rank-l</h1><p>登陆时可以发现其输入用户名和输入密码是在不同路径下的。</p><p>在经过尝试可以发现在登陆页面输入一次用户名,服务器会将其保存,后面输入密码时,如果错误会回显用户名<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163641406.png" class=""><br>因为是py所以尝试使用ssti<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163741888.png" class=""><br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163756540.png" class="">  </p><p>经过尝试可以发现,在用户名处存在ssti<br>其过滤了一些特殊符号如/ * ;等。这里我使用equest.args.x1来进行绕过<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_number=&#123;&#123;g.pop.__globals__.__builtins__[&#x27;__import__&#x27;](&#x27;os&#x27;).popen(request.args.x1).read()&#125;&#125;phone_number=&#123;&#123;g.pop.__globals__.__builtins__[&#x27;__import__&#x27;](&#x27;os&#x27;).popen(request.args.x1).read()&#125;&#125;</span><br></pre></td></tr></table></figure><br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-162734268.png" class="">  </p><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163335604.png" class="">  <h1 id="easydatalog"><a href="#easydatalog" class="headerlink" title="easydatalog"></a>easydatalog</h1><p>下载查看日志<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164019396.png" class=""><br>可以发现其为使用蚁剑所记录的日志。<br>一步步看下去可以发现用蚁剑传了一张jpg图片。蚁剑传图片是分段传的将图片的多段拼接在一起。<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164201560.png" class="">  </p><p>得到如下图片<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164407354.jpg" class="">  </p><p>提取盲水印可以发现<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164505721.png" class="">  </p><p>再接着看日志可以发现还有一个zip文件<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164620152.png" class=""><br>提取出来使用盲水印的密码解压。<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164702770.png" class=""><br>得到csv文件<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164729780.png" class="">  </p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Rank-l"><a href="#Rank-l" class="headerlink" title="Rank-l"></a>Rank-l</h1><p>登陆时可以发现其输入用户名和输入密码是在不同路径下的。</p><p>在经过尝试可以发现在登陆页面输入一次用户名,服务器会将其保存,后面输入密码时,如果错误会回显用户名<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163641406.png" class=""><br>因为是py所以尝试使用ssti<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163741888.png" class=""><br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163756540.png" class="">  </p><p>经过尝试可以发现,在用户名处存在ssti<br>其过滤了一些特殊符号如/ * ;等。这里我使用equest.args.x1来进行绕过<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_number=&#123;&#123;g.pop.__globals__.__builtins__[&#x27;__import__&#x27;](&#x27;os&#x27;).popen(request.args.x1).read()&#125;&#125;phone_number=&#123;&#123;g.pop.__globals__.__builtins__[&#x27;__import__&#x27;](&#x27;os&#x27;).popen(request.args.x1).read()&#125;&#125;</span><br></pre></td></tr></table></figure><br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-162734268.png" class="">  </p><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163335604.png" class="">  <h1 id="easydatalog"><a href="#easydatalog" class="headerlink" title="easydatalog"></a>easydatalog</h1><p>下载查看日志<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164019396.png" class=""><br>可以发现其为使用蚁剑所记录的日志。<br>一步步看下去可以发现用蚁剑传了一张jpg图片。蚁剑传图片是分段传的将图片的多段拼接在一起。<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164201560.png" class="">  </p><p>得到如下图片<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164407354.jpg" class="">  </p><p>提取盲水印可以发现<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164505721.png" class="">  </p><p>再接着看日志可以发现还有一个zip文件<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164620152.png" class=""><br>提取出来使用盲水印的密码解压。<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164702770.png" class=""><br>得到csv文件<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164729780.png" class="">  </p><h1 id="sqli-or-not"><a href="#sqli-or-not" class="headerlink" title="sqli or not"></a>sqli or not</h1><p>主要是记一下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$`</span><br></pre></td></tr></table></figure><br>可以代替引号来和前面一个引号匹配。<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastParen">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastParen</a><br>这个trick说实话真是学到了。</p>]]></content>
       
       
       
@@ -34,7 +34,7 @@
       <link href="/2025/01/16/%E5%9F%B9%E8%AE%AD/"/>
       <url>/2025/01/16/%E5%9F%B9%E8%AE%AD/</url>
       
-        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="f6d87c76ca8c2a3423bc394b96b496b2c551c08a819523cc62f99b842c9bc48d">c020d5660b048b9f7f37ea66b4ec7175915dd87ce8423425a8b462462a869c69b00c4860d178b3be25cb6560090a973ceb7b7f87dedbb1643089b80192b5495bc435b49a8e3df8832a34841d19e59ca50a94e630125b032d57cb790ac3da4ca52cd5bd5475469e967039602d7e2c9a105d0f84c75a4c8ca67955f0b345c5b41c95dcc034f9f371479f23a5071864c775593362014782368555be972f9baaa7cba07de186ef83a679e804fa8ecbcb55dd057944522236355705ec1be184cdbcef69a35c3abd44191cd982b85ce8fe92cab18661af3d040bb1c2c62fedf24537c297039eb3a5bfe35276c5e8dfd41723ccbc3a7bbd14510b4a095963fb5951aae2dbbcce3e0d28ae0dfad2c519c5dd67871b2021fd4ab373cf183c2de7d22442309d67853f4f318fca4228589811827d9aee2c2e408fb8f9f642ab505839c84de8728aa18990d656b2df0272843fdeb27857d7a303caa2ecd196e441dd6213ac70df4f0222890584889ed328cab8bcb049d85e4107b7aa869b4de9a351e6854668cf6946113f5f02145d73462479a8fcf0d61ccc214095c983dc00c9fb82a85d2bbb641b8370a0d2523b857371fba443cc7a2dfba6b335f69382598b2703b945e9333627bd11a777e5d09405136b1b561a9dfe9aa48755f70c9ab68401b166af14b89533e38a8af049a0d075f5748e01cc8798c82856bf5ea11196ba99672f89efb19520a07a4b08448d0a4566efb19fa9787e1ddd8a77521ff20d81bf31a9d47784cd28e2a0119ace2e411b85c44ddcc06fae4951ddd9b2c075a7e796adc26df0d82e296b3939a453fda96dc89c8e24c2afe4414d672a5f386f3c3e641b8dc5f5c22e22fec6341dd3e8bdbf1f9241e63e6f2f52e5d44f0c01e8c21d575a889d83007e7af07c068771e1266fb263d606e8eeb1ee04298ac4160d4d5755d7643c7a80298ad45fde0b4a55c52e0a9f5cac109f0e9bf9c2755485d6b19cab9789d84da1081061fd3053b0b25ee702a62aabe25f49500808dacb5f9a7a39151e66653cac1479cf3b4da230edeac5f68fc89ba7e91b785ec6fdbc6ca8f0d7b5031240184e3b21f8a64b61af567c37a147b1c165ce35a731c065b4944b5f6ef9569bacd4163c006c1ad93f86e70469c880a6a6653886a9692a8113ccf5892684b80d4121f64332a27057b56a9d90f8c46a4b52e402e1caf00b8927fc4b88f16445cd3ae567ffc04c1baad3533294746b82b43db45f1cb2140310593203714797ff3cadd988da9cab429004ee095082568aafb6a390fd065d8a214bc9921ca3fa1be103af10e54ed99fa8279f7ecfd8f2ae39a5d81da714576de91ee3acd6e208c44a0bbcfd4b082b42c9463467e7b663f505ae259c6181517d2237768564b297da57595aaf8df37ed98eb3c56d9487ac51cb602552896413578867a016e25e129b0e678b0d1543a3704700bdc7548b651646f38f4957044a0b05502815e6cae31e40ac42bd40e06cb5394ca4db1583f6b263be0cef17ad9e054fd2efcd77a23375a5ebadbe05f7b687f8a55770c6179647081a0976c298c5f9e60147e75a42be892f8d5d523e99a7036f698585486a5faf272e7edf9a93aa6cc88e2f70e88439f8d53050c2a0ce9cf3dabdffadd5d459940217c9fff88eeae3577e0f187e5d63aae7aba2825e038049a43b221d94070732fd7bcc40b56deb63371e37b1b561e3bc389574c4fa41353ae7c29c55cb688eaca81bab5143fd63f898b8e211796096915ef9e276ff633490d1a4e18ec14f60560319d56fe3ce4d16fe0546eea3bec2b6d54ab7762687ac004b636b2939b4a0b9ab9f6527d9970cc8cad019d2fe1a673c659f8272cf23402738053638c90cecd1d85ab8964436f6904f641c42a20778a748d5b4e0e961167c6215b48b2fb4ae0661638fe6e2227d89999b941bee3fce6aea984d2ba534081126c985ac37328c96cb83fb18488b8cb008065c6e41406dcf28173cbd0b32ce1e4222a07c4e04867df02f23548ba969deba7c26c4f4385189cb02a843a90d204e68e0a57647ab0b06e4dde3c6d658722e89eb59fdf85a89eb6b9ef2d264b8b7b22bc214935fad04217b71f78ed7e6771a2b4ab2dd2d2d1d63cd148d6bc57d2715a75e87d2cdfc7688eb818005abe315d71c771098ea52df4088147d78c8a904fc392270879d7c90c71b819ec2f0f09f38f1d6d5e9530faa9bd0c16f42ad210109a383619aef524d22b503c5a37a3316107c8cfec10885d6a168187ceda5b6b8fb02feb279da9cf6e7fdc2dcbb73cdbed67983de50423e5ce683b338af3d70380b909b1c028bb2f240013c94ac5920e24bc854718108a4ff171aeced7690b45d507303c807e2e4c39082a74664de220341f9327256d3f104b72de092eadeac9a72f7a44f781574f8156f0910ce0fa091050e8be267dac458a5e9acef160c315e997868e9f1d9bcce1ca9f81471e088d618335d5893ba58903a1f8098e209eedc64025dde6c26c47f5444b6bf0171ff198151f08ab508daab550f46dfd2d676a959183f16c0b7fffdf044c164feda6f6d04540422e822b1ca769660b479192fc1400fb9e7d374a4d0bfe848b899d29be22878ef128cccff2e4fcbdd481431c9c7ec6679f704d6b522df2d76484a92bd5edcd26da499ae30724154031f059b8bcd4c39376088da447042c17a1dc1335862360f9f5958f83fd70bba92c273509b5571a743d03faae8c969676131</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="884b8239243e3bcfc4ed0d542745dff8d1e6f650b7be6529c4599e1bbedc04f4">c020d5660b048b9f7f37ea66b4ec7175915dd87ce8423425a8b462462a869c69b00c4860d178b3be25cb6560090a973ceb7b7f87dedbb1643089b80192b5495bc435b49a8e3df8832a34841d19e59ca50a94e630125b032d57cb790ac3da4ca52cd5bd5475469e967039602d7e2c9a105d0f84c75a4c8ca67955f0b345c5b41c95dcc034f9f371479f23a5071864c775593362014782368555be972f9baaa7cba07de186ef83a679e804fa8ecbcb55dd057944522236355705ec1be184cdbcef69a35c3abd44191cd982b85ce8fe92cab18661af3d040bb1c2c62fedf24537c297039eb3a5bfe35276c5e8dfd41723ccbc3a7bbd14510b4a095963fb5951aae2dbbcce3e0d28ae0dfad2c519c5dd67871b2021fd4ab373cf183c2de7d22442309d67853f4f318fca4228589811827d9aee2c2e408fb8f9f642ab505839c84de8728aa18990d656b2df0272843fdeb27857d7a303caa2ecd196e441dd6213ac70df4f0222890584889ed328cab8bcb049d85e4107b7aa869b4de9a351e6854668cf6946113f5f02145d73462479a8fcf0d61ccc214095c983dc00c9fb82a85d2bbb641b8370a0d2523b857371fba443cc7a2dfba6b335f69382598b2703b945e9333627bd11a777e5d09405136b1b561a9dfe9aa48755f70c9ab68401b166af14b89533e38a8af049a0d075f5748e01cc8798c82856bf5ea11196ba99672f89efb19520a07a4b08448d0a4566efb19fa9787e1ddd8a77521ff20d81bf31a9d47784cd28e2a0119ace2e411b85c44ddcc06fae4951ddd9b2c075a7e796adc26df0d82e296b3939a453fda96dc89c8e24c2afe4414d672a5f386f3c3e641b8dc5f5c22e22fec6341dd3e8bdbf1f9241e63e6f2f52e5d44f0c01e8c21d575a889d83007e7af07c068771e1266fb263d606e8eeb1ee04298ac4160d4d5755d7643c7a80298ad45fde0b4a55c52e0a9f5cac109f0e9bf9c2755485d6b19cab9789d84da1081061fd3053b0b25ee702a62aabe25f49500808dacb5f9a7a39151e66653cac1479cf3b4da230edeac5f68fc89ba7e91b785ec6fdbc6ca8f0d7b5031240184e3b21f8a64b61af567c37a147b1c165ce35a731c065b4944b5f6ef9569bacd4163c006c1ad93f86e70469c880a6a6653886a9692a8113ccf5892684b80d4121f64332a27057b56a9d90f8c46a4b52e402e1caf00b8927fc4b88f16445cd3ae567ffc04c1baad3533294746b82b43db45f1cb2140310593203714797ff3cadd988da9cab429004ee095082568aafb6a390fd065d8a214bc9921ca3fa1be103af10e54ed99fa8279f7ecfd8f2ae39a5d81da714576de91ee3acd6e208c44a0bbcfd4b082b42c9463467e7b663f505ae259c6181517d2237768564b297da57595aaf8df37ed98eb3c56d9487ac51cb602552896413578867a016e25e129b0e678b0d1543a3704700bdc7548b651646f38f4957044a0b05502815e6cae31e40ac42bd40e06cb5394ca4db1583f6b263be0cef17ad9e054fd2efcd77a23375a5ebadbe05f7b687f8a55770c6179647081a0976c298c5f9e60147e75a42be892f8d5d523e99a7036f698585486a5faf272e7edf9a93aa6cc88e2f70e88439f8d53050c2a0ce9cf3dabdffadd5d459940217c9fff88eeae3577e0f187e5d63aae7aba2825e038049a43b221d94070732fd7bcc40b56deb63371e37b1b561e3bc389574c4fa41353ae7c29c55cb688eaca81bab5143fd63f898b8e211796096915ef9e276ff633490d1a4e18ec14f60560319d56fe3ce4d16fe0546eea3bec2b6d54ab7762687ac004b636b2939b4a0b9ab9f6527d9970cc8cad019d2fe1a673c659f8272cf23402738053638c90cecd1d85ab8964436f6904f641c42a20778a748d5b4e0e961167c6215b48b2fb4ae0661638fe6e2227d89999b941bee3fce6aea984d2ba534081126c985ac37328c96cb83fb18488b8cb008065c6e41406dcf28173cbd0b32ce1e4222a07c4e04867df02f23548ba969deba7c26c4f4385189cb02a843a90d204e68e0a57647ab0b06e4dde3c6d658722e89eb59fdf85a89eb6b9ef2d264b8b7b22bc214935fad04217b71f78ed7e6771a2b4ab2dd2d2d1d63cd148d6bc57d2715a75e87d2cdfc7688eb818005abe315d71c771098ea52df4088147d78c8a904fc392270879d7c90c71b819ec2f0f09f38f1d6d5e9530faa9bd0c16f42ad210109a383619aef524d22b503c5a37a3316107c8cfec10885d6a168187ceda5b6b8fb02feb279da9cf6e7fdc2dcbb73cdbed67983de50423e5ce683b338af3d70380b909b1c028bb2f240013c94ac5920e24bc854718108a4ff171aeced7690b45d507303c807e2e4c39082a74664de220341f9327256d3f104b72de092eadeac9a72f7a44f781574f8156f0910ce0fa091050e8be267dac458a5e9acef83088b9e7dfc5456700a6702adc242fa21eaf9cb215dc22e0ec1fc3e626bbd988b33cfa05680d9ce904bc49f2fe2858bde0ef59fd81c7d104cad99112ba3c1f39bed511ddd586dde50bb41f3ec8b62e326932fb44ef0bc7ab71d7974ba15efa5d1fb8f48b0038d42da987426fd6b8d8ba1cbc40e36c8ecb7dd631b134f560e4e3daec93414f6c344ea8e34433a94ae68263c0fa0a319ebf28db21f635616a5e4e544dffdc24d9387d761d4fc3764e7296a84f2c5c38d46762bd85e4cf5aa50933188e38bed8a6ccfc71b4877e1eafb03979a021d2fef5e798fdef8b56fdf6ae5b2be1c054614aa4fa0f3e1ae104703dbb8ff5ccbdc61a613de502ab46e619cb22e63307dd70da46f885df3854f711a5620e017954a9a59241d4fff2496d7265bbab135d6053ed0c466da7d85de222da69b956fe9db7b569ed36fc5cd94c7bdbd6eb00f72aa52330e8cb70f9b5c7a2ef0</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       
       
       
@@ -124,9 +124,9 @@
       
         <tags>
             
-            <tag> thinkphp </tag>
-            
             <tag> 代码审计 </tag>
+            
+            <tag> thinkphp </tag>
             
         </tags>
       
@@ -2664,17 +2664,6 @@
     
     <entry>
       <title></title>
-      <link href="/css/LSE.css"/>
-      <url>/css/LSE.css</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
       <link href="/css/modify.css"/>
       <url>/css/modify.css</url>
       
@@ -2685,9 +2674,9 @@
     
     
     <entry>
-      <title>这就是（一个平平无奇的大学生的）分类</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title></title>
+      <link href="/css/LSE.css"/>
+      <url>/css/LSE.css</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2707,20 +2696,9 @@
     
     
     <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>这就是（一个平平无奇的大学生的）分类</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2740,9 +2718,9 @@
     
     
     <entry>
-      <title>一个普通大学生的标签页</title>
-      <link href="/tag/index.html"/>
-      <url>/tag/index.html</url>
+      <title></title>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2756,6 +2734,28 @@
       <url>/scripts/modify.js</url>
       
         <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一个普通大学生的标签页</title>
+      <link href="/tag/index.html"/>
+      <url>/tag/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
