@@ -1,0 +1,430 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>TDEA算法 | L的博客</title><meta name="author" content="L"><meta name="copyright" content="L"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介Blowfish是由Bruce Schneier在1993年发明的对称密钥分组加密算法，类似的DES和AES都是分组加密算法，Blowfish是用来替代DES算法出现的，并且Blowfish是没有商用限制的，任何人都可以自由使用。 对比而言，虽然AES也是一种密码强度很高的对称密码算法，但是如果需要商用的话要向NIST支付授权费用 加密流程Blowfish算法流程目录 一、密钥扩展 初始化静">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TDEA算法">
+<meta property="og:url" content="https://lisien11.xyz/2025/03/31/Blowfish%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="L的博客">
+<meta property="og:description" content="简介Blowfish是由Bruce Schneier在1993年发明的对称密钥分组加密算法，类似的DES和AES都是分组加密算法，Blowfish是用来替代DES算法出现的，并且Blowfish是没有商用限制的，任何人都可以自由使用。 对比而言，虽然AES也是一种密码强度很高的对称密码算法，但是如果需要商用的话要向NIST支付授权费用 加密流程Blowfish算法流程目录 一、密钥扩展 初始化静">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover77.jpg">
+<meta property="article:published_time" content="2025-03-31T00:40:07.000Z">
+<meta property="article:modified_time" content="2025-04-02T02:54:10.948Z">
+<meta property="article:author" content="L">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover77.jpg"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://lisien11.xyz/2025/03/31/Blowfish%E7%AE%97%E6%B3%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'TDEA算法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-02 10:54:10'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/LSE.css"><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="onerror=null;src='/img/lll.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">130</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover77.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="L的博客"><span class="site-name">L的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">TDEA算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-31T00:40:07.000Z" title="发表于 2025-03-31 08:40:07">2025-03-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-02T02:54:10.948Z" title="更新于 2025-04-02 10:54:10">2025-04-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="TDEA算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Blowfish是由Bruce Schneier在1993年发明的对称密钥分组加密算法，类似的DES和AES都是分组加密算法，Blowfish是用来替代DES算法出现的，并且Blowfish是没有商用限制的，任何人都可以自由使用。</p>
+<p>对比而言，虽然AES也是一种密码强度很高的对称密码算法，但是如果需要商用的话要向NIST支付授权费用</p>
+<h1 id="加密流程"><a href="#加密流程" class="headerlink" title="加密流程"></a>加密流程</h1><h3 id="Blowfish算法流程目录"><a href="#Blowfish算法流程目录" class="headerlink" title="Blowfish算法流程目录"></a>Blowfish算法流程目录</h3><hr>
+<h4 id="一、密钥扩展"><a href="#一、密钥扩展" class="headerlink" title="一、密钥扩展"></a><strong>一、密钥扩展</strong></h4><ol>
+<li><p><strong>初始化静态参数</strong>  </p>
+<ul>
+<li>P数组（18个元素）  </li>
+<li>S盒（4×256元素）  </li>
+</ul>
+</li>
+<li><p><strong>融合用户密钥</strong>  </p>
+<ul>
+<li>密钥循环填充 → 异或修改P数组  </li>
+</ul>
+</li>
+<li><p><strong>动态生成参数</strong>  </p>
+<ul>
+<li>加密全零块 → 更新P数组  </li>
+<li>重复加密 → 更新4个S盒  </li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="二、加密流程"><a href="#二、加密流程" class="headerlink" title="二、加密流程"></a><strong>二、加密流程</strong></h4><ol>
+<li><p><strong>拆分明文</strong>  </p>
+<ul>
+<li>64位分组 → 左32位(L) + 右32位(R)  </li>
+</ul>
+</li>
+<li><p><strong>16轮Feistel迭代</strong>  </p>
+<ul>
+<li>每轮操作：  <ul>
+<li>L异或P值 → 输入F函数  </li>
+<li>R异或F结果 → 交换L/R  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>最终输出</strong>  </p>
+<ul>
+<li>末轮不交换 → 异或P[16]/P[17]  </li>
+<li>合并为64位密文  </li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>循环流程<br>  </p>
+<p>F函数内部流程<br></p>
+<h4 id="三、核心模块"><a href="#三、核心模块" class="headerlink" title="三、核心模块"></a><strong>三、核心模块</strong></h4><ol>
+<li><p><strong>F函数</strong>  </p>
+<ul>
+<li>拆分4字节 → 查4个S盒  </li>
+<li>加法+异或混合运算  </li>
+</ul>
+</li>
+<li><p><strong>动态S盒</strong>  </p>
+<ul>
+<li>每个密钥生成唯一S盒  </li>
+<li>通过迭代加密随机化  </li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h1><h3 id="一、密钥扩展过程（密钥→P数组-S盒）"><a href="#一、密钥扩展过程（密钥→P数组-S盒）" class="headerlink" title="一、密钥扩展过程（密钥→P数组+S盒）"></a><strong>一、密钥扩展过程（密钥→P数组+S盒）</strong></h3><p><strong>输入</strong>：用户密钥（4~56字节）<br><strong>输出</strong>：初始化后的P数组（18个32位字）和4个S盒（每个256个32位字）</p>
+<h4 id="步骤1：初始化P数组和S盒"><a href="#步骤1：初始化P数组和S盒" class="headerlink" title="步骤1：初始化P数组和S盒"></a><strong>步骤1：初始化P数组和S盒</strong></h4><ul>
+<li><strong>P数组</strong>：初始包含18个固定32位值（来自圆周率π的小数部分）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">P = [</span><br><span class="line">    <span class="number">0x243F6A88</span>, <span class="number">0x85A308D3</span>, <span class="number">0x13198A2E</span>, <span class="number">0x03707344</span>,</span><br><span class="line">    <span class="number">0xA4093822</span>, <span class="number">0x299F31D0</span>, <span class="number">0x082EFA98</span>, <span class="number">0xEC4E6C89</span>,</span><br><span class="line">    <span class="number">0x452821E6</span>, <span class="number">0x38D01377</span>, <span class="number">0xBE5466CF</span>, <span class="number">0x34E90C6C</span>,</span><br><span class="line">    <span class="number">0xC0AC29B7</span>, <span class="number">0xC97C50DD</span>, <span class="number">0x3F84D5B5</span>, <span class="number">0xB5470917</span>,</span><br><span class="line">    <span class="number">0x9216D5D9</span>, <span class="number">0x8979FB1B</span>  <span class="comment"># 注意共18个元素</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li><strong>S盒</strong>：4个盒，每个盒256个固定32位值（同样来自π）</li>
+</ul>
+<h4 id="步骤2：处理用户密钥"><a href="#步骤2：处理用户密钥" class="headerlink" title="步骤2：处理用户密钥"></a><strong>步骤2：处理用户密钥</strong></h4><ul>
+<li><strong>示例密钥</strong>：假设用户密钥为 <code>b&quot;SecretKey&quot;</code>（8字节）</li>
+<li><strong>密钥转换</strong>：将密钥拆分为32位字数组<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">key_bytes = <span class="string">b&quot;S(0x53) e(0x65) c(0x63) r(0x72)...&quot;</span></span><br><span class="line">key_words = [</span><br><span class="line">    <span class="number">0x53656372</span>,  <span class="comment"># 前4字节 &quot;Secr&quot;</span></span><br><span class="line">    <span class="number">0x65744B65</span>    <span class="comment"># 后4字节 &quot;etKe&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="步骤3：异或P数组"><a href="#步骤3：异或P数组" class="headerlink" title="步骤3：异或P数组"></a><strong>步骤3：异或P数组</strong></h4><ul>
+<li><strong>循环扩展密钥</strong>：将密钥循环重复至18个元素<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expanded_key = [<span class="number">0x53656372</span>, <span class="number">0x65744B65</span>, <span class="number">0x53656372</span>, <span class="number">0x65744B65</span>, ...] (共<span class="number">18</span>个)</span><br></pre></td></tr></table></figure></li>
+<li><strong>逐元素异或</strong>：<code>P[i] = P[i] XOR expanded_key[i]</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P[<span class="number">0</span>] = <span class="number">0x243F6A88</span> ^ <span class="number">0x53656372</span> → <span class="number">0x775A09FA</span></span><br><span class="line">P[<span class="number">1</span>] = <span class="number">0x85A308D3</span> ^ <span class="number">0x65744B65</span> → <span class="number">0xE0D743B6</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="步骤4：初始化P数组和S盒"><a href="#步骤4：初始化P数组和S盒" class="headerlink" title="步骤4：初始化P数组和S盒"></a><strong>步骤4：初始化P数组和S盒</strong></h4><p>使用全0数据块加密生成最终P和S：</p>
+<p>在上面操作，我们生成了初始化的P数组和S-box。</p>
+<p>blowfish认为这样还不够安全，不够随机。</p>
+<p>我们还需要进行一些操作来生成最终的K数组。</p>
+<p>首先我们取一个全为0的64bits，然后P数组和S-box，应用blowfish算法，生成一个64bits。</p>
+<p>将这个64bits分成两部分，分别作为新的P1 和 P2。</p>
+<p>然后将这个64bits作为输入，再次调用blowfish算法，作为新的P3 和 P4。</p>
+<p>依次类推，最终生成所有P数组中的元素。</p>
+<p>4个S-box的数组也按照上面的流程来进行生成。从而得到最终的S-box。</p>
+<ol>
+<li><p><strong>初始化加密器</strong>：</p>
+<ul>
+<li>左半部分 <code>L = 0x00000000</code></li>
+<li>右半部分 <code>R = 0x00000000</code></li>
+</ul>
+</li>
+<li><p><strong>加密过程</strong>：</p>
+<ul>
+<li>用当前P数组加密 <code>(L, R)</code></li>
+<li>结果更新P数组前两个元素<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一次加密</span></span><br><span class="line">new_L, new_R = encrypt(L, R)</span><br><span class="line">P[<span class="number">0</span>], P[<span class="number">1</span>] = new_L, new_R</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二次加密</span></span><br><span class="line">new_L, new_R = encrypt(new_L, new_R)</span><br><span class="line">P[<span class="number">2</span>], P[<span class="number">3</span>] = new_L, new_R</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>循环处理</strong>：</p>
+<ul>
+<li>重复这个过程直到更新完所有18个P元素</li>
+<li>接着用相同方式更新4个S盒（每个S盒256元素）<br>UnIIS</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二、加密全流程详解（64位分组）"><a href="#二、加密全流程详解（64位分组）" class="headerlink" title="二、加密全流程详解（64位分组）"></a><strong>二、加密全流程详解（64位分组）</strong></h3><p><strong>示例明文</strong>：<code>0x0123456789ABCDEF</code></p>
+<h4 id="步骤1：初始拆分"><a href="#步骤1：初始拆分" class="headerlink" title="步骤1：初始拆分"></a><strong>步骤1：初始拆分</strong></h4><ul>
+<li>拆分为左右两部分（各32位）：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = <span class="number">0x01234567</span>  <span class="comment"># 高32位</span></span><br><span class="line">R = <span class="number">0x89ABCDEF</span>  <span class="comment"># 低32位</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="步骤2：16轮Feistel循环"><a href="#步骤2：16轮Feistel循环" class="headerlink" title="步骤2：16轮Feistel循环"></a><strong>步骤2：16轮Feistel循环</strong></h4><p>循环流程<br>  </p>
+<p>F函数内部流程<br>  </p>
+<ol>
+<li><p><strong>输入处理与轮操作</strong>  </p>
+<ul>
+<li>输入为一个64位数据块 ( X_m )，将其均分为高32位 ( X_L ) 和低32位 ( X_R )。  </li>
+<li>在每一轮中：  <ul>
+<li>将 ( X<em>L ) 与当前轮的轮密钥 ( P_r ) 进行异或操作，得到中间结果 ( X</em>{L1} )。  </li>
+<li>将 ( X<em>{L1} ) 输入 <strong>F函数</strong> 计算，输出结果与 ( X_R ) 进行异或操作，得到中间结果 ( X</em>{R1} )。  </li>
+<li>交换 ( X<em>{L1} ) 和 ( X</em>{R1} ) 的位置，作为下一轮的输入 ( X_L ) 和 ( X_R )。  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>最终轮处理</strong>  </p>
+<ul>
+<li>完成16轮迭代后，<strong>不再交换</strong> ( X_L ) 和 ( X_R ) 的位置。  </li>
+<li>将 ( X<em>L ) 与 ( P</em>{18} ) 异或，( X<em>R ) 与 ( P</em>{17} ) 异或。  </li>
+<li>将异或后的结果按顺序拼接（高32位为处理后的 ( X_L )，低32位为处理后的 ( X_R )），生成最终的64位加密数据块 ( X_c )。</li>
+</ul>
+</li>
+</ol>
+<h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><p><strong>每一轮操作</strong>（i从0到15）：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0.</span><span class="number">.15</span>:</span><br><span class="line">    <span class="comment"># (1) 左半部分异或当前P值</span></span><br><span class="line">    L = L ^ P[i]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># (2) 右半部分异或F函数结果</span></span><br><span class="line">    R = R ^ F(L)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># (3) 交换左右部分（最后一轮不交换）</span></span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">15</span>:</span><br><span class="line">        L, R = R, L</span><br></pre></td></tr></table></figure></p>
+<p><strong>第1轮示例</strong>（i=0）：</p>
+<ol>
+<li><p><code>L = 0x01234567 ^ P[0]</code></p>
+<ul>
+<li>假设 <code>P[0] = 0x775A09FA</code></li>
+<li>→ <code>L = 0x01234567 ^ 0x775A09FA = 0x76794C9D</code></li>
+</ul>
+</li>
+<li><p>计算 <code>F(L)</code>：</p>
+<ul>
+<li>将 <code>0x76794C9D</code> 拆分为4字节：<code>0x76, 0x79, 0x4C, 0x9D</code></li>
+<li>查S盒：<ul>
+<li><code>S0[0x76]</code> → 假设为 <code>0xA1B2C3D4</code></li>
+<li><code>S1[0x79]</code> → <code>0xE5F6A7B8</code></li>
+<li><code>S2[0x4C]</code> → <code>0x9E8D7C6B</code></li>
+<li><code>S3[0x9D]</code> → <code>0x5A4B3C2D</code></li>
+</ul>
+</li>
+<li>计算：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">F = (S0[<span class="number">0x76</span>] + S1[<span class="number">0x79</span>]) ^ S2[<span class="number">0x4C</span>] + S3[<span class="number">0x9D</span>]</span><br><span class="line">  = (<span class="number">0xA1B2C3D4</span> + <span class="number">0xE5F6A7B8</span>) → <span class="number">0x187A96B8C</span> (取后<span class="number">32</span>位: <span class="number">0x87A96B8C</span>)</span><br><span class="line">  ^ <span class="number">0x9E8D7C6B</span> → <span class="number">0x192417E7</span></span><br><span class="line">  + <span class="number">0x5A4B3C2D</span> → <span class="number">0x736F5414</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>R = 0x89ABCDEF ^ F(L)</code></p>
+<ul>
+<li><code>R = 0x89ABCDEF ^ 0x736F5414 = 0xFAE499FB</code></li>
+</ul>
+</li>
+<li><p><strong>交换L和R</strong>：</p>
+<ul>
+<li><code>新L = 0xFAE499FB</code></li>
+<li><code>新R = 0x76794C9D</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>后续轮次</strong>：重复上述过程，使用P[1]到P[15]</p>
+<h4 id="步骤3：最终处理"><a href="#步骤3：最终处理" class="headerlink" title="步骤3：最终处理"></a><strong>步骤3：最终处理</strong></h4><ol>
+<li><p><strong>交换最后一次结果</strong>（补偿第16轮未交换）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L, R = R, L  <span class="comment"># 交换回来</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>异或最后两个P值</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = L ^ P[<span class="number">17</span>]</span><br><span class="line">R = R ^ P[<span class="number">16</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>合并为密文</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">密文 = (L &lt;&lt; <span class="number">32</span>) | R</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3 id="三、完整流程示意图"><a href="#三、完整流程示意图" class="headerlink" title="三、完整流程示意图"></a><strong>三、完整流程示意图</strong></h3>  
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">初始L/R</span><br><span class="line">│</span><br><span class="line">├─轮1: L^=P[0], R^=F(L), 交换</span><br><span class="line">├─轮2: L^=P[1], R^=F(L), 交换</span><br><span class="line">│   ...</span><br><span class="line">├─轮16:L^=P[15], R^=F(L), 不交换</span><br><span class="line">│</span><br><span class="line">└─最终: 交换L/R → L^=P[17], R^=P[16] → 合并</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="四、为什么这样设计？"><a href="#四、为什么这样设计？" class="headerlink" title="四、为什么这样设计？"></a><strong>四、为什么这样设计？</strong></h3><ol>
+<li><p><strong>密钥扩展</strong>：</p>
+<ul>
+<li>通过多次加密生成P/S，使每个密钥的S盒不同</li>
+<li>密钥参与修改P数组，增强密钥相关性</li>
+</ul>
+</li>
+<li><p><strong>Feistel结构</strong>：</p>
+<ul>
+<li>每轮只加密一半数据，解密结构相同（只需逆序P数组）</li>
+<li>交换操作确保充分扩散</li>
+</ul>
+</li>
+<li><p><strong>F函数设计</strong>：</p>
+<ul>
+<li>S盒提供非线性，加法/异或提供线性混合</li>
+<li>4次查表+2次加法+1次异或，平衡安全与效率</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="五、实战示例"><a href="#五、实战示例" class="headerlink" title="五、实战示例"></a><strong>五、实战示例</strong></h3><p>假设某轮计算后：</p>
+<ul>
+<li><code>P[0] = 0x243F6A88</code></li>
+<li><code>L = 0x00000000</code></li>
+<li><code>R = 0x00000000</code></li>
+</ul>
+<p><strong>加密过程</strong>：</p>
+<ol>
+<li><code>L ^= P[0]</code> → <code>0x243F6A88</code></li>
+<li>计算 <code>F(L)</code>：<ul>
+<li>拆分：0x24, 0x3F, 0x6A, 0x88</li>
+<li><code>S0[0x24] = 0x85A308D3</code></li>
+<li><code>S1[0x3F] = 0x13198A2E</code></li>
+<li><code>S2[0x6A] = 0x03707344</code></li>
+<li><code>S3[0x88] = 0xA4093822</code></li>
+<li>计算：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = (<span class="number">0x85A308D3</span> + <span class="number">0x13198A2E</span>) &amp; <span class="number">0xFFFFFFFF</span> → <span class="number">0x98BC9301</span></span><br><span class="line">h ^= <span class="number">0x03707344</span> → <span class="number">0x9BCCE045</span></span><br><span class="line">h = (h + <span class="number">0xA4093822</span>) &amp; <span class="number">0xFFFFFFFF</span> → <span class="number">0x3FD61867</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><code>R ^= h</code> → <code>0x00000000 ^ 0x3FD61867 = 0x3FD61867</code></li>
+<li>交换 → <code>L=0x3FD61867</code>, <code>R=0x243F6A88</code></li>
+</ol>
+<hr>
+<h3 id="六、常见疑问解答"><a href="#六、常见疑问解答" class="headerlink" title="六、常见疑问解答"></a><strong>六、常见疑问解答</strong></h3><p><strong>Q1：为什么需要18个P值？</strong><br>A：16轮加密每轮用1个P值（P[0]~P[15]），最后交换后用P[16]和P[17]</p>
+<p><strong>Q2：S盒如何保证安全性？</strong><br>A：S盒通过π生成，具有高度非线性，且每个密钥生成不同的S盒</p>
+<p><strong>Q3：如果密钥全为0会怎样？</strong><br>A：P数组初始异或后不变，但后续通过加密生成新的P/S，仍具备安全性</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lisien11.xyz">L</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lisien11.xyz/2025/03/31/Blowfish%E7%AE%97%E6%B3%95/">https://lisien11.xyz/2025/03/31/Blowfish%E7%AE%97%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lisien11.xyz" target="_blank">L的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover77.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/03/30/%E4%B8%80%E6%9D%A1emlog%E7%9A%84%E6%B0%B4%E6%B4%9E/" title="一条emlog的水洞"><img class="cover" src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover36.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">一条emlog的水洞</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="this.onerror=null;this.src='/img/lll.png'" alt="avatar"/></div><div class="author-info__name">L</div><div class="author-info__description">我只是一个平平无奇路过的普通大学生罢了</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">130</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lisien11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/lisien11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2488218724@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无人问津也好，技不如人也罢，你都要试着安静下来，去做自己该做的事，而不是让内心烦躁焦虑，毁掉你本就不多的热情和定力。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">加密流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Blowfish%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B%E7%9B%AE%E5%BD%95"><span class="toc-number">2.0.1.</span> <span class="toc-text">Blowfish算法流程目录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AF%86%E9%92%A5%E6%89%A9%E5%B1%95"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">一、密钥扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B"><span class="toc-number">2.0.1.2.</span> <span class="toc-text">二、加密流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="toc-number">2.0.1.3.</span> <span class="toc-text">三、核心模块</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">实现过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AF%86%E9%92%A5%E6%89%A9%E5%B1%95%E8%BF%87%E7%A8%8B%EF%BC%88%E5%AF%86%E9%92%A5%E2%86%92P%E6%95%B0%E7%BB%84-S%E7%9B%92%EF%BC%89"><span class="toc-number">3.0.1.</span> <span class="toc-text">一、密钥扩展过程（密钥→P数组+S盒）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96P%E6%95%B0%E7%BB%84%E5%92%8CS%E7%9B%92"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">步骤1：初始化P数组和S盒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%A4%84%E7%90%86%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">步骤2：处理用户密钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E5%BC%82%E6%88%96P%E6%95%B0%E7%BB%84"><span class="toc-number">3.0.1.3.</span> <span class="toc-text">步骤3：异或P数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44%EF%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96P%E6%95%B0%E7%BB%84%E5%92%8CS%E7%9B%92"><span class="toc-number">3.0.1.4.</span> <span class="toc-text">步骤4：初始化P数组和S盒</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8A%A0%E5%AF%86%E5%85%A8%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3%EF%BC%8864%E4%BD%8D%E5%88%86%E7%BB%84%EF%BC%89"><span class="toc-number">3.0.2.</span> <span class="toc-text">二、加密全流程详解（64位分组）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%88%9D%E5%A7%8B%E6%8B%86%E5%88%86"><span class="toc-number">3.0.2.1.</span> <span class="toc-text">步骤1：初始拆分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A16%E8%BD%AEFeistel%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.0.2.2.</span> <span class="toc-text">步骤2：16轮Feistel循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="toc-number">3.0.2.3.</span> <span class="toc-text">伪代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E6%9C%80%E7%BB%88%E5%A4%84%E7%90%86"><span class="toc-number">3.0.2.4.</span> <span class="toc-text">步骤3：最终处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">3.0.3.</span> <span class="toc-text">三、完整流程示意图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9F"><span class="toc-number">3.0.4.</span> <span class="toc-text">四、为什么这样设计？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%9E%E6%88%98%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.0.5.</span> <span class="toc-text">五、实战示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E8%A7%81%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94"><span class="toc-number">3.0.6.</span> <span class="toc-text">六、常见疑问解答</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/03/31/Blowfish%E7%AE%97%E6%B3%95/" title="TDEA算法"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover77.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TDEA算法"/></a><div class="content"><a class="title" href="/2025/03/31/Blowfish%E7%AE%97%E6%B3%95/" title="TDEA算法">TDEA算法</a><time datetime="2025-03-31T00:40:07.000Z" title="发表于 2025-03-31 08:40:07">2025-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/30/%E4%B8%80%E6%9D%A1emlog%E7%9A%84%E6%B0%B4%E6%B4%9E/" title="一条emlog的水洞"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover36.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一条emlog的水洞"/></a><div class="content"><a class="title" href="/2025/03/30/%E4%B8%80%E6%9D%A1emlog%E7%9A%84%E6%B0%B4%E6%B4%9E/" title="一条emlog的水洞">一条emlog的水洞</a><time datetime="2025-03-30T14:01:40.000Z" title="发表于 2025-03-30 22:01:40">2025-03-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/30/DES%E5%8A%A0%E5%AF%86%E4%B8%8ETDEA/" title="DES加密与TDEA"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover34.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DES加密与TDEA"/></a><div class="content"><a class="title" href="/2025/03/30/DES%E5%8A%A0%E5%AF%86%E4%B8%8ETDEA/" title="DES加密与TDEA">DES加密与TDEA</a><time datetime="2025-03-30T10:50:39.000Z" title="发表于 2025-03-30 18:50:39">2025-03-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/28/%E6%B0%B4%E7%9A%840dayemlog%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7sql%E6%B3%A8%E5%85%A5/" title="水的0day——emlog注册用户sql注入"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover53.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="水的0day——emlog注册用户sql注入"/></a><div class="content"><a class="title" href="/2025/03/28/%E6%B0%B4%E7%9A%840dayemlog%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7sql%E6%B3%A8%E5%85%A5/" title="水的0day——emlog注册用户sql注入">水的0day——emlog注册用户sql注入</a><time datetime="2025-03-28T14:58:19.000Z" title="发表于 2025-03-28 22:58:19">2025-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/28/emlog%E7%9A%841day%E7%AE%80%E5%8D%95%E5%AE%A1%E8%AE%A1/" title="emlog的1day简单审计"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover80.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="emlog的1day简单审计"/></a><div class="content"><a class="title" href="/2025/03/28/emlog%E7%9A%841day%E7%AE%80%E5%8D%95%E5%AE%A1%E8%AE%A1/" title="emlog的1day简单审计">emlog的1day简单审计</a><time datetime="2025-03-28T08:46:21.000Z" title="发表于 2025-03-28 16:46:21">2025-03-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By L</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://tw-sigma.vercel.app/',
+      region: 'ap-guangzhou',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://tw-sigma.vercel.app/',
+      region: 'ap-guangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="/js/LSE.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
