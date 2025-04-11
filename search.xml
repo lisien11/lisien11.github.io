@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>CB链</title>
+      <link href="/2025/04/11/CB%E9%93%BE/"/>
+      <url>/2025/04/11/CB%E9%93%BE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="java-util-PriorityQueue"><a href="#java-util-PriorityQueue" class="headerlink" title="java.util.PriorityQueue"></a>java.util.PriorityQueue</h1><p>在学CB链之前我们需要回忆一下java.util.PriorityQueue，这个类是我们CC2的入口点。我们回忆一下CC2的链子<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.util.PriorityQueue#readObject-&gt;heapify-&gt;siftDown-&gt;siftDownUsingComparator-&gt;TransformingComparator#compare-&gt;xxx#transform</span><br></pre></td></tr></table></figure><br>在CC2中我们就已经知道了PriorityQueue可以调用到xxx.compare而在CB1中也是利用了这个来寻找compare类</p><h1 id="commons-beanutils"><a href="#commons-beanutils" class="headerlink" title="commons.beanutils"></a>commons.beanutils</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> CB;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.beanutils.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException, NoSuchMethodException &#123;</span><br><span class="line">        <span class="type">testBean</span> <span class="variable">bean</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">testBean</span>();</span><br><span class="line">        <span class="type">String</span> <span class="variable">Name</span> <span class="operator">=</span> (String) PropertyUtils.getProperty(bean, <span class="string">&quot;name&quot;</span>);</span><br><span class="line">        PropertyUtils.setProperty(bean, <span class="string">&quot;name&quot;</span>, <span class="string">&quot;Bob&quot;</span>);</span><br><span class="line">        System.out.println(bean.getname());</span><br><span class="line"></span><br><span class="line">        <span class="type">HashMap</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        map.put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;xiaoming&quot;</span>);</span><br><span class="line">        <span class="comment">//map.put(&quot;age&quot;, 23);</span></span><br><span class="line"></span><br><span class="line">        BeanUtils.populate(bean, map);</span><br><span class="line">        BeanUtils.setProperty(bean, <span class="string">&quot;age&quot;</span>, <span class="string">&quot;23&quot;</span>);</span><br><span class="line">        System.out.println(bean.getname());</span><br><span class="line">        System.out.println(bean.getage());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> CB;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">testBean</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name=<span class="string">&quot;xiaoli&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> Integer age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getage</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setage</span><span class="params">(Integer age)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.age=age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getname</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setname</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java反序列化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java反序列常用方法(持续更新)</title>
       <link href="/2025/04/10/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
       <url>/2025/04/10/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</url>
@@ -1276,9 +1295,9 @@
       
         <tags>
             
-            <tag> 刷题 </tag>
-            
             <tag> wp </tag>
+            
+            <tag> 刷题 </tag>
             
         </tags>
       
@@ -2938,21 +2957,10 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
-      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
+      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
+      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
       
-        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>这就是（一个平平无奇的大学生的）分类</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
       
     </entry>
     
@@ -2960,10 +2968,10 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
-      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
+      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
+      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
       
-        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
+        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
       
     </entry>
     
@@ -2981,33 +2989,11 @@
     
     
     <entry>
-      <title>友情链接</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>这就是（一个平平无奇的大学生的）分类</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/css/transpancy.css"/>
-      <url>/css/transpancy.css</url>
-      
-        <content type="html"><![CDATA[/* 文章页背景 */.layout_post>#post {    /* 以下代表透明度为0.7 可以自行修改*/    background: rgba(255,255,255,.8);} /* 所有页面背景 */#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    /* 以下代表透明度为0.7 */    background: rgba(255,255,255,.8);}/*侧边卡片的透明度 */:root {  --card-bg: rgba(255, 255, 255, .8);}/* 页脚透明 */#footer {/* 以下代表透明度为0.7 */background: rgba(255,255,255, .0);}]]></content>
       
     </entry>
     
@@ -3037,10 +3023,43 @@
     
     <entry>
       <title></title>
+      <link href="/css/transpancy.css"/>
+      <url>/css/transpancy.css</url>
+      
+        <content type="html"><![CDATA[/* 文章页背景 */.layout_post>#post {    /* 以下代表透明度为0.7 可以自行修改*/    background: rgba(255,255,255,.8);} /* 所有页面背景 */#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{    /* 以下代表透明度为0.7 */    background: rgba(255,255,255,.8);}/*侧边卡片的透明度 */:root {  --card-bg: rgba(255, 255, 255, .8);}/* 页脚透明 */#footer {/* 以下代表透明度为0.7 */background: rgba(255,255,255, .0);}]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>友情链接</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
       <link href="/scripts/modify.js"/>
       <url>/scripts/modify.js</url>
       
         <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
