@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SRC | L的博客</title><meta name="author" content="L"><meta name="copyright" content="L"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="cors所谓cors其实就是浏览器的跨站请求协议cors和csrf的区别就是一个是利用img等标签来操控用户行为看不到其返回的值，一个是通过跨站请求来获取敏感信息。 主要原因是在某些网站是需要允许跨站资源访问的，这时候就一套允许携带cookie的跨站协议。而cors由几个请求头来进行操控Access-Control-Allow-Origin: Access-Control-Allow-Method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SRC">
+<meta property="og:url" content="https://lisien11.xyz/2025/09/14/SRC/index.html">
+<meta property="og:site_name" content="L的博客">
+<meta property="og:description" content="cors所谓cors其实就是浏览器的跨站请求协议cors和csrf的区别就是一个是利用img等标签来操控用户行为看不到其返回的值，一个是通过跨站请求来获取敏感信息。 主要原因是在某些网站是需要允许跨站资源访问的，这时候就一套允许携带cookie的跨站协议。而cors由几个请求头来进行操控Access-Control-Allow-Origin: Access-Control-Allow-Method">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover73.jpg">
+<meta property="article:published_time" content="2025-09-14T08:20:36.000Z">
+<meta property="article:modified_time" content="2025-09-14T08:29:15.225Z">
+<meta property="article:author" content="L">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover73.jpg"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://lisien11.xyz/2025/09/14/SRC/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SRC',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-09-14 16:29:15'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/LSE.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="L的博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="onerror=null;src='/img/lll.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">174</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 个人写的小Demo</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 信息收集</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover73.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="L的博客"><span class="site-name">L的博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 个人写的小Demo</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 信息收集</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SRC</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-14T08:20:36.000Z" title="发表于 2025-09-14 16:20:36">2025-09-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-14T08:29:15.225Z" title="更新于 2025-09-14 16:29:15">2025-09-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="SRC"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h1><p>所谓cors其实就是浏览器的跨站请求协议<br>cors和csrf的区别就是一个是利用img等标签来操控用户行为看不到其返回的值，一个是通过跨站请求来获取敏感信息。</p>
+<p>主要原因是在某些网站是需要允许跨站资源访问的，这时候就一套允许携带cookie的跨站协议。<br>而cors由几个请求头来进行操控<br>Access-Control-Allow-Origin: <em><br>Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS<br>Access-Control-Allow-Headers: </em><br>Origin就是其允许的域如果这个返回值可控或者这个返回值为*即可跨域来获取用户的某些信息<br>主要是fetch这里ajAX请求</p>
+<p>下面这个文章写挺好的<br><a target="_blank" rel="noopener" href="https://forum.butian.net/share/2901">https://forum.butian.net/share/2901</a></p>
+<h1 id="危险组合一：最严重-—-任意-Origin-回显-允许带凭证"><a href="#危险组合一：最严重-—-任意-Origin-回显-允许带凭证" class="headerlink" title="危险组合一：最严重 — 任意 Origin 回显 + 允许带凭证"></a>危险组合一：<strong>最严重 — 任意 Origin 回显 + 允许带凭证</strong></h1><p>请求（由攻击者发送）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br></pre></td></tr></table></figure>
+<p>服务器响应（危险）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com    // 或直接回显请求的 Origin</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Set-Cookie: session=...; HttpOnly; Secure</span><br><span class="line">Vary: Origin (缺失则更危险)</span><br></pre></td></tr></table></figure>
+<p>危险性：攻击者页面可以 <code>fetch(..., &#123; credentials: &#39;include&#39; &#125;)</code>，浏览器既会把目标站点 cookie 发出，又会把响应 body 交给攻击者脚本，<strong>完全泄露登录用户的私有数据</strong>。<br>检测（curl 看头）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -H <span class="string">&quot;Origin: https://attacker.com&quot;</span> https://target.example/api/secret</span><br></pre></td></tr></table></figure>
+<p>浏览器验证（真实可利用）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://target.example/api/secret&#x27;</span>, &#123; <span class="attr">credentials</span>: <span class="string">&#x27;include&#x27;</span> &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">text</span>()).<span class="title function_">then</span>(<span class="function"><span class="params">t</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(t))</span><br></pre></td></tr></table></figure>
+<p>修复：不要回显任意 Origin；如果必须允许凭证，<strong>只返回白名单中的具体域名</strong>，并添加 <code>Vary: Origin</code>。</p>
+<hr>
+<h1 id="危险组合二：Allow-Origin-与敏感响应-误配凭证"><a href="#危险组合二：Allow-Origin-与敏感响应-误配凭证" class="headerlink" title="危险组合二：Allow-Origin: * 与敏感响应 / 误配凭证"></a>危险组合二：<strong>Allow-Origin: * 与敏感响应 / 误配凭证</strong></h1><p>请求：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br></pre></td></tr></table></figure>
+<p>响应（松散/错误）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS</span><br><span class="line">Access-Control-Allow-Headers: *</span><br><span class="line">Access-Control-Allow-Credentials: true    // 有些错误实现会返回这个（或老旧/代理问题）</span><br></pre></td></tr></table></figure>
+<p>危险性：按规范 <code>*</code> 不应与 <code>Allow-Credentials: true</code> 同时使用；现代浏览器会忽略 <code>*</code>+credentials 组合，但错误的代理/旧浏览器/自制客户端或缓存不当可能造成泄露。即便没有凭证，公开敏感接口也可能被任意站点读取。<br>检测（curl）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -H <span class="string">&quot;Origin: https://attacker.com&quot;</span> https://target.example/api/secret</span><br></pre></td></tr></table></figure>
+<p>修复：不要用 <code>*</code> 对敏感数据开放；若需要公开 API，确保其仅返回公共数据且不依赖 cookie；敏感接口需白名单 + credentials 控制。</p>
+<hr>
+<h1 id="危险组合三：回显-Origin-允许宽松-Methods-Headers（扩大发现面）"><a href="#危险组合三：回显-Origin-允许宽松-Methods-Headers（扩大发现面）" class="headerlink" title="危险组合三：回显 Origin + 允许宽松 Methods/Headers（扩大发现面）"></a>危险组合三：<strong>回显 Origin + 允许宽松 Methods/Headers（扩大发现面）</strong></h1><p>请求（触发预检）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br><span class="line">Access-Control-Request-Method: POST</span><br><span class="line">Access-Control-Request-Headers: X-Requested-With, Authorization, Content-Type</span><br></pre></td></tr></table></figure>
+<p>响应（危险）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com</span><br><span class="line">Access-Control-Allow-Credentials: true   // 或存在</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH   // 过宽</span><br><span class="line">Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, *</span><br><span class="line">Access-Control-Max-Age: 86400</span><br></pre></td></tr></table></figure>
+<p>危险性：若服务允许任意方法和任意头并允许凭证，攻击者可使用复杂请求（带 <code>Authorization</code> 或自定义头）并长期复用（Max-Age）。<br>检测（curl 预检）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X OPTIONS \</span><br><span class="line">  -H <span class="string">&quot;Origin: https://attacker.com&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Access-Control-Request-Method: POST&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Access-Control-Request-Headers: Authorization&quot;</span> \</span><br><span class="line">  https://target.example/api/secret</span><br></pre></td></tr></table></figure>
+<p>修复：限制允许的方法与头到业务最小集合；不要用 <code>*</code>；缩短 <code>Max-Age</code>。</p>
+<hr>
+<h1 id="危险组合四：Expose-Headers-过度暴露敏感头"><a href="#危险组合四：Expose-Headers-过度暴露敏感头" class="headerlink" title="危险组合四：Expose-Headers 过度暴露敏感头"></a>危险组合四：<strong>Expose-Headers 过度暴露敏感头</strong></h1><p>响应（危险）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Expose-Headers: Set-Cookie, Authorization, X-User-Email</span><br></pre></td></tr></table></figure>
+<p>危险性：<code>Expose-Headers</code> 允许跨域脚本读取原本受保护的响应头。如果这些头包含敏感信息（如 Authorization token 或自定义 session info），会被窃取。<br>检测（fetch）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://target.example/api/secret&#x27;</span>, &#123; <span class="attr">credentials</span>: <span class="string">&#x27;include&#x27;</span> &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">r</span> =&gt;</span> &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(r.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&#x27;Authorization&#x27;</span>)) &#125;)</span><br></pre></td></tr></table></figure>
+<p>修复：不要把敏感 header 列在 <code>Access-Control-Expose-Headers</code> 中；仅暴露必要的非敏感头。</p>
+<hr>
+<h1 id="危险组合五：缺少-Vary-Origin-导致-CDN-缓存中毒"><a href="#危险组合五：缺少-Vary-Origin-导致-CDN-缓存中毒" class="headerlink" title="危险组合五：缺少 Vary: Origin 导致 CDN/缓存中毒"></a>危险组合五：<strong>缺少 Vary: Origin 导致 CDN/缓存中毒</strong></h1><p>请求：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br></pre></td></tr></table></figure>
+<p>响应（危险）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com   // 动态回显</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">// **没有** Vary: Origin</span><br></pre></td></tr></table></figure>
+<p>危险性：代理或 CDN 可能缓存带有回显 <code>Allow-Origin</code> 的响应并对其他用户返回同一缓存，造成<strong>跨用户的数据泄露或扩大攻击面</strong>。<br>检测（通过代理/CDN 配置与缓存行为测试）<br>修复：当动态返回 <code>Access-Control-Allow-Origin</code>，务必加 <code>Vary: Origin</code>；并确保 CDN 不缓存敏感动态响应（Cache-Control: private/no-store）。</p>
+<hr>
+<h1 id="危险组合六：-对预检允许任意-header（Access-Control-Allow-Headers-）"><a href="#危险组合六：-对预检允许任意-header（Access-Control-Allow-Headers-）" class="headerlink" title="危险组合六：*对预检允许任意 header（Access-Control-Allow-Headers: ）**"></a>危险组合六：*<em>对预检允许任意 header（Access-Control-Allow-Headers: </em>）**</h1><p>请求（预检）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br><span class="line">Access-Control-Request-Method: POST</span><br><span class="line">Access-Control-Request-Headers: Authorization, X-Custom-Auth</span><br></pre></td></tr></table></figure>
+<p>响应：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com</span><br><span class="line">Access-Control-Allow-Headers: *   // 或列出 Authorization 等敏感头</span><br></pre></td></tr></table></figure>
+<p>危险性：攻击者可以发送带任意敏感自定义头（例如伪造 Authorization）或触发更有力的请求。<br>修复：明确列出被允许的 header，避免 <code>*</code>，并在服务端对 header 值作严格校验。</p>
+<hr>
+<h1 id="危险组合七：允许-OPTIONS-预检-但不限制来源"><a href="#危险组合七：允许-OPTIONS-预检-但不限制来源" class="headerlink" title="危险组合七：允许 OPTIONS / 预检 但不限制来源"></a>危险组合七：<strong>允许 OPTIONS / 预检 但不限制来源</strong></h1><p>响应：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com</span><br><span class="line">Access-Control-Allow-Methods: *</span><br><span class="line">Access-Control-Allow-Headers: *</span><br></pre></td></tr></table></figure>
+<p>危险性：预检放行所有方法与头会使攻击者能以任意复杂度发起跨域请求并读取响应（若同时允许凭证）。<br>修复：只允许实际使用的方法和头；对预检请求进行源白名单校验。</p>
+<hr>
+<h1 id="危险组合八：Set-Cookie-与回显-Origin-Allow-Credentials"><a href="#危险组合八：Set-Cookie-与回显-Origin-Allow-Credentials" class="headerlink" title="危险组合八：Set-Cookie 与回显 Origin / Allow-Credentials"></a>危险组合八：<strong>Set-Cookie 与回显 Origin / Allow-Credentials</strong></h1><p>请求：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br></pre></td></tr></table></figure>
+<p>响应（危险）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Set-Cookie: session=...; HttpOnly; Secure; SameSite=None</span><br></pre></td></tr></table></figure>
+<p>危险性：服务器在跨域响应中下发 cookie（且允许凭证），这可能使攻击者诱使浏览器在后续请求中发送该 cookie（会话劫持或持久化）。<br>修复：避免在跨站响应中设置敏感 cookie；如果必须，确保只在可信来源下设置并做严格验证。</p>
+<hr>
+<h1 id="危险组合九：Access-Control-Allow-Origin-回显任意-Origin，但没有-Allow-Credentials（仍可能泄露公共数据）"><a href="#危险组合九：Access-Control-Allow-Origin-回显任意-Origin，但没有-Allow-Credentials（仍可能泄露公共数据）" class="headerlink" title="危险组合九：Access-Control-Allow-Origin 回显任意 Origin，但没有 Allow-Credentials（仍可能泄露公共数据）"></a>危险组合九：<strong>Access-Control-Allow-Origin 回显任意 Origin，但没有 Allow-Credentials（仍可能泄露公共数据）</strong></h1><p>响应：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: https://attacker.com   // 回显任意 Origin</span><br><span class="line">Access-Control-Allow-Credentials: false (或无)</span><br></pre></td></tr></table></figure>
+<p>危险性：虽然不能带凭证，但若接口返回敏感数据（误将私人数据当公共数据返回），攻击者仍然能读取。<br>修复：区分公共 API 与敏感 API；敏感 API 不应回显任意 Origin。</p>
+<hr>
+<h1 id="辅助：攻击者常用的“请求头组合”用于探测与预检"><a href="#辅助：攻击者常用的“请求头组合”用于探测与预检" class="headerlink" title="辅助：攻击者常用的“请求头组合”用于探测与预检"></a>辅助：攻击者常用的“请求头组合”用于探测与预检</h1><ul>
+<li>基本探测：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br></pre></td></tr></table></figure>
+<ul>
+<li>触发预检（测试复杂跨域权限）：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://attacker.com</span><br><span class="line">Access-Control-Request-Method: POST</span><br><span class="line">Access-Control-Request-Headers: Authorization, X-Requested-With</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>测试是否会接受凭证/cookie：</p>
+<ul>
+<li>在攻击者页面使用 <code>fetch(..., &#123; credentials: &#39;include&#39; &#125;)</code> 发真实请求（浏览器行为决定是否发送 cookie）；同时用 curl 带 Origin 看响应头。</li>
+</ul>
+</li>
+<li><p>测试是否能读取特定 header：</p>
+<ul>
+<li>请求后看 <code>Access-Control-Expose-Headers</code> 包含什么。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="快速检测脚本（curl-fetch-POC）"><a href="#快速检测脚本（curl-fetch-POC）" class="headerlink" title="快速检测脚本（curl + fetch POC）"></a>快速检测脚本（curl + fetch POC）</h1><ol>
+<li>用 curl 看响应头（初筛）：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -H <span class="string">&quot;Origin: https://attacker.com&quot;</span> https://target.example/api/secret</span><br></pre></td></tr></table></figure>
+<ol>
+<li>若返回 <code>Access-Control-Allow-Origin</code> 并且可能有 <code>Allow-Credentials: true</code>，在 attacker.com 的浏览器控制台试：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://target.example/api/secret&#x27;</span>, &#123; <span class="attr">credentials</span>: <span class="string">&#x27;include&#x27;</span> &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">text</span>()).<span class="title function_">then</span>(<span class="function"><span class="params">t</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(t)).<span class="title function_">catch</span>(<span class="function"><span class="params">e</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(e));</span><br></pre></td></tr></table></figure>
+<p>若能拿到 body，就是真实可利用漏洞。</p>
+<hr>
+<h1 id="总结与防护要点（一眼清单）"><a href="#总结与防护要点（一眼清单）" class="headerlink" title="总结与防护要点（一眼清单）"></a>总结与防护要点（一眼清单）</h1><ul>
+<li>危险组合的核心：<strong>回显任意 Origin (<code>ACAO</code> 回显) + <code>Access-Control-Allow-Credentials: true</code> + 可读的响应体/头</strong>。这是最危险的一类。</li>
+<li>其他危险：<code>ACAO: *</code> 对私有数据开放、<code>Allow-Headers: *</code> / <code>Allow-Methods: *</code> / 过度 <code>Expose-Headers</code>、缺 <code>Vary: Origin</code> 等都能放大问题或绕过保护。</li>
+<li>修复总策略：<strong>白名单 Origin + 不对敏感接口使用 <code>*</code> + 当允许凭证时只返回具体可信域 + 加 <code>Vary: Origin</code> + 限制 Methods/Headers/Expose-Headers 并在服务端做严格授权验证</strong>。</li>
+</ul>
+<hr>
+<p>如果你想，我可以接着做两件事（任选其一）：</p>
+<ol>
+<li>把上面所有<strong>危险组合</strong>整理成一张便于复测的清单（CSV 或表格），包含检测 curl 命令与风险等级；</li>
+<li>帮你审查某个站点的真实响应头 —— 你把 <code>curl -i -H &quot;Origin: https://attacker.com&quot; https://target/...</code> 的输出贴上来，我直接指出哪些头造成漏洞并给出精确修复代码/配置（比如 Nginx、Express、Spring Boot 的示例）。</li>
+</ol>
+<p>你想先要哪一个？</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lisien11.xyz">L</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lisien11.xyz/2025/09/14/SRC/">https://lisien11.xyz/2025/09/14/SRC/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lisien11.xyz" target="_blank">L的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover73.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/09/17/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="代码审计"><img class="cover" src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover76.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">代码审计</div></div></a></div><div class="next-post pull-right"><a href="/2025/09/14/ccb/" title="ccb"><img class="cover" src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover58.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ccb</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/%E5%9B%BE%E7%89%87/1231.jpg" onerror="this.onerror=null;this.src='/img/lll.png'" alt="avatar"/></div><div class="author-info__name">L</div><div class="author-info__description">我只是一个平平无奇路过的普通大学生罢了</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">174</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">43</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lisien11"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/atom.xml" target="_blank" title="订阅-ATOM"><i class="fas fa-rss"></i></a><a class="social-icon" href="https://github.com/lisien11" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2488218724@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无人问津也好，技不如人也罢，你都要试着安静下来，去做自己该做的事，而不是让内心烦躁焦虑，毁掉你本就不多的热情和定力。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cors"><span class="toc-number">1.</span> <span class="toc-text">cors</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E4%B8%80%EF%BC%9A%E6%9C%80%E4%B8%A5%E9%87%8D-%E2%80%94-%E4%BB%BB%E6%84%8F-Origin-%E5%9B%9E%E6%98%BE-%E5%85%81%E8%AE%B8%E5%B8%A6%E5%87%AD%E8%AF%81"><span class="toc-number">2.</span> <span class="toc-text">危险组合一：最严重 — 任意 Origin 回显 + 允许带凭证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E4%BA%8C%EF%BC%9AAllow-Origin-%E4%B8%8E%E6%95%8F%E6%84%9F%E5%93%8D%E5%BA%94-%E8%AF%AF%E9%85%8D%E5%87%AD%E8%AF%81"><span class="toc-number">3.</span> <span class="toc-text">危险组合二：Allow-Origin: * 与敏感响应 &#x2F; 误配凭证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E4%B8%89%EF%BC%9A%E5%9B%9E%E6%98%BE-Origin-%E5%85%81%E8%AE%B8%E5%AE%BD%E6%9D%BE-Methods-Headers%EF%BC%88%E6%89%A9%E5%A4%A7%E5%8F%91%E7%8E%B0%E9%9D%A2%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">危险组合三：回显 Origin + 允许宽松 Methods&#x2F;Headers（扩大发现面）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E5%9B%9B%EF%BC%9AExpose-Headers-%E8%BF%87%E5%BA%A6%E6%9A%B4%E9%9C%B2%E6%95%8F%E6%84%9F%E5%A4%B4"><span class="toc-number">5.</span> <span class="toc-text">危险组合四：Expose-Headers 过度暴露敏感头</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E4%BA%94%EF%BC%9A%E7%BC%BA%E5%B0%91-Vary-Origin-%E5%AF%BC%E8%87%B4-CDN-%E7%BC%93%E5%AD%98%E4%B8%AD%E6%AF%92"><span class="toc-number">6.</span> <span class="toc-text">危险组合五：缺少 Vary: Origin 导致 CDN&#x2F;缓存中毒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E5%85%AD%EF%BC%9A-%E5%AF%B9%E9%A2%84%E6%A3%80%E5%85%81%E8%AE%B8%E4%BB%BB%E6%84%8F-header%EF%BC%88Access-Control-Allow-Headers-%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">危险组合六：*对预检允许任意 header（Access-Control-Allow-Headers: ）**</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E4%B8%83%EF%BC%9A%E5%85%81%E8%AE%B8-OPTIONS-%E9%A2%84%E6%A3%80-%E4%BD%86%E4%B8%8D%E9%99%90%E5%88%B6%E6%9D%A5%E6%BA%90"><span class="toc-number">8.</span> <span class="toc-text">危险组合七：允许 OPTIONS &#x2F; 预检 但不限制来源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E5%85%AB%EF%BC%9ASet-Cookie-%E4%B8%8E%E5%9B%9E%E6%98%BE-Origin-Allow-Credentials"><span class="toc-number">9.</span> <span class="toc-text">危险组合八：Set-Cookie 与回显 Origin &#x2F; Allow-Credentials</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%B1%E9%99%A9%E7%BB%84%E5%90%88%E4%B9%9D%EF%BC%9AAccess-Control-Allow-Origin-%E5%9B%9E%E6%98%BE%E4%BB%BB%E6%84%8F-Origin%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89-Allow-Credentials%EF%BC%88%E4%BB%8D%E5%8F%AF%E8%83%BD%E6%B3%84%E9%9C%B2%E5%85%AC%E5%85%B1%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="toc-number">10.</span> <span class="toc-text">危险组合九：Access-Control-Allow-Origin 回显任意 Origin，但没有 Allow-Credentials（仍可能泄露公共数据）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%EF%BC%9A%E6%94%BB%E5%87%BB%E8%80%85%E5%B8%B8%E7%94%A8%E7%9A%84%E2%80%9C%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%BB%84%E5%90%88%E2%80%9D%E7%94%A8%E4%BA%8E%E6%8E%A2%E6%B5%8B%E4%B8%8E%E9%A2%84%E6%A3%80"><span class="toc-number">11.</span> <span class="toc-text">辅助：攻击者常用的“请求头组合”用于探测与预检</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%A3%80%E6%B5%8B%E8%84%9A%E6%9C%AC%EF%BC%88curl-fetch-POC%EF%BC%89"><span class="toc-number">12.</span> <span class="toc-text">快速检测脚本（curl + fetch POC）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E9%98%B2%E6%8A%A4%E8%A6%81%E7%82%B9%EF%BC%88%E4%B8%80%E7%9C%BC%E6%B8%85%E5%8D%95%EF%BC%89"><span class="toc-number">13.</span> <span class="toc-text">总结与防护要点（一眼清单）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/10/31/ffuf%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" title="ffuf使用手册"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover104.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ffuf使用手册"/></a><div class="content"><a class="title" href="/2025/10/31/ffuf%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" title="ffuf使用手册">ffuf使用手册</a><time datetime="2025-10-31T06:17:58.000Z" title="发表于 2025-10-31 14:17:58">2025-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/31/GraphQL/" title="GraphQL"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover55.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GraphQL"/></a><div class="content"><a class="title" href="/2025/10/31/GraphQL/" title="GraphQL">GraphQL</a><time datetime="2025-10-31T00:50:02.000Z" title="发表于 2025-10-31 08:50:02">2025-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/27/OAuth2-0%E8%AE%A4%E8%AF%81%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81/" title="OAuth2.0认证解析与威胁"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover13.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OAuth2.0认证解析与威胁"/></a><div class="content"><a class="title" href="/2025/10/27/OAuth2-0%E8%AE%A4%E8%AF%81%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81/" title="OAuth2.0认证解析与威胁">OAuth2.0认证解析与威胁</a><time datetime="2025-10-27T10:26:54.000Z" title="发表于 2025-10-27 18:26:54">2025-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/22/%E7%BC%93%E5%AD%98%E5%8A%AB%E6%8C%81%E6%89%AB%E6%8F%8F%E5%99%A8/" title="缓存劫持扫描器"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover69.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="缓存劫持扫描器"/></a><div class="content"><a class="title" href="/2025/10/22/%E7%BC%93%E5%AD%98%E5%8A%AB%E6%8C%81%E6%89%AB%E6%8F%8F%E5%99%A8/" title="缓存劫持扫描器">缓存劫持扫描器</a><time datetime="2025-10-22T08:20:28.000Z" title="发表于 2025-10-22 16:20:28">2025-10-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/19/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7%E7%BC%96%E5%86%99/" title="信息收集工具编写"><img src="https://raw.githubusercontent.com/lisien11/lisien11.github.io/refs/heads/master/cover/cover52.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信息收集工具编写"/></a><div class="content"><a class="title" href="/2025/10/19/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7%E7%BC%96%E5%86%99/" title="信息收集工具编写">信息收集工具编写</a><time datetime="2025-10-19T14:42:23.000Z" title="发表于 2025-10-19 22:42:23">2025-10-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By L</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://tw-sigma.vercel.app/',
+      region: 'ap-guangzhou',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://tw-sigma.vercel.app/',
+      region: 'ap-guangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="/js/LSE.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
