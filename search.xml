@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>2020-2024top-10-web-hacking-techniques-of-2023</title>
+      <link href="/2025/12/09/2020-2024top-10-web-hacking-techniques-of-2023/"/>
+      <url>/2025/12/09/2020-2024top-10-web-hacking-techniques-of-2023/</url>
+      
+        <content type="html"><![CDATA[<h1 id="无聊在刷portswigger时发现portswigger原来还有对年度十大研究成果进行排名，感觉都挺有意思的。"><a href="#无聊在刷portswigger时发现portswigger原来还有对年度十大研究成果进行排名，感觉都挺有意思的。" class="headerlink" title="无聊在刷portswigger时发现portswigger原来还有对年度十大研究成果进行排名，感觉都挺有意思的。"></a>无聊在刷portswigger时发现portswigger原来还有对年度十大研究成果进行排名，感觉都挺有意思的。</h1><h1 id="2023-top3：SMTP走私——全球范围内的电子邮件伪造"><a href="#2023-top3：SMTP走私——全球范围内的电子邮件伪造" class="headerlink" title="2023/top3：SMTP走私——全球范围内的电子邮件伪造"></a>2023/top3：SMTP走私——全球范围内的电子邮件伪造</h1><p>所谓SMTP请求走私就是利用SMTP服务器的发送端和接收端的差异而进行的。</p><h2 id="SMTP报文结果，发送端和接受端的简介"><a href="#SMTP报文结果，发送端和接受端的简介" class="headerlink" title="SMTP报文结果，发送端和接受端的简介"></a>SMTP报文结果，发送端和接受端的简介</h2><p>首先我们得先了解一下发送端于接受端的功能对应报文的处理</p><h3 id="报文结构"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">From: Alice &lt;alice@example.com&gt;\r\n</span><br><span class="line">To: Bob &lt;bob@example.com&gt;\r\n</span><br><span class="line">Subject: Test\r\n</span><br><span class="line">Date: Thu, 10 Dec 2025 15:30:00 +0800\r\n</span><br><span class="line">\r\n</span><br><span class="line">Hello Bob,\r\n</span><br><span class="line">This is a test email.\r\n</span><br><span class="line">.\r\n</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>可以发现其实就是邮件头加消息即body的结构，然后使用单独一行的.即<code>&lt;CRLF&gt; . &lt;CRLF&gt;</code>来当结束符。</p><h3 id="发送端于发送端的差异"><a href="#发送端于发送端的差异" class="headerlink" title="发送端于发送端的差异"></a>发送端于发送端的差异</h3><p>首先发送端遇到<code>&lt;CRLF&gt; . &lt;CRLF&gt;</code>即结束符号时会进行截断直接不解析后面的即只将<code>&lt;CRLF&gt; . &lt;CRLF&gt;</code>前的内容发送给接收端<br>而非常有趣的是当接受端收到<code>&lt;CRLF&gt; . &lt;CRLF&gt;</code>却会继续解析后面的smtp命令。</p><h2 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h2><p>前面我们说了发送端和接受端对<code>&lt;CRLF&gt; . &lt;CRLF&gt;</code>即结束符的处理方法是不同的。但是单纯的使用<code>&lt;CRLF&gt; . &lt;CRLF&gt;</code>是无法走私成功的，这个漏洞需要当发送端无法解析类似<code>&lt;CRLF&gt; . &lt;LF&gt;</code>或者<code>&lt;LF&gt; . &lt;LF&gt;</code>这种形式的单行.而接受端却可以解析。</p><p>那么就会造成攻击者构造如下报文<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">data\r\n</span><br><span class="line">From: user@gmx.net\r\n</span><br><span class="line">To: user@provider.example\r\n</span><br><span class="line">Subject: Message #1\r\n</span><br><span class="line">\r\n</span><br><span class="line">lorem ipsum</span><br><span class="line">\n.\r\n</span><br><span class="line">mail FROM:&lt;admin@gmx.net&gt;\r\n</span><br><span class="line">rcpt TO:&lt;user@provider.example&gt;\r\n</span><br><span class="line">data\r\n</span><br><span class="line">From: admin@gmx.net\r\n</span><br><span class="line">To: user@provider.example\r\n</span><br><span class="line">Subject: Message #2\r\n</span><br><span class="line">\r\n</span><br><span class="line">I am the admin now!</span><br><span class="line">\r\n.\r\n</span><br><span class="line"></span><br></pre></td></tr></table></figure></p><p>上面的payload就有可能造成发送端无法识别</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>盲xss</title>
       <link href="/2025/11/05/%E7%9B%B2xss/"/>
       <url>/2025/11/05/%E7%9B%B2xss/</url>
@@ -1042,9 +1055,9 @@
       
         <tags>
             
-            <tag> thinkphp </tag>
-            
             <tag> 代码审计 </tag>
+            
+            <tag> thinkphp </tag>
             
         </tags>
       
@@ -3549,28 +3562,6 @@
     
     <entry>
       <title></title>
-      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
-      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
-      
-        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/css/modify.css"/>
-      <url>/css/modify.css</url>
-      
-        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
       <link href="/baidu_verify_codeva-t6Y9fshzlA.html"/>
       <url>/baidu_verify_codeva-t6Y9fshzlA.html</url>
       
@@ -3582,10 +3573,10 @@
     
     <entry>
       <title></title>
-      <link href="/css/LSE.css"/>
-      <url>/css/LSE.css</url>
+      <link href="/baidu_verify_codeva-tWN8KDrfR6.html"/>
+      <url>/baidu_verify_codeva-tWN8KDrfR6.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[ea91b333547ce4e46d20121a9e7c8153]]></content>
       
     </entry>
     
@@ -3626,10 +3617,10 @@
     
     <entry>
       <title></title>
-      <link href="/scripts/modify.js"/>
-      <url>/scripts/modify.js</url>
+      <link href="/css/modify.css"/>
+      <url>/css/modify.css</url>
       
-        <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
+        <content type="html"><![CDATA[#page-header {  background: transparent !important;}#page-header.post-bg,#page-header.not-home-page {  height: 280px !important;}#page-header #post-info {  bottom: 40px !important;  text-align: center;}#page-header #page-site-info {  top: 140px !important;}@media screen and (max-width: 768px) {  #page-header.not-home-page {    height: 200px !important;  }  #page-header #post-info {    bottom: 10px !important;  }  #page-header #page-site-info {    top: 100px !important;  }}.top-img {  height: 250px;  margin: -50px -40px 50px;  border-top-left-radius: inherit;  border-top-right-radius: inherit;  background-position: center center;  background-size: cover;  -webkit-transition: all 0.3s;  -moz-transition: all 0.3s;  -o-transition: all 0.3s;  -ms-transition: all 0.3s;  transition: all 0.3s;}@media screen and (max-width: 768px) {  .top-img {    height: 230px;    margin: -36px -14px 36px;  }}[data-theme='dark'] .top-img {  filter: brightness(0.8);}#footer:before {  background-color: rgba(255,255,255,0.5);}[data-theme='dark'] #footer:before {  background-color: rgba(0,0,0,0.5);}#footer-wrap,#footer-wrap a {  color: #111;  -webkit-transition: unset;  -moz-transition: unset;  -o-transition: unset;  -ms-transition: unset;  transition: unset;}[data-theme='dark'] #footer-wrap,[data-theme='dark'] #footer-wrap a {  color: var(--light-grey);}]]></content>
       
     </entry>
     
@@ -3658,9 +3649,31 @@
     
     
     <entry>
+      <title></title>
+      <link href="/scripts/modify.js"/>
+      <url>/scripts/modify.js</url>
+      
+        <content type="html"><![CDATA['use strict';const { filter } = hexo.extend;const cheerio = require('cheerio');/** * 在页面插入新顶部图 * @param {cheerio.Root} $ Root */function insertTopImg($) {    const header = $('#page-header');    if (header.length === 0) return;    const background = header.css('background-image');    if (!background) return;    $('#post, #page, #archive, #tag, #category').prepend(`<div class="top-img" style="background-image: ${background};"></div>`);}// 修改 HTMLfilter.register('after_render:html', (str, data) => {    const $ = cheerio.load(str, {        decodeEntities: false    });    insertTopImg($);    return $.html();});]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一个普通大学生的标签页</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/LSE.css"/>
+      <url>/css/LSE.css</url>
       
         <content type="html"><![CDATA[]]></content>
       
